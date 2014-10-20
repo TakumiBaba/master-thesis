@@ -14,5 +14,13 @@ gulp.task 'compile', ->
     stderr: true
     stdout: true
 
+gulp.task 'clean', ->
+  gulp.src 'main.pdf'
+  .pipe exec 'rm -f *~ *.log *.dvi *.blg *.aux *.out *.bbl *.lot *.toc *.lof *.pdf'
+  .pipe  exec.reporter
+    err: true
+    stderr: true
+    stdout: true
+
 gulp.task 'default', ['compile'], ->
-  gulp.watch './**/*.tex', 'compile'
+  gulp.watch './**/*.tex', ['compile']
