@@ -5,13 +5,13 @@ Writing a master's thesis!!
 
 This thesis use (this template)[http://github.com/TakumiBaba/master-thesis].
 
-# usage (Use Makefile)
+# usage (Makefile)
 
     % git clone git@github.com:TakumiBaba/master-thesis.git
     % cd master-thesis
     % make
 
-# usage (Use Gulp)
+# usage (Gulp)
 
 if you use gulp, main.pdf is compiled automatically
 
