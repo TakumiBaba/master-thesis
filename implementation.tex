@@ -35,6 +35,32 @@
 
 \section{Babascript Client}
 
+Babascript Agent Applicationは、プログラムと人とのインタラクションを仲介する役割を持つ。
+
+機能としては、プログラムからの命令を受け取ることと、命令に対する人の処理結果を返すこと
+
+\subsection{サービス}
+
+\subsection{インタフェース}
+
+\subsubsection{Webアプリケーション}
+
 \section{通信方式}
 
+Babascript及びBabascript Clientは、通信手法を切り替えることが出来る
+この通信モジュール部分をBabascript Adapterと呼ぶ。
+
+\subsection{Node-Linda Adapter}
+
+\subsection{PushNotification Adapter}
+
 \section{プラグイン機構}
+
+Babascript 及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
+
+以下の様に使うことで、Babascript及びBabascriptClientによってイベントが発生した時に、
+それに応じたデータを受け取り、自由に操作することができる。
+
+\subsection{具体例}
+
+\subsubsection{Logger Plugin}
