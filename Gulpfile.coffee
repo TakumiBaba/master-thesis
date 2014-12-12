@@ -22,6 +22,23 @@ gulp.task 'clean', ->
     stderr: true
     stdout: true
 
+gulp.task 'count', ->
+  gulp.src 'main.pdf'
+  .pipe exec 'ruby ./count.rb --no-tags | tw --pipe'
+  .pipe exec.reporter
+    err: true
+    stderr: true
+    stdout: true
+
+gulp.task 'push', ->
+  gulp.src 'main.pdf'
+  .pipe exec 'git push origin master'
+  .pipe exec 'ruby ./count.rb --no-tags | tw --pipe'
+  .pipe exec.reporter
+    err: true
+    stderr: true
+    stdout: true
+
 gulp.task 'default', ['compile'], ->
   gulp.src 'main.tex'
   .pipe exec 'open main.pdf'
