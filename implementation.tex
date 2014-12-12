@@ -5,6 +5,10 @@
 
 \section{Babascript}
 
+Babascriptは人への命令構文を持ったオブジェクトを宣言できるライブラリだ。
+Node.js及びRubyで実装した。
+
+
 \subsection{基本仕様}
 人オブジェクトを宣言する
 
@@ -37,6 +41,9 @@
 
 Babascript Agent Applicationは、プログラムと人とのインタラクションを仲介する役割を持つ。
 
+Javascript及びRubyで実装した。
+Node.js / ブラウザ 上で動作する。
+
 機能としては、プログラムからの命令を受け取ることと、命令に対する人の処理結果を返すこと
 
 Babascript Clientは、サービス部とインタフェース部から構成される。
@@ -45,34 +52,19 @@ Babascript Clientは、サービス部とインタフェース部から構成さ
 
 命令の受け取りや返り値の送信などを担う
 
+命令を受け取ると、イベントを発行する
+
+
+
 \subsection{インタフェース}
 
 ユーザとのインタラクションを行う。
 命令をユーザに見せるのと、実際に実行結果を入力させる機能を持つ
 
-\subsubsection{Webアプリケーション}
-\subsubsection{Android Wear アプリケーション}
+例として、Webアプリケーションとして実装した。
+% Android wear interaface and slack interaface のどちらか/双方が実装できたら
+% 項目を増やして対応する。
 
-\section{通信方式}
-
-Babascript及びBabascript Clientは、通信手法を切り替えることが出来る
-この通信モジュール部分をBabascript Adapterと呼ぶ。
-
-% ここの区分、どうしよ？
-% Node-lidaの利用は前提とする？
-% Node-linda Socket.IO Adapter
-% Node-linda Pushnotification Adapter
-% こんな感じの分け方でいい気がする。
-% 今はnode-lindaを利用してるけど、Adapterは非常に簡単に開発できる、みたいな。
-
-\subsection{Node-Linda Adapter}
-
-Node-Linda Adapterは、Socket.IOを用いてNode-Lindaというプラットフォームに接続し、
-
-\subsection{PushNotification Adapter}
-
-Node-Linda Pushnotification Adapter は、HTTP RequestとPushnotificationを用いて
-Node-Linda プラットフォームに接続する。
 
 \section{プラグイン機構}
 
@@ -90,6 +82,37 @@ Babascript及びBabascriptClientは、以下のイベントを受け取る。
 
 \subsection{具体例}
 
+
+
 \subsubsection{Logger Plugin}
 
+LoggerPluginは、
+
 \subsubsection{Datasync Plugin}
+
+
+% Adapter
+\section{通信手法}
+
+Babascript及びBabascript Clientは、通信手法を切り替えることが出来る
+この通信モジュール部分をBabascript Adapterと呼ぶ。
+
+% ここの区分、どうしよ？
+% Node-lidaの利用は前提とする？
+% Node-linda Socket.IO Adapter
+% Node-linda Pushnotification Adapter
+% こんな感じの分け方でいい気がする。
+% 今はnode-lindaを利用してるけど、Adapterは非常に簡単に開発できる、みたいな。
+
+\subsection{Node-Linda}
+
+\subsection{Node-Linda Adapter}
+
+Node-Linda Adapterは、Socket.IOを用いてNode-Lindaというプラットフォームに接続する。
+
+構成図は以下のような感じになる。
+
+\subsection{PushNotification Adapter}
+
+Node-Linda Pushnotification Adapter は、HTTP RequestとPushnotificationを用いて
+Node-Linda プラットフォームに接続する。
