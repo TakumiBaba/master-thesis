@@ -39,20 +39,40 @@ Babascript Agent Applicationは、プログラムと人とのインタラクシ�
 
 機能としては、プログラムからの命令を受け取ることと、命令に対する人の処理結果を返すこと
 
+Babascript Clientは、サービス部とインタフェース部から構成される。
+
 \subsection{サービス}
+
+命令の受け取りや返り値の送信などを担う
 
 \subsection{インタフェース}
 
+ユーザとのインタラクションを行う。
+命令をユーザに見せるのと、実際に実行結果を入力させる機能を持つ
+
 \subsubsection{Webアプリケーション}
+\subsubsection{Android Wear アプリケーション}
 
 \section{通信方式}
 
 Babascript及びBabascript Clientは、通信手法を切り替えることが出来る
 この通信モジュール部分をBabascript Adapterと呼ぶ。
 
+% ここの区分、どうしよ？
+% Node-lidaの利用は前提とする？
+% Node-linda Socket.IO Adapter
+% Node-linda Pushnotification Adapter
+% こんな感じの分け方でいい気がする。
+% 今はnode-lindaを利用してるけど、Adapterは非常に簡単に開発できる、みたいな。
+
 \subsection{Node-Linda Adapter}
 
+Node-Linda Adapterは、Socket.IOを用いてNode-Lindaというプラットフォームに接続し、
+
 \subsection{PushNotification Adapter}
+
+Node-Linda Pushnotification Adapter は、HTTP RequestとPushnotificationを用いて
+Node-Linda プラットフォームに接続する。
 
 \section{プラグイン機構}
 
@@ -61,6 +81,15 @@ Babascript 及びBabascriptClientはその機能を拡張するために、プ�
 以下の様に使うことで、Babascript及びBabascriptClientによってイベントが発生した時に、
 それに応じたデータを受け取り、自由に操作することができる。
 
+Babascript及びBabascriptClientは、以下のイベントを受け取る。
+
+- initialize
+- connect
+- send
+- receive
+
 \subsection{具体例}
 
 \subsubsection{Logger Plugin}
+
+\subsubsection{Datasync Plugin}
