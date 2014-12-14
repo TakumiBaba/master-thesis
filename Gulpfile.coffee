@@ -2,6 +2,7 @@ gulp = require 'gulp'
 exec = require 'gulp-exec'
 through2 = require 'through2'
 gistupload = require './upload2gist'
+gaze = require 'gaze'
 
 gulp.task 'compile', ->
   gulp.src "main.tex"
@@ -51,19 +52,21 @@ p2g = ->
 
 
 gulp.task 'upload2gist', ->
-  gulp.src 'scripts/*.*'
-  .pipe p2g()
-  .pipe exec 'gist2image <%= file.url %> ./images/<%= file.name %>.png'
+  gaze './scripts/*.*', (err, watcher) ->
+    upload = (filepath) ->
+      gulp.src filepath
+      .pipe p2g()
+      .pipe exec 'gist2image <%= file.url %> ./images/<%= file.name %>.png'
+    @on "changed", upload
+    @on "added", upload
 
-gulp.task 'wait', ->
-  gulp.watch './scripts/*.*', ['upload2gist']
+gulp.task 'image_reset', ->
+  gulp.src 'main.tex'
+  .pipe exec 'rm .master_thesis.json'
+  .pipe exec 'rm -r images'
+  .pipe exec 'mkdir images'
 
-gulp.task 'gist2image', ->
-  gulp.src 'images/gistlist.json'
-  .pipe g2i()
-
-
-gulp.task 'default', ['compile'], ->
+gulp.task 'default', ['compile', 'upload2gist'], ->
   gulp.src 'main.tex'
   .pipe exec 'open main.pdf'
   .pipe exec.reporter
@@ -71,4 +74,3 @@ gulp.task 'default', ['compile'], ->
     stderr: true
     stdout: true
   gulp.watch './**/*.tex', ['compile']
-  gulp.watch './scripts/*.*', ['upload2gist']

@@ -9,7 +9,9 @@
     "gulp-exec": "^2.1.1",
     "lokijs": "^1.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gaze": "^0.6.4"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/TakumiBaba/thesis-template.git"
