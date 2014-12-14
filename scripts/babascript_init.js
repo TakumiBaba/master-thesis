@@ -1,0 +1,1 @@
+var Babascript = require('babascript');

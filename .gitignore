@@ -13,4 +13,6 @@
 .DS_Store
 Thumbs.db
 
+.master_thesis.json
+
 node_modules/

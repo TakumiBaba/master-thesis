@@ -1,17 +1,15 @@
 {
-  "name": "thesis-template",
-  "version": "1.0.0",
-  "description": "thesis template for Keio University SFC",
-  "main": "index.js",
+  "name": "master_thesis",
+  "version": "0.0.1",
+  "description": "TakumiBaba's master thesis",
+  "main": "main.tex",
   "dependencies": {
     "coffee-script": "^1.8.0",
     "gulp": "^3.8.8",
-    "gulp-exec": "^2.1.1"
+    "gulp-exec": "^2.1.1",
+    "lokijs": "^1.0.2"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/TakumiBaba/thesis-template.git"
