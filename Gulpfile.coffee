@@ -54,6 +54,9 @@ p2g = ->
 gulp.task 'upload2gist', ->
   gaze 'scripts/*.*', (err, watcher) ->
     upload = (filepath) ->
+      paths = filepath.split '/'
+      # 対処療法につきすぐ直す
+      return if paths[paths.length-2] isnt 'scripts'
       gulp.src filepath
       .pipe p2g()
       .pipe exec 'gist2image <%= file.url %> ./images/<%= file.name %>.png'
@@ -69,6 +72,8 @@ gulp.task 'image_reset', ->
 gulp.task 'md2tex', ->
   gaze './markdown/*.md', (err, watcher) ->
     @on "changed", (filepath) ->
+      console.log 'md2tex'
+      console.log filepath
       gulp.src filepath
       .pipe pandoc
         from: 'markdown'

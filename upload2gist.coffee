@@ -26,6 +26,15 @@ AA = module.exports = (filename, contents, cb) ->
       username: process.env.GITHUB_USERNAME
       password: process.env.GITHUB_PASSWORD
 
+    create = (filename, contents) ->
+      msg =
+        public: true
+        files: {}
+      msg.files["#{filename}"] = content: contents
+      github.gists.create msg, (err, result) ->
+        gists.insert {gid: result.id, filename: filename}
+        save result.html_url
+
     gists = null
     for collection in db.listCollections()
       if collection.name is 'gists'
@@ -34,13 +43,7 @@ AA = module.exports = (filename, contents, cb) ->
       gists = db.addCollection 'gists'
     gist = gists.findOne filename: filename
     if gist.length is 0
-      msg =
-        public: true
-        files: {}
-      msg.files["#{filename}"] = content: contents
-      github.gists.create msg, (err, result) ->
-        gists.insert {gid: result.id, filename: filename}
-        save result.html_url
+      create filename, contents
     else
       gid = gist.gid
       msg =
@@ -48,5 +51,7 @@ AA = module.exports = (filename, contents, cb) ->
         files: {}
       msg.files[filename] = content: contents
       github.gists.edit msg, (err, result) ->
-        throw err if err
-        save result.html_url
+        if !err?
+          save result.html_url
+        else
+          create filename, contents
