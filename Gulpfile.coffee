@@ -52,7 +52,7 @@ p2g = ->
       callback null
 
 gulp.task 'upload2gist', ->
-  gaze './scripts/*.*', (err, watcher) ->
+  gaze 'scripts/*.*', (err, watcher) ->
     upload = (filepath) ->
       gulp.src filepath
       .pipe p2g()

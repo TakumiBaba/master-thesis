@@ -47,8 +47,8 @@ end
 
 
 c = 0
-Dir::glob("*").each do |f|
-  if f =~/^.*\.tex$/
+Dir::glob("./markdown/*").each do |f|
+  if f =~/^.*\.md$/
     File.open(f,'r') do |t|
       while l = t.gets
         m = Kconv.kconv(l,Kconv::UTF8)
