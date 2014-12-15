@@ -3,26 +3,27 @@
 
 本章では、第\ref{chap:design}章で述べたプログラミング環境の構成要素について述べる。
 
-\section{Babascript}
+\section{Babascript}\label{babascript}
 
 Babascriptは人への命令構文を持ったオブジェクトを宣言できるライブラリだ。
 Node.js及びRubyで実装した。
 
+\subsection{基本仕様}\label{ux57faux672cux4ed5ux69d8}
 
-\subsection{基本仕様}
 人オブジェクトを宣言する
 
 人オブジェクトに対するメッセージ送信によって、プログラム上にて人とコミュニケーションを取る
 
-\subsection{人への命令構文}
+\subsection{人への命令構文}\label{ux4ebaux3078ux306eux547dux4ee4ux69cbux6587}
 
 人への命令構文を実行することによって、人への処理命令を送ることができる。
 人オブジェクトを対象とし、命令内をそのままメソッドとして記述することによって人への命令構文として実行することができる。
 人オブジェクトは、存在しないメソッドを全て人への命令構文として解釈する。
 そのため、実装されていないメソッド名であれば、あらゆる命令をメソッドとして表現し実行することが可能である。
-例えば、 \"toString\" などのメソッドは多くのオブジェクトに置いて定義されている。
+例えば、 "toString"
+などのメソッドは多くのオブジェクトに置いて定義されている。
 このような、すでに定義されているメソッドは人への命令としては解釈されず、そのまま実行できる。
-しかし、\"パスタを茹でる\"などのようなメソッドは定義は可能だが、実際に定義されているケースは非常に稀であると言える。
+しかし、"パスタを茹でる"などのようなメソッドは定義は可能だが、実際に定義されているケースは非常に稀であると言える。
 また、プログラム内で人オブジェクトに新たにメソッドを定義した場合なども、人への命令として解釈することはない。
 
 \begin{figure}[htbp]
@@ -41,7 +42,7 @@ methodmissingなどと呼ばれる。
 第一引数はオプション情報として評価される。
 また、第二引数は、命令に対して何かしらの値が返された時に実行される。
 
-\subsection{オプション情報の付加}
+\subsection{オプション情報の付加}\label{ux30aaux30d7ux30b7ux30e7ux30f3ux60c5ux5831ux306eux4ed8ux52a0}
 
 メソッド名以外に送信したい情報があるときには、第一引数にオプション情報としてオブジェクトを与える。
 クライアントアプリケーション側でオプション情報を得ることができるため、このオプション情報に応じて
@@ -71,14 +72,13 @@ methodmissingなどと呼ばれる。
   \label{fig:option_default}
 \end{figure}
 
-
-\subsection{コールバック関数}
+\subsection{コールバック関数}\label{ux30b3ux30fcux30ebux30d0ux30c3ux30afux95a2ux6570}
 
 命令構文の第二引数にコールバック関数を指定すると、実行結果を取得した後にこのコールバック関数が呼ばれる
 
 人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている
 
-\subsection{タスク情報}
+\subsection{タスク情報}\label{ux30bfux30b9ux30afux60c5ux5831}
 
 タスク情報は図\ref{fig:task_format}のように構成される。
 
@@ -90,17 +90,18 @@ methodmissingなどと呼ばれる。
   \label{fig:task_format}
 \end{figure}
 
-\section{Babascript Client}
+\section{abascript Client}\label{abascript-client}
 
-Babascript Agent Applicationは、プログラムと人とのインタラクションを仲介する役割を持つ。
+Babascript Agent
+Applicationは、プログラムと人とのインタラクションを仲介する役割を持つ。
 
-Javascript及びRubyで実装した。
+Javascriptで実装した。 Node.js上及びWebブラウザー上で動作する。
 
 機能としては、プログラムからの命令を受け取ることと、命令に対する人の処理結果を返すこと
 
 Babascript Clientは、サービス部とインタフェース部から構成される。
 
-\subsection{サービス}
+\subsection{サービス}\label{ux30b5ux30fcux30d3ux30b9}
 
 命令の受け取りや返り値の送信などを担う
 
@@ -114,63 +115,80 @@ Babascript Clientは、サービス部とインタフェース部から構成さ
   \label{fig:babascript_client_service}
 \end{figure}
 
-\subsection{インタフェース}
+何かしらの値を実行結果として返すときは、clientオブジェクトに実装されているretrnValueメソッドを用いる。
+図\ref{fig:babascript_client_service_returnvalue}のように、第一引数に結果として返すものを指定する。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.8\linewidth,bb=0 0 357 149]{images/babascript_client_service_returnvalue.js.png}
+  \end{center}
+  \caption{Babascript Client 処理結果を返すメソッド}
+  \label{fig:babascript_client_service_returnvalue}
+\end{figure}
+
+\subsection{インタフェース}\label{ux30a4ux30f3ux30bfux30d5ux30a7ux30fcux30b9}
 
 ユーザとのインタラクションを行う。
 命令をユーザに見せるのと、実際に実行結果を入力させる機能を持つ
 
-例として、Webアプリケーションとして実装した。
-% Android wear interaface and slack interaface のどちらか/双方が実装できたら
-% 項目を増やして対応する。
+例として、Webアプリケーションとして実装した。 \% Android wear interaface
+and slack interaface のどちらか/双方が実装できたら \%
+項目を増やして対応する。
 
+\section{プラグイン機構}\label{ux30d7ux30e9ux30b0ux30a4ux30f3ux6a5fux69cb}
 
-\section{プラグイン機構}
+Babascript
+及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
 
-Babascript 及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
-
-以下の様に使うことで、Babascript及びBabascriptClientによってイベントが発生した時に、
+図\ref{fig:babascript_plugin}の様に使うことで、Babascript及びBabascriptClientによってイベントが発生した時に、
 それに応じたデータを受け取り、自由に操作することができる。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.7\linewidth,bb=0 0 416 226]{images/babascript_plugin.js.png}
+  \end{center}
+  \caption{Babascript Client 処理結果を返すメソッド}
+  \label{fig:babascript_plugin}
+\end{figure}
 
 Babascript及びBabascriptClientは、以下のイベントを受け取る。
 
-- initialize
-- connect
-- send
-- receive
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  initialize
+\item
+  connect
+\item
+  send
+\item
+  receive
+\end{itemize}
 
-\subsection{具体例}
+\subsection{具体例}\label{ux5177ux4f53ux4f8b}
 
-
-
-\subsubsection{Logger Plugin}
+\subsubsection{Logger Plugin}\label{logger-plugin}
 
 LoggerPluginは、
 
-\subsubsection{Datasync Plugin}
+\subsubsection{Datasync Plugin}\label{datasync-plugin}
 
-
-% Adapter
-\section{通信手法}
+\section{通信手法}\label{ux901aux4fe1ux624bux6cd5}
 
 Babascript及びBabascript Clientは、通信手法を切り替えることが出来る
 この通信モジュール部分をBabascript Adapterと呼ぶ。
 
-% ここの区分、どうしよ？
-% Node-lidaの利用は前提とする？
-% Node-linda Socket.IO Adapter
-% Node-linda Pushnotification Adapter
-% こんな感じの分け方でいい気がする。
-% 今はnode-lindaを利用してるけど、Adapterは非常に簡単に開発できる、みたいな。
+\subsection{Node-Linda}\label{node-linda}
 
-\subsection{Node-Linda}
+\subsection{Node-Linda Adapter}\label{node-linda-adapter}
 
-\subsection{Node-Linda Adapter}
-
-Node-Linda Adapterは、Socket.IOを用いてNode-Lindaというプラットフォームに接続する。
+Node-Linda
+Adapterは、Socket.IOを用いてNode-Lindaというプラットフォームに接続する。
 
 構成図は以下のような感じになる。
 
-\subsection{PushNotification Adapter}
+\subsection{PushNotification Adapter}\label{pushnotification-adapter}
 
-Node-Linda Pushnotification Adapter は、HTTP RequestとPushnotificationを用いて
-Node-Linda プラットフォームに接続する。
+Node-Linda Pushnotification Adapter は、HTTP
+RequestとPushnotificationを用いて Node-Linda
+プラットフォームに接続する。

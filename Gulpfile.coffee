@@ -3,6 +3,7 @@ exec = require 'gulp-exec'
 through2 = require 'through2'
 gistupload = require './upload2gist'
 gaze = require 'gaze'
+pandoc = require 'gulp-pandoc'
 
 gulp.task 'compile', ->
   gulp.src "main.tex"
@@ -65,7 +66,24 @@ gulp.task 'image_reset', ->
   .pipe exec 'rm -r images'
   .pipe exec 'mkdir images'
 
-gulp.task 'default', ['compile', 'upload2gist'], ->
+gulp.task 'md2tex', ->
+  gaze './markdown/*.md', (err, watcher) ->
+    @on "changed", (filepath) ->
+      gulp.src filepath
+      .pipe pandoc
+        from: 'markdown'
+        to: 'latex'
+        ext: '.tex'
+      .pipe gulp.dest 'tex/'
+  return gulp.src 'markdown/*.md'
+  .pipe pandoc
+    from: 'markdown'
+    to: 'latex'
+    ext: '.tex'
+  .pipe gulp.dest 'tex/'
+
+
+gulp.task 'default', ['md2tex', 'compile', 'upload2gist'], ->
   gulp.src 'main.tex'
   .pipe exec 'open main.pdf'
   .pipe exec.reporter

@@ -1,20 +1,17 @@
 \chapter{序論}
 \label{chap:introduction}
 
-\section{研究の目的}
+# 研究の目的
 
-\section{用語定義}
+# 用語定義
 
 本論文において使用する用語を以下のように定義する。
 
-\begin{description}
-  \item [ヒューマンコンピュテーション] \mbox{}\\
-  \item [クラウドソーシング] \mbox{}\\
-  \item [アウトソーシング] \mbox{}\\
+- ヒューマンコンピュテーション
+- クラウドソーシング
+- アウトソーシング
 
-\end{description}
-
-\section{本論文の構成}
+# 本論文の構成
 
 第\ref{chap:design}章では、人と計算機を同様に記述可能なプログラミング環境の設計について述べる。
 

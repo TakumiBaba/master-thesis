@@ -1,7 +1,7 @@
 \chapter{関連研究}
 \label{chap:related}
 
-\section{HumanComputation}
+# HumanComputation
 コンピュータの計算能力だけでは解決できない問題を、人間の処理能力を計算資源として利用することによって解決する手法は、
 ヒューマンコンピュテーション\cite{humancomputation}と呼ばれ、様々な研究が行なわれている。
 
@@ -10,7 +10,7 @@
 \cite{recaptcha}
 \cite{vizwiz}
 
-\section{CrowdSourcing}
+# CrowdSourcing
 インターネットを介して、不特定多数の人に仕事を依頼する仕組みとして、クラウドソーシングというものがある。
 クラウドソーシングとは、アウトソーシングという言葉を改変した造語である\cite{riseofcrowdsourcing}。
 安価かつ必要なだけの人員をすぐに利用することができる。
@@ -44,18 +44,18 @@ Franklinらは、CrowdDBというSQLを拡張した。
 コンピュータのみでは実現できなかったような処理や、より大規模な人力処理を実現させている。
 本研究では、不特定多数の人ではなく、特定可能な人を対象としたものである。
 
-% \section{Programming Environments}
-\section{Social Computing}
+% # Programming Environments
+# Social Computing
 \cite{dog},
 \cite{jabberwocky},
 \cite{personal-api},
 \cite{social-machines},
 
-\section{Human as Sensor}
+# Human as Sensor
 \cite{prism}
 \cite{moboq}
 \cite{medusa}
 
-\section{その他}
+# その他
 \cite{hapticturk}
 \cite{sharedo}

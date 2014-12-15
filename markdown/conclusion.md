@@ -1,7 +1,7 @@
 \chapter{結論}
 \label{chap:conclusion}
 
-\section{おわりに}
+# おわりに
 本論文でやったことをまとめる。
 
 今後の展望について語る
