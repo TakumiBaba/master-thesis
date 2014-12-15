@@ -1,0 +1,3 @@
+var defaultOption = {
+  format: 'boolean'
+}

@@ -50,7 +50,6 @@ p2g = ->
       @push data
       callback null
 
-
 gulp.task 'upload2gist', ->
   gaze './scripts/*.*', (err, watcher) ->
     upload = (filepath) ->

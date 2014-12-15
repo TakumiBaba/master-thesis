@@ -60,6 +60,18 @@ methodmissingなどと呼ばれる。
   \label{fig:babascript_option}
 \end{figure}
 
+オプション情報である第一引数は省略可能である。
+省略した場合は、自動的に図\ref{fig:option_default}のようなオブジェクトが代入される。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.3\linewidth,bb=0 0 138 44]{images/option_default.js.png}
+  \end{center}
+  \caption{デフォルトのオプション情報}
+  \label{fig:option_default}
+\end{figure}
+
+
 \subsection{コールバック関数}
 
 命令構文の第二引数にコールバック関数を指定すると、実行結果を取得した後にこのコールバック関数が呼ばれる
@@ -68,14 +80,21 @@ methodmissingなどと呼ばれる。
 
 \subsection{タスク情報}
 
-以下のような情報でタスクオブジェクトは構成される。
+タスク情報は図\ref{fig:task_format}のように構成される。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.6\linewidth,bb=0 0 354 225]{images/task_format.js.png}
+  \end{center}
+  \caption{タスク情報}
+  \label{fig:task_format}
+\end{figure}
 
 \section{Babascript Client}
 
 Babascript Agent Applicationは、プログラムと人とのインタラクションを仲介する役割を持つ。
 
 Javascript及びRubyで実装した。
-Node.js / ブラウザ 上で動作する。
 
 機能としては、プログラムからの命令を受け取ることと、命令に対する人の処理結果を返すこと
 

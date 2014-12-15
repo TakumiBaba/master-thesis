@@ -21,6 +21,13 @@ if you use gulp, main.pdf is compiled automatically
     $ npm install
     $ gulp
 
+# auto gist uploader
+
+    % export GITHUB_USERNAME=your_github_username
+    % export GITHUB_PASSWORD=your_github_password
+
+upload code to gist, if code exists in ./scripts 
+
 Contributing
 ---
 

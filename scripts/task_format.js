@@ -1,4 +1,4 @@
-task = {
+var task = {
   name: "takumibaba", // 命令配信先ID
   key: "instruction_body", // 指示内容
   cid: "", // タスクID
