@@ -34,7 +34,6 @@ AA = module.exports = (filename, contents, cb) ->
       github.gists.create msg, (err, result) ->
         gists.insert {gid: result.id, filename: filename}
         save result.html_url
-
     gists = null
     for collection in db.listCollections()
       if collection.name is 'gists'
