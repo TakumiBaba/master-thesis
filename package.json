@@ -5,10 +5,12 @@
   "main": "main.tex",
   "dependencies": {
     "coffee-script": "^1.8.0",
+    "github": "^0.2.3",
     "gulp": "^3.8.8",
     "gulp-exec": "^2.1.1",
     "gulp-pandoc": "^0.2.0",
-    "lokijs": "^1.0.2"
+    "lokijs": "^1.0.2",
+    "through2": "^0.6.3"
   },
   "devDependencies": {
     "gaze": "^0.6.4"
