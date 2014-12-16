@@ -1,4 +1,4 @@
-\chapter{実装}
+\chapter{Babascriptプログラミング環境の実装}
 \label{chap:implementation}
 
 本章では、第\ref{chap:design}章で述べたプログラミング環境の構成要素について述べる。
@@ -50,7 +50,7 @@ methodmissingなどと呼ばれる。
 
 オプション情報の例としては、返り値の型情報や、タイムアウト時間などが考えられる。
 オプション情報は図\ref{fig:babascript_option}のように記述する。
-図\ref{fig:babascript_option}場合であれば、返り値の型はstringで、3分後までに返り値を得られなかった場合は、
+図\ref{fig:babascript_option}の場合であれば、返り値の型はstringで、3分後までに返り値を得られなかった場合は、
 人力処理を止め、第二引数で指定するコールバック関数を実行し、処理を続行させるといったことをオプション情報として記述している。
 
 \begin{figure}[htbp]
@@ -72,7 +72,7 @@ methodmissingなどと呼ばれる。
   \label{fig:option_default}
 \end{figure}
 
-\subsection{コールバック関数}\label{ux30b3ux30fcux30ebux30d0ux30c3ux30afux95a2ux6570}
+\subsection{コールバック関数の指定}\label{ux30b3ux30fcux30ebux30d0ux30c3ux30afux95a2ux6570ux306eux6307ux5b9a}
 
 命令構文の第二引数にコールバック関数を指定すると、実行結果を取得した後にこのコールバック関数が呼ばれる
 
@@ -90,7 +90,7 @@ methodmissingなどと呼ばれる。
   \label{fig:task_format}
 \end{figure}
 
-\section{abascript Client}\label{abascript-client}
+\section{Babascript Client}\label{babascript-client}
 
 Babascript Agent
 Applicationは、プログラムと人とのインタラクションを仲介する役割を持つ。
@@ -147,7 +147,7 @@ Babascript
   \begin{center}
   \includegraphics[width=.7\linewidth,bb=0 0 416 226]{images/babascript_plugin.js.png}
   \end{center}
-  \caption{Babascript Client 処理結果を返すメソッド}
+  \caption{Babascript Plugin}
   \label{fig:babascript_plugin}
 \end{figure}
 
@@ -167,6 +167,18 @@ Babascript及びBabascriptClientは、以下のイベントを受け取る。
 
 \subsection{具体例}\label{ux5177ux4f53ux4f8b}
 
+例えば、以下のようなプラグイン例が考えられる。
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  LoggingPlugin
+\item
+  DatasyncPlugin
+\item
+  WearableDevicePlugin
+\end{itemize}
+
 \subsubsection{Logger Plugin}\label{logger-plugin}
 
 LoggerPluginは、
@@ -174,6 +186,9 @@ LoggerPluginは、
 \subsubsection{Datasync Plugin}\label{datasync-plugin}
 
 \section{通信手法}\label{ux901aux4fe1ux624bux6cd5}
+
+BabascriptとBabascript Clientのデータの通信には、Babascript
+Adapterという切り替え可能なモジュールを用いる。
 
 Babascript及びBabascript Clientは、通信手法を切り替えることが出来る
 この通信モジュール部分をBabascript Adapterと呼ぶ。

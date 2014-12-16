@@ -1,25 +1,28 @@
-\chapter{設計}
+\chapter{Babascriptプログラミング環境の設計}
 \label{chap:design}
 
 本章では、前章におけるヒューマンコンピュテーションやクラウドソーシングの研究動向を踏まえ、
 人とプログラムとの新しいインタラクションを実現するためのプログラミング環境の要件を定義し、考察を行う。
 
-\section{プログラムと人の対話}\label{ux30d7ux30edux30b0ux30e9ux30e0ux3068ux4ebaux306eux5bfeux8a71}
+\section{プログラムと人のインタラクション}\label{ux30d7ux30edux30b0ux30e9ux30e0ux3068ux4ebaux306eux30a4ux30f3ux30bfux30e9ux30afux30b7ux30e7ux30f3}
 
 人と計算機の両要素を融合させたプログラムを書くためには、
 人と計算機、双方への指示を同じようなモデルで実行できるようにする必要がある。
 
-\section{明示的な人リソースの指定}\label{ux660eux793aux7684ux306aux4ebaux30eaux30bdux30fcux30b9ux306eux6307ux5b9a}
+\section{通信手法をPlugableにする}\label{ux901aux4fe1ux624bux6cd5ux3092plugableux306bux3059ux308b}
 
-\section{プログラム上での人の表現}\label{ux30d7ux30edux30b0ux30e9ux30e0ux4e0aux3067ux306eux4ebaux306eux8868ux73fe}
+デバイスごとに利用可能な通信手法は異なり、また、新しい仕様が短い期間で生まれてくる。
+このような状況に対応するためには、通信手法の部分を可能な限り独立したモジュールとしておくことが必要となる。
 
-\section{人への命令構文}\label{ux4ebaux3078ux306eux547dux4ee4ux69cbux6587}
+\section{人の拡張}\label{ux4ebaux306eux62e1ux5f35}
 
-\section{人オブジェクトの拡張}\label{ux4ebaux30aaux30d6ux30b8ux30a7ux30afux30c8ux306eux62e1ux5f35}
+人間が時計をつけたりJawboneUpみたいなのをつけるのと同じように、プログラム上の人間もその機能を拡張できるべきだ。
 
 \section{クライアントアプリケーションの拡張性の確保}\label{ux30afux30e9ux30a4ux30a2ux30f3ux30c8ux30a2ux30d7ux30eaux30b1ux30fcux30b7ux30e7ux30f3ux306eux62e1ux5f35ux6027ux306eux78baux4fdd}
 
-\section{新しいプログラミング環境の仕様}\label{ux65b0ux3057ux3044ux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux74b0ux5883ux306eux4ed5ux69d8}
+\section{新しいプログラミング環境}\label{ux65b0ux3057ux3044ux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux74b0ux5883}
+
+人間と計算機、双方への指示を同じプログラム
 
 上記項目を満たすアプリケーションが必要 下記の4つを実装した
 
@@ -31,6 +34,8 @@
   Babascript Client
 \item
   Babascript Plugin
+\item
+  Babascript
 \end{itemize}
 
 \section{まとめ}\label{ux307eux3068ux3081}
