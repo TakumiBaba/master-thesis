@@ -9,12 +9,12 @@
 
 ## 処理手順
 
-- 人への命令構文を実行する
-- 命令がNode-Lindaサーバを経由してクライアントへと配信される
-- 命令を受け取ったクライアントがユーザに処理を促す
-- 命令実行者が、処理結果を入力する
-- Node-Lindaサーバを経由して実行元プログラムに入力された処理結果が送信される
-- プログラム側で指定されたコールバック関数が実行され、処理が継続される
+1. 人への命令構文を実行する
+1. 命令がNode-Lindaサーバを経由してクライアントへと配信される
+1. 命令を受け取ったクライアントがユーザに処理を促す
+1. 命令実行者が、処理結果を入力する
+1. Node-Lindaサーバを経由して実行元プログラムに入力された処理結果が送信される
+1. プログラム側で指定されたコールバック関数が実行され、処理が継続される
 
 
 # Babascript
@@ -63,6 +63,7 @@ methodmissingと呼ばれる。
 この際、メソッド名部分がユーザに命令として提示される文となる。
 タスク情報は図\ref{fig:task_format}のように構成される。
 
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.6\linewidth,bb=0 0 354 225]{images/task_format.js.png}
@@ -99,7 +100,7 @@ methodmissingと呼ばれる。
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 563 149]{images/babascript_option_list.js.png}
+  \includegraphics[width=.5\linewidth,bb=0 0 574 513]{images/babascript_option_list.js.png}
   \end{center}
   \caption{オプション情報のサンプルソースコード}
   \label{fig:babascript_option_list}
@@ -187,28 +188,134 @@ Babascript Clientは、Babascriptとの通信を担うサービス部と返り�
 \end{figure}
 
 
-## インタフェース
+## ユーザインタフェース
 
 ユーザとのインタラクションを行う。
 命令をユーザに見せるのと、実際に実行結果を入力させる機能を持つ
 
-例として、Webアプリケーションとして実装した。
-% Android wear interaface and slack interaface のどちらか/双方が実装できたら
-% 項目を増やして対応する。
+サービス部と独立した実装のため、異なるデバイスや環境上でもインタフェース部を実装するだけでBabascript Clientは構築可能である。
+基本的には、指示内容と返り値の入力インタフェースをユーザに提示し、返り値の入力を受け付ける機能を担う。
+この際、Babascriptの指示でオプション情報として返り値の型を指定していた場合、指定した型以外の入力を受け付けないような実装を行っている。
+返り値の型は現在、Boolean, String, Numberに対応している。
 
-### Web Application
+例として、Webアプリケーション、コマンドライン・インタフェース、slackインタフェースを実装した。
 
-### CommandLineInterface
+## Webアプリケーションインタフェース
 
-### Slack Interface
+インタフェースの例として、Webアプリケーションとして実装した。
+webブラウザ上で動作し、フレームワークにはBackbone.jsとMarionette.jsを利用した。
+CSSはLESSを、HTMLはJadeで記述した。
+Heroku上で稼働している。
+
+システムは図\ref{fig:babascript_client_webapp}のように構成される。
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babacript_client_slack.png}
+  \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_webapp_system.png}
+  \end{center}
+  \caption{Babascript Client Slackインタフェース}
+  \label{fig:babascript_client_webapp_system}
+\end{figure}
+
+Webインタフェースでは、指示内容に応じて提示インタフェースを変化させる実装をしている。
+例えば、フォーマットにBooleanを指定していた場合、ユーザには trueボタンと falseボタンが提示され、
+どちらかのボタンを押すと、その結果が返り値としてプログラムに返される。
+また、StringとNumberであれば、文字・数字の入力フォームと投稿ボタンが提示され、
+投稿ボタンを押した際にフォームに入力されていた内容が返り値としてプログラムに返される。
+実際に提示されるインタフェースの例を図\ref{fig:babascript_client_webapp_interface}に示す。
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_webapp_interface.png}
+\end{center}
+\caption{Babascript Client Slackインタフェース}
+\label{fig:babascript_client_webapp_interface}
+\end{figure}
+
+
+
+## CommandLineインタフェース
+
+## チャットボットインタフェース
+
+チャットサービス上で稼働するボットにBabascript Clientの機能を実装した。
+ボットシステムにはHubotを採用した。
+Hubotは様々なチャットサービスに対応しているが、Slackというチャットサービス上において運用している。
+このボットシステムは、Heroku上で稼働している。
+チャットボットのシステム図を図\ref{fig:babascript_client_hubot_system}に示す。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_hubot_system.png}
+  \end{center}
+  \caption{Babascript Client Slackインタフェース}
+  \label{fig:babascript_client_hubot_system}
+\end{figure}
+
+チャットボットシステムは、ユーザからのメッセージによる問い合わせに応じて返答を行う。
+返答の例を図\ref{fig:babascript_client_slack}に示す。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_slack.png}
   \end{center}
   \caption{Babascript Client Slackインタフェース}
   \label{fig:babascript_client_slack}
 \end{figure}
+
+チャットボットシステムの問い合わせに対する動作のリストを表\ref{tb:babscript_hubot_mention}に示す。
+<!--
+|メッセージ|対応|
+|--|--|
+|メッセージ|対応|
+|メッセージ|対応| -->
+
+<!-- \label{tb:babscript_hubot_mention} -->
+
+チャットボットインタフェースでは、Webアプリケーションの場合と違い、
+提示するインタフェースを返り値の型に応じて変化させるといったことができない。
+そのため、ユーザにとっては値を返しにくくなっているが、普段利用しているチャットサービス上で
+Babascript Clientの機能を利用できるということは有用なことであると考える。
+
+
+<!-- % Adapter -->
+# 通信手法
+<!-- もっと掘り下げる -->
+
+BabascriptとBabascript Client間のデータ通信には、Node-LindaというWebサービスを利用する。
+Node-Lindaは、分散並列処理のための仕組みであるLindaをNode.js上に実装したものである。
+Node-Lindaはネットワーク経由のデータ通信を前提としており、複数の通信手法に対応している。
+本研究では、デバイスごとに利用可能な通信手法が異なるという状況を想定したものである。
+そこで、このNode-Lindaに接続するための複数のAdapterを実装した。
+このAdapterは簡単に切り替えることができ、各実装に影響を与えることがないよう設計されている。
+Babascript及びBabascript Clientは双方共にこのAdapterを利用して通信を行う。
+
+具体的にはSocket.IO AdapterとPush Notification Adapterの2つを実装した。
+以下の節で具体的に述べる。
+
+## Node-Linda
+
+Node-Lindaについて
+どのようなタプルを書くのか
+take, watch, read, writeについて
+
+## Socket.IO Adapter
+
+Socket.IO Adapterは、リアルタイム通信のためのライブラリであるSocket.IOを用いてNode-Lindaに接続するためのAdapterだ。
+WebsocketもしくはXHR-Pollingによって常にNode-Lindaサーバと通信を行い続ける。
+常時通信している都合上、バッテリー消費の問題が生じたり、デバイスによっては通信を強制的に切断されてしまうこともある。
+
+構成図を図\ref{fig:socket.io-adapter}に示す。
+
+## PushNotification Adapter
+
+Pushnotification Adapter は、HTTP RequestとPushNotificationを用いてNode-Lindaと通信を行うためのAdapterだ。
+Node-Lindaへのタプル書き込みや処理待ちの登録にはHTTP Requestを投げる。
+Node-Linda側からAdapter側への通信には、PushNotificationを用いる。
+現在は、Amazon AWS SimpleNotificationServiceを利用し、PushNotificationを実現している。
+主にAndroidやiPhone等のモバイルデバイスからNode-Lindaと接続する際に利用する。
+
+構成図を図\ref{fig:pushnotification-adapter}に示す。
 
 # プラグイン機構
 
@@ -226,11 +333,20 @@ Babascript 及びBabascriptClientはその機能を拡張するために、プ�
 \end{figure}
 
 Babascript及びBabascriptClientは、以下のイベントを受け取る。
+また、イベントを受け取った際にはイベントに応じたデータを受け取る。
 
 - initialize
 - connect
 - send
 - receive
+
+initializeイベントは、プラグインが読み込まれた際に発生する。
+例えば、設定ファイルの読み込みなどの処理を行う。
+connectイベントは、Babascript及びBabascript ClientがNode-Lindaサーバに接続した際に発生する。
+sendイベントは、Babascript及びBabascript Clientが何かしらのデータをNode-Lindaサーバに書き込む際に発生する。
+例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
+receiveイベントは、Babascript及びBabascript Clientが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
+指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
 
 ## 具体例
 
@@ -245,35 +361,3 @@ Babascript及びBabascriptClientは、以下のイベントを受け取る。
 LoggerPluginは、
 
 ### Datasync Plugin
-
-
-<!-- % Adapter -->
-# 通信手法
-
-BabascriptとBabascript Clientのデータの通信には、Babascript Adapterという切り替え可能なモジュールを用いる。
-
-
-Babascript及びBabascript Clientは、通信手法を切り替えることが出来る
-この通信モジュール部分をBabascript Adapterと呼ぶ。
-
-<!--
-  % ここの区分、どうしよ？
-  % Node-lidaの利用は前提とする？
-  % Node-linda Socket.IO Adapter
-  % Node-linda Pushnotification Adapter
-  % こんな感じの分け方でいい気がする。
-  % 今はnode-lindaを利用してるけど、Adapterは非常に簡単に開発できる、みたいな。
--->
-
-## Node-Linda
-
-## Node-Linda Adapter
-
-Node-Linda Adapterは、Socket.IOを用いてNode-Lindaというプラットフォームに接続する。
-
-構成図は以下のような感じになる。
-
-## PushNotification Adapter
-
-Node-Linda Pushnotification Adapter は、HTTP RequestとPushnotificationを用いて
-Node-Linda プラットフォームに接続する。
