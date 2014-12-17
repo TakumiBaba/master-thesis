@@ -6,7 +6,7 @@
 \section{Babascript}\label{babascript}
 
 Babascriptは人への命令構文を持ったオブジェクトを宣言できるライブラリだ。
-Node.js及びRubyで実装した。
+Node.js及びRuby上で動作する。
 
 \subsection{基本仕様}\label{ux57faux672cux4ed5ux69d8}
 
@@ -108,6 +108,12 @@ methodmissingなどと呼ばれる。
   \label{fig:task_format}
 \end{figure}
 
+\subsection{CommandLine}\label{commandline}
+
+baba -e hoge などができる
+
+pipeできる
+
 \section{Babascript Client}\label{babascript-client}
 
 Babascript Agent
@@ -152,6 +158,20 @@ Babascript Clientは、サービス部とインタフェース部から構成さ
 例として、Webアプリケーションとして実装した。 \% Android wear interaface
 and slack interaface のどちらか/双方が実装できたら \%
 項目を増やして対応する。
+
+\subsubsection{Web Application}\label{web-application}
+
+\subsubsection{CommandLineInterface}\label{commandlineinterface}
+
+\subsubsection{Slack Interface}\label{slack-interface}
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babacript_client_slack.png}
+  \end{center}
+  \caption{Babascript Client Slackインタフェース}
+  \label{fig:babascript_client_slack}
+\end{figure}
 
 \section{プラグイン機構}\label{ux30d7ux30e9ux30b0ux30a4ux30f3ux6a5fux69cb}
 

@@ -16,7 +16,7 @@ no_message = false
 no_limit = false
 no_tags = false
 saykana = false
-debug = false
+debug = ENV['DEBUG'] || false
 slash = false
 
 ARGV.each do |arg|
@@ -70,7 +70,6 @@ Dir::glob("./markdown/*").each do |f|
         m.gsub!(/\\[a-z]+\s+/,'')
         m.gsub!(/[\t\r\n]/,'')
         puts m if debug
-        # puts m
         c += m.split(//).length
       end
     end

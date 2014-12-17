@@ -7,8 +7,7 @@
 # Babascript
 
 Babascriptは人への命令構文を持ったオブジェクトを宣言できるライブラリだ。
-Node.js及びRubyで実装した。
-
+Node.js及びRuby上で動作する。
 
 ## 基本仕様
 人オブジェクトを宣言する
@@ -100,6 +99,12 @@ methodmissingなどと呼ばれる。
   \label{fig:task_format}
 \end{figure}
 
+## CommandLine
+
+baba -e hoge などができる
+
+pipeできる
+
 
 # Babascript Client
 
@@ -147,6 +152,19 @@ Babascript Clientは、サービス部とインタフェース部から構成さ
 % Android wear interaface and slack interaface のどちらか/双方が実装できたら
 % 項目を増やして対応する。
 
+### Web Application
+
+### CommandLineInterface
+
+### Slack Interface
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babacript_client_slack.png}
+  \end{center}
+  \caption{Babascript Client Slackインタフェース}
+  \label{fig:babascript_client_slack}
+\end{figure}
 
 # プラグイン機構
 
@@ -194,12 +212,14 @@ BabascriptとBabascript Clientのデータの通信には、Babascript Adapter�
 Babascript及びBabascript Clientは、通信手法を切り替えることが出来る
 この通信モジュール部分をBabascript Adapterと呼ぶ。
 
-<!-- % ここの区分、どうしよ？
-% Node-lidaの利用は前提とする？
-% Node-linda Socket.IO Adapter
-% Node-linda Pushnotification Adapter
-% こんな感じの分け方でいい気がする。
-% 今はnode-lindaを利用してるけど、Adapterは非常に簡単に開発できる、みたいな。 -->
+<!--
+  % ここの区分、どうしよ？
+  % Node-lidaの利用は前提とする？
+  % Node-linda Socket.IO Adapter
+  % Node-linda Pushnotification Adapter
+  % こんな感じの分け方でいい気がする。
+  % 今はnode-lindaを利用してるけど、Adapterは非常に簡単に開発できる、みたいな。
+-->
 
 ## Node-Linda
 
