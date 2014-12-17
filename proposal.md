@@ -15,39 +15,39 @@
 - コンピュータと人への指示を同じように記述できる環境
 - 新しいプログラミング環境の提案
 
-# 関連研究
-## HumanComputation / Crowdsourcing
-人間を計算資源として処理に組み込む仕組みはヒューマンコンピュテーションと呼ばれる。
-- reCAPTCHA
-- soylent
-- Vizwiz
-- etc
-インターネットを介して不特定多数の人間に仕事を依頼する仕組みはクラウドソーシングと呼ばれる。
-- Amazon MechanicalTurk
-- Turkit
-- crowdDB
-- crowdforge
-- cylog
-- automan
-- jabberwocky
-## Human as Sensor
-人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman as Sensorと呼ばれる。
-- PRISM
-- medusa
-- moboq
-## Human as Actuator
-人間をアクチュエータの代わりや、
-- sharedo
-- haptic turk
-## Social Computing
-コンピュータ・ネットワーク上の人間の活動をシステムに組み込み、活用する仕組みはソーシャルコンピューティングと呼ばれる。
-- SNS
-- ソーシャルメディア
-- 集合知
-- Wiki
-- SocialMachines
-- Human APIs
-- the dog programming language
+  # 関連研究
+  ## HumanComputation / Crowdsourcing
+  人間を計算資源として処理に組み込む仕組みはヒューマンコンピュテーションと呼ばれる。
+  - reCAPTCHA
+  - soylent
+  - Vizwiz
+  - etc
+  インターネットを介して不特定多数の人間に仕事を依頼する仕組みはクラウドソーシングと呼ばれる。
+  - Amazon MechanicalTurk
+  - Turkit
+  - crowdDB
+  - crowdforge
+  - cylog
+  - automan
+  - jabberwocky
+  ## Human as Sensor
+  人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman as Sensorと呼ばれる。
+  - PRISM
+  - medusa
+  - moboq
+  ## Human as Actuator
+  人間をアクチュエータの代わりや、
+  - sharedo
+  - haptic turk
+  ## Social Computing
+  コンピュータ・ネットワーク上の人間の活動をシステムに組み込み、活用する仕組みはソーシャルコンピューティングと呼ばれる。
+  - SNS
+  - ソーシャルメディア
+  - 集合知
+  - Wiki
+  - SocialMachines
+  - Human APIs
+  - the dog programming language
 
 # 人と計算機の融合的プログラミング環境の設計
 ## 人とプログラムのインタラクション
