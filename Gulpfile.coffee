@@ -9,7 +9,15 @@ gulp.task 'compile', ->
   gulp.src "main.tex"
   .pipe exec 'platex  -kanji=utf8 main'
   .pipe exec 'pbibtex -kanji=utf8 main'
+  .pipe exec.reporter
+    err: true
+    stderr: true
+    stdout: true
   .pipe exec 'platex  -kanji=utf8 main'
+  .pipe exec.reporter
+    err: true
+    stderr: true
+    stdout: true
   .pipe exec 'platex  -kanji=utf8 main'
   .pipe exec 'dvipdfmx -p a4 main'
   .pipe exec.reporter

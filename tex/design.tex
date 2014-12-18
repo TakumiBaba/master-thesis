@@ -4,21 +4,47 @@
 本章では、前章におけるヒューマンコンピュテーションやクラウドソーシングの研究動向を踏まえ、
 人とプログラムとの新しいインタラクションを実現するためのプログラミング環境の要件を定義し、考察を行う。
 
-\section{プログラムと人のインタラクション}\label{ux30d7ux30edux30b0ux30e9ux30e0ux3068ux4ebaux306eux30a4ux30f3ux30bfux30e9ux30afux30b7ux30e7ux30f3}
+\section{プログラムと人のインタラクション設計}\label{ux30d7ux30edux30b0ux30e9ux30e0ux3068ux4ebaux306eux30a4ux30f3ux30bfux30e9ux30afux30b7ux30e7ux30f3ux8a2dux8a08}
+
+\subsection{具体的な人間リソースの指定}\label{ux5177ux4f53ux7684ux306aux4ebaux9593ux30eaux30bdux30fcux30b9ux306eux6307ux5b9a}
+
+\subsection{関数のように人間を扱う}\label{ux95a2ux6570ux306eux3088ux3046ux306bux4ebaux9593ux3092ux6271ux3046}
+
+\subsection{類似の指示記法で実現したい}\label{ux985eux4f3cux306eux6307ux793aux8a18ux6cd5ux3067ux5b9fux73feux3057ux305fux3044}
 
 人と計算機の両要素を融合させたプログラムを書くためには、
 人と計算機、双方への指示を同じようなモデルで実行できるようにする必要がある。
 
-\section{通信手法をPlugableにする}\label{ux901aux4fe1ux624bux6cd5ux3092plugableux306bux3059ux308b}
+\section{プラガブルなモジュール構成}\label{ux30d7ux30e9ux30acux30d6ux30ebux306aux30e2ux30b8ux30e5ux30fcux30ebux69cbux6210}
 
-デバイスごとに利用可能な通信手法は異なり、また、新しい仕様が短い期間で生まれてくる。
-このような状況に対応するためには、通信手法の部分を可能な限り独立したモジュールとしておくことが必要となる。
+\subsection{通信手法}\label{ux901aux4fe1ux624bux6cd5}
 
-\section{人の拡張}\label{ux4ebaux306eux62e1ux5f35}
+\subsection{ユーザインタフェース}\label{ux30e6ux30fcux30b6ux30a4ux30f3ux30bfux30d5ux30a7ux30fcux30b9}
+
+\begin{itemize}
+\item
+  デバイスが多様化している
+\item
+  デバイスに応じて利用可能なリソースが異なる
+\item
+  例えば以下の要素
+\item
+  通信手法
+\item
+  ユーザインタフェース
+\item
+  簡単に開発できる環境のためにも、これらの独自開発に負担をかけないようにするべき
+\item
+  プラガブルにする
+\item
+  通信手法をプラガブル
+\item
+  ユーザインタフェースをプラガブル
+\end{itemize}
+
+\section{拡張性の確保}\label{ux62e1ux5f35ux6027ux306eux78baux4fdd}
 
 人間が時計をつけたりJawboneUpみたいなのをつけるのと同じように、プログラム上の人間もその機能を拡張できるべきだ。
-
-\section{クライアントアプリケーションの拡張性の確保}\label{ux30afux30e9ux30a4ux30a2ux30f3ux30c8ux30a2ux30d7ux30eaux30b1ux30fcux30b7ux30e7ux30f3ux306eux62e1ux5f35ux6027ux306eux78baux4fdd}
 
 \section{新しいプログラミング環境}\label{ux65b0ux3057ux3044ux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux74b0ux5883}
 

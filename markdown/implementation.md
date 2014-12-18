@@ -55,6 +55,18 @@ Babascriptは、この定義されていないメソッドをエラーとして�
   \label{fig:methodmissing_sample}
 \end{figure}
 
+また、図\ref{fig:babascript_exec_method}のように、execメソッドを使うことで指示を送ることも可能だ。
+execメソッドを利用する場合は、第一引数に命令内容、第二引数にオプション情報、第三引数にコールバック関数を指定する。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.8\linewidth,bb=0 0 577 330]{images/babascript_exec_method.js.png}
+  \end{center}
+  \caption{人への命令構文}
+  \label{fig:babascript_exec_method}
+\end{figure}
+
+
 オブジェクトに存在しないメソッドが呼び出された時に、特定のメソッドにその処理を委譲するような仕組みは、プログラミング言語Rubyにおいては
 methodmissingと呼ばれる。
 各言語によって名称は異なるが、類似する仕組みが存在する言語は複数存在する。
@@ -62,7 +74,6 @@ methodmissingと呼ばれる。
 人間への指示として評価されたメソッドは、そのメソッド名と引数を元にしたタスク情報を生成し、タスク配信サーバへと送信する。
 この際、メソッド名部分がユーザに命令として提示される文となる。
 タスク情報は図\ref{fig:task_format}のように構成される。
-
 
 \begin{figure}[htbp]
 \begin{center}
