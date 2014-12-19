@@ -30,7 +30,25 @@
 
 \subsection{具体的な人間リソースの指定}\label{ux5177ux4f53ux7684ux306aux4ebaux9593ux30eaux30bdux30fcux30b9ux306eux6307ux5b9a}
 
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  例えば自分を指定できなくてはいけない
+\item
+  自分の部屋を片付ける、みたいなことは自分もしくは家族ぐらいしかできない
+\item
+  クラウドソーシングのような仕組みではできない。
+\end{itemize}
+
 \subsection{類似の指示記法で実現したい}\label{ux985eux4f3cux306eux6307ux793aux8a18ux6cd5ux3067ux5b9fux73feux3057ux305fux3044}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  人間と計算機を融合させたい
+\item
+  両者をプログラミングしていく上で、区別なく記述できるべき
+\end{itemize}
 
 人と計算機の両要素を融合させたプログラムを書くためには、
 人と計算機、双方への指示を同じようなモデルで実行できるようにする必要がある。
@@ -77,20 +95,25 @@ Webアプリケーションとして実装する場合、Webブラウザが使�
 
 前節までの設計検討から、人間と計算機への指示を融合させた新しいプログラミング環境の要件についてまとめる。
 
-人間と計算機、双方への指示を同じプログラム
-
-上記項目を満たすアプリケーションが必要 下記の4つを実装した
-
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
 \item
-  Babascript
+  人間を表す何か
 \item
-  Babascript Client
+  メッセージングができる
 \item
-  Babascript Plugin
+  人の指定が可能
 \item
-  Babascript
+  既存プログラミングスタイルを維持
+\item
+  各要素を組み換えが容易なモジュールとして実装する
+\item
+  好きな機能をプログラマが自由に実装できるような拡張性が必要
 \end{itemize}
 
+上記要件を満たす各種要素について、次章にて述べる。
+具体的には、Babascriptプログラミング環境について述べる。
+
 \section{まとめ}\label{ux307eux3068ux3081}
+
+本章では、新しいプログラミング環境に必要な要素についての検討を行った。
