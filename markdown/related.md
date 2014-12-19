@@ -23,6 +23,7 @@ Soylent\cite{soylent}は、
 非常に安価で、かつ、必要な人員をすぐに確保して仕事依頼が可能なことから、多くの利用例が生まれている。
 近年では、Amazon Mechanical Turk\cite{amt}(以降MTurk)等のクラウドソーシングプラットフォームが登場してきたことによって
 多くの利用例が生まれている。
+その中でも、本研究と類似している研究について、述べる。
 
 ## Turkit
 
@@ -78,10 +79,19 @@ Franklinらは、CrowdDBというSQLを拡張した。
 本研究では、不特定多数の人ではなく、特定可能な人を対象としたものである。
 
 # Social Computing
+
+コンピュータ・ネットワーク上における群衆の様々な行動や叡智をフィードバックデータとして
+システムに組み込み活用していくことはソーシャルコンピューティングと呼ばれている。
+例えば、群衆による叡智が集められた情報をまとめるためのプラットフォームとしてはWiki\cite{wiki}が存在する。
+また、人々が作るwebページのリンク関係から重要度を算出するアルゴリズムとしては、\cite{pagerank}が存在する。
+また、群衆の嗜好情報等を蓄積し、個人間の嗜好等の類似度から情報の推薦等を行う手法は協調フィルタリングと呼ばれる\cite{collaborative-filtering}。
+
+次に、特に本研究と関連するソーシャルコンピューティングの事例を紹介する。
+
 \cite{dog},
 \cite{jabberwocky},
-\cite{personal-api},
 \cite{social-machines},
+\cite{personal-api},
 
 # Human as Sensor
 \cite{prism}
