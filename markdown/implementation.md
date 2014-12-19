@@ -346,18 +346,20 @@ Babascript 及びBabascriptClientはその機能を拡張するために、プ�
 Babascript及びBabascriptClientは、以下のイベントを受け取る。
 また、イベントを受け取った際にはイベントに応じたデータを受け取る。
 
-- initialize
+- load
 - connect
 - send
 - receive
 
-initializeイベントは、プラグインが読み込まれた際に発生する。
+loadイベントは、プラグインが読み込まれた際に発生する。
 例えば、設定ファイルの読み込みなどの処理を行う。
 connectイベントは、Babascript及びBabascript ClientがNode-Lindaサーバに接続した際に発生する。
 sendイベントは、Babascript及びBabascript Clientが何かしらのデータをNode-Lindaサーバに書き込む際に発生する。
 例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
 receiveイベントは、Babascript及びBabascript Clientが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
 指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
+
+プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
 
 ## 具体例
 

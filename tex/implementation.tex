@@ -349,7 +349,7 @@ Babascript及びBabascriptClientは、以下のイベントを受け取る。
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
 \item
-  initialize
+  load
 \item
   connect
 \item
@@ -358,7 +358,7 @@ Babascript及びBabascriptClientは、以下のイベントを受け取る。
   receive
 \end{itemize}
 
-initializeイベントは、プラグインが読み込まれた際に発生する。
+loadイベントは、プラグインが読み込まれた際に発生する。
 例えば、設定ファイルの読み込みなどの処理を行う。
 connectイベントは、Babascript及びBabascript
 ClientがNode-Lindaサーバに接続した際に発生する。
@@ -368,6 +368,8 @@ Clientが何かしらのデータをNode-Lindaサーバに書き込む際に発�
 receiveイベントは、Babascript及びBabascript
 Clientが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
 指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
+
+プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
 
 \subsection{具体例}\label{ux5177ux4f53ux4f8b}
 
