@@ -373,6 +373,16 @@ Node-Lindaを用いることによって、タスクの分散配信等が実現�
 Babascriptによる人間の指示実行結果も、センサーやアクチュエータの処理を同じようにNode-Linda上で共有される。
 つまり、Node-Linda上において人間はセンサーやアクチュエータと同じような存在になる。
 
+Node-Lindaの各操作は、図\ref{fig:linda-usage}のようなプログラムで実現する。
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=.7\linewidth,bb=0 0 770 695]{images/linda-usage.js.png}
+  \end{center}
+  \caption{Node-Lindaへの接続方法}
+  \label{fig:linda-usage}
+\end{figure}
+
 各デバイスによって、利用可能な通信手法は異なる。
 そこで、様々なデバイスが接続できるよう
 Node-Lindaに接続するための接続手法別のアダプターを2種類、実装した。
