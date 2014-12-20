@@ -94,6 +94,9 @@ Franklinらは、CrowdDBというSQLを拡張した。
 \cite{personal-api},
 
 # Human as Sensor
+
+人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman as Sensorと呼ばれる。
+
 \cite{prism}
 \cite{moboq}
 Raらは、medusa\cite{Ra-medusa}という

@@ -1,6 +1,8 @@
 \chapter{序論}
 \label{chap:introduction}
 
+本章では、研究の目的と本論文の構成について述べる。
+
 # 研究の目的
 
 # 用語定義

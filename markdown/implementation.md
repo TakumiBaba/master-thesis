@@ -40,6 +40,8 @@ Babascriptでは、通常のメソッド実行とほぼ同じ記法で人間へ�
 人への命令構文は、このidを元に命令配信先を決定する。
 例えば、id=baba に命令を送りたければ、人オブジェクト宣言時の第一引数にはbabaという文字列を指定する。
 指定したidに命令が配信されるため、Babascript Client側でも同じidを指定する必要がある。
+また、指定したidを監視しているクライアントが複数ある場合は、命令がラウンドロビン方式で配信される。
+そのため、masuilabのような、特定のグループの人たちに命令を配信したいときなどにも利用可能である。
 
 人間オブジェクトは、人間オブジェクトに定義されていないメソッドが実行されると、エラーを返さずに、人間への指示として解釈する。
 そのため、実装されていないメソッド名であれば、あらゆる命令をメソッドとして表現し実行することが可能である。
@@ -66,7 +68,6 @@ execメソッドを利用する場合は、第一引数に命令内容、第二�
   \label{fig:babascript_exec_method}
 \end{figure}
 
-
 オブジェクトに存在しないメソッドが呼び出された時に、特定のメソッドにその処理を委譲するような仕組みは、プログラミング言語Rubyにおいては
 methodmissingと呼ばれる。
 各言語によって名称は異なるが、類似する仕組みが存在する言語は複数存在する。
@@ -76,11 +77,11 @@ methodmissingと呼ばれる。
 タスク情報は図\ref{fig:task_format}のように構成される。
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.6\linewidth,bb=0 0 354 225]{images/task_format.js.png}
-\end{center}
-\caption{タスク情報}
-\label{fig:task_format}
+  \begin{center}
+  \includegraphics[width=.6\linewidth,bb=0 0 354 225]{images/task_format.js.png}
+  \end{center}
+  \caption{タスク情報}
+  \label{fig:task_format}
 \end{figure}
 
 メソッド名が自由に設定できるため、内容は指示ではなく、質問のようなものもあり得るが、本研究では統一して指示と呼ぶ。
@@ -117,6 +118,9 @@ methodmissingと呼ばれる。
   \label{fig:babascript_option_list}
 \end{figure}
 
+オプション情報の中でもbroadcastというものは特別な情報として存在する。
+<!-- ちゃんと書く -->
+
 オプション情報である第一引数は省略可能である。
 省略した場合は、自動的に図\ref{fig:option_default}のようなオブジェクトが代入される。
 図\ref{fig:option_default}のオプション情報の場合、返り値の型はBooleanで返すように指定できる。
@@ -135,7 +139,25 @@ methodmissingと呼ばれる。
 命令構文の第二引数にコールバック関数を指定すると、実行結果を取得した後にこのコールバック関数が呼ばれる
 resultの中に処理結果が入ってる
 
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 574 513]{images/babascript_callback_func.js.png}
+  \end{center}
+  \caption{コールバック関数の指定}
+  \label{fig:babascript_callback_func}
+\end{figure}
+
 人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている
+
+また、Promiseによる処理関数の指定も可能である。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 574 513]{images/babascript_promise.js.png}
+  \end{center}
+  \caption{コールバック関数の指定}
+  \label{fig:babascript_promise}
+\end{figure}
 
 
 ## コマンドラインでの利用
@@ -198,6 +220,26 @@ Babascript Clientは、Babascriptとの通信を担うサービス部と返り�
   \label{fig:babascript_client_service_returnvalue}
 \end{figure}
 
+実行結果情報として返すデータの例を図\ref{return_value_data}に示す。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.6\linewidth,bb=0 0 408 225]{images/return_value_data.js.png}
+  \end{center}
+  \caption{タスク情報}
+  \label{fig:return_value_data}
+\end{figure}
+
+命令実行をキャンセルしたい場合は、cancelメソッドを用いる\ref{client_cancel_method}。
+cancelメソッドの第一引数に、キャンセルする理由を指定することができる。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.6\linewidth,bb=0 0 408 225]{images/client_cancel_method.js.png}
+  \end{center}
+  \caption{タスク情報}
+  \label{fig:client_cancel_method}
+\end{figure}
 
 ## ユーザインタフェース
 
@@ -218,7 +260,7 @@ webブラウザ上で動作し、フレームワークにはBackbone.jsとMarion
 CSSはLESSを、HTMLはJadeで記述した。
 Heroku上で稼働している。
 
-システムは図\ref{fig:babascript_client_webapp}のように構成される。
+システムは図\ref{fig:babascript_client_webapp_system}のように構成される。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -236,16 +278,12 @@ Webインタフェースでは、指示内容に応じて提示インタフェ�
 実際に提示されるインタフェースの例を図\ref{fig:babascript_client_webapp_interface}に示す。
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_webapp_interface.png}
-\end{center}
-\caption{Babascript Client Slackインタフェース}
-\label{fig:babascript_client_webapp_interface}
+  \begin{center}
+  \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_webapp_interface.png}
+  \end{center}
+  \caption{Babascript Client Slackインタフェース}
+  \label{fig:babascript_client_webapp_interface}
 \end{figure}
-
-
-
-## CommandLineインタフェース
 
 ## チャットボットインタフェース
 
@@ -259,7 +297,7 @@ Hubotは様々なチャットサービスに対応しているが、Slackとい�
   \begin{center}
   \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_hubot_system.png}
   \end{center}
-  \caption{Babascript Client Slackインタフェース}
+  \caption{Hubotシステム図}
   \label{fig:babascript_client_hubot_system}
 \end{figure}
 
@@ -275,13 +313,14 @@ Hubotは様々なチャットサービスに対応しているが、Slackとい�
 \end{figure}
 
 チャットボットシステムの問い合わせに対する動作のリストを表\ref{tb:babscript_hubot_mention}に示す。
+
 <!--
 |メッセージ|対応|
 |--|--|
 |メッセージ|対応|
 |メッセージ|対応| -->
 
-<!-- \label{tb:babscript_hubot_mention} -->
+<!-- \label{tb:babscript_hubot_mentions} -->
 
 チャットボットインタフェースでは、Webアプリケーションの場合と違い、
 提示するインタフェースを返り値の型に応じて変化させるといったことができない。
@@ -292,6 +331,9 @@ Babascript Clientの機能を利用できるということは有用なことで
 <!-- % Adapter -->
 # 通信手法
 <!-- もっと掘り下げる -->
+
+BabascriptとBabascript Client間でデータを交換するために、データ配信サーバとしてNode-LindaというWebサービスを用いる。
+
 
 BabascriptとBabascript Client間のデータ通信には、Node-LindaというWebサービスを利用する。
 Node-Lindaは、分散並列処理のための仕組みであるLindaをNode.js上に実装したものである。
@@ -306,17 +348,47 @@ Babascript及びBabascript Clientは双方共にこのAdapterを利用して通�
 
 ## Node-Linda
 
-Node-Lindaについて
-どのようなタプルを書くのか
-take, watch, read, writeについて
+Node-Linda\cite{node-linda}は、分散並列処理のための仕組みであるLinda\cite{linda}をNode.js上に実装したものだ。
+Lindaは、タプルスペースという共有メモリを用いてプロセス間でデータの通信を行う並列処理のためのモデルだ。
+従来のLindaは、以下のようにタプル空間を操作できる。
+
+- out(書き込み)
+- rd(読み込み)
+- rdp(処理をブロックして読み込み)
+- in(読み込みつつ削除)
+- inp(処理をブロックして読み込みつつ削除)
+
+Node-Lindaでは、Lindaをネットワーク経由でも利用できるようにしている。
+ネットワーク経由で利用可能になったことで、様々なデバイスなども並列処理に加わることができる。
+また、上記のタプル空間への操作を以下のように変更している
+
+- write(書き込み)
+- read(読み込み)
+- take(読み込みつつ削除)
+- watch(書き込みを読み続ける)
+
+watch操作は従来のLindaの仕様にはなく、Node-Linda独自の仕様である。
+Node-Lindaを用いることによって、タスクの分散配信等が実現する。
+実世界コンピューティングでの利用を前提としており、様々なセンサーやアクチュエータが接続することが想定される。
+Babascriptによる人間の指示実行結果も、センサーやアクチュエータの処理を同じようにNode-Linda上で共有される。
+つまり、Node-Linda上において人間はセンサーやアクチュエータと同じような存在になる。
+
+各デバイスによって、利用可能な通信手法は異なる。
+そこで、様々なデバイスが接続できるよう
+Node-Lindaに接続するための接続手法別のアダプターを2種類、実装した。
 
 ## Socket.IO Adapter
 
-Socket.IO Adapterは、リアルタイム通信のためのライブラリであるSocket.IOを用いてNode-Lindaに接続するためのAdapterだ。
-WebsocketもしくはXHR-Pollingによって常にNode-Lindaサーバと通信を行い続ける。
+Socket.IO Adapterは、リアルタイム通信のためのライブラリであるSocket.IO\footnote{http://socket.io/}を用いてNode-Lindaに接続するためのAdapterだ。
+WebsocketもしくはXHR-Pollingによって常にNode-Lindaサーバと通信をし続ける。
+全ての処理はSocket.IOによる通信によって実現する。
+
 常時通信している都合上、バッテリー消費の問題が生じたり、デバイスによっては通信を強制的に切断されてしまうこともある。
+Socket.IO Adapterは、接続環境が良好な状態での利用が望ましい。
+例えば、常時ネット接続しているようなデバイスでの利用が想定される。
 
 構成図を図\ref{fig:socket.io-adapter}に示す。
+
 
 ## PushNotification Adapter
 
