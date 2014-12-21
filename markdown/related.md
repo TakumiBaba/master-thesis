@@ -1,5 +1,7 @@
-\chapter{関連研究}
-\label{chap:related}
+<!-- \chapter{関連研究} -->
+<!-- \label{chap:related} -->
+
+# 関連研究
 
 # HumanComputation / Crowdsourcing
 
@@ -14,6 +16,8 @@ Vizwiz\cite{vizwiz}は、
 
 Soylent\cite{soylent}は、
 
+```
+a = b();
 
 # CrowdSourcing
 
@@ -28,7 +32,8 @@ Soylent\cite{soylent}は、
 ## Turkit
 
 Littleらは、このMTurkをプログラムから簡単に利用するためのツールキットであるTurkit\cite{turkit}を提案している。
-Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる\ref{fig:turkit}。
+<!-- Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる\ref{fig:turkit}。 -->
+Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる@fig:turkit。
 また、クラウドソーシングによる処理結果の保存をしておくことで、その後の処理でプログラム実行に失敗しても
 再度クラウドソーシングに処理依頼をするのではなく、保存済みの結果を元にプログラムを再度実行できるような仕組み
 であるthe crash-and-return プログラミングモデルを提唱している。
@@ -37,6 +42,7 @@ Turkitでは、通常のプログラミング記法と同じような記法で�
 Turkitでは特定個人に対する処理依頼を記述することはできない。
 また、MTurkに依存しているため、クライアントサイドなどを自由に記述することはできない。
 
+
 \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.6\linewidth,bb=0 0 651 345]{images/turkit.png}
@@ -44,6 +50,9 @@ Turkitでは特定個人に対する処理依頼を記述することはでき�
   \caption{Turkit}
   \label{fig:turkit}
 \end{figure}
+
+![fig:turkit](images/turkit.eps)
+
 
 ## Automan
 

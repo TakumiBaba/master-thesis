@@ -25,6 +25,15 @@ gulp.task 'compile', ->
     stderr: true
     stdout: true
 
+gulp.task 'tex2pdf', ->
+  gulp.src "main.tex"
+  .pipe pandoc
+    from: 'latex'
+    to: 'pdf'
+    ext: '.pdf'
+    args: ['--latex-engine=lualatex']
+  .pipe gulp.dest 'test/'
+
 gulp.task 'clean', ->
   list = '*~ *.log *.dvi *.blg *.aux *.out *.bbl *.lot *.toc *.lof *.pdf'
   gulp.src 'main.pdf'
@@ -87,12 +96,14 @@ gulp.task 'md2tex', ->
         from: 'markdown'
         to: 'latex'
         ext: '.tex'
+        args: ['--listings']
       .pipe gulp.dest 'tex/'
   return gulp.src 'markdown/*.md'
   .pipe pandoc
     from: 'markdown'
     to: 'latex'
     ext: '.tex'
+    args: ['--listings']
   .pipe gulp.dest 'tex/'
 
 
