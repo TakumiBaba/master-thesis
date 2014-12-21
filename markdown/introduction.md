@@ -15,6 +15,8 @@
 
 # 本論文の構成
 
+第\ref{chap:background}章では、背景について述べる。
+
 第\ref{chap:design}章では、人と計算機を同様に記述可能なプログラミング環境の設計について述べる。
 
 第\ref{chap:implementation}章では、。

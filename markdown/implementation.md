@@ -7,6 +7,8 @@
 
 ## 概要
 
+
+
 ## 処理手順
 
 1. 人への命令構文を実行する
@@ -333,7 +335,6 @@ Babascript Clientの機能を利用できるということは有用なことで
 <!-- もっと掘り下げる -->
 
 BabascriptとBabascript Client間でデータを交換するために、データ配信サーバとしてNode-LindaというWebサービスを用いる。
-
 
 BabascriptとBabascript Client間のデータ通信には、Node-LindaというWebサービスを利用する。
 Node-Lindaは、分散並列処理のための仕組みであるLindaをNode.js上に実装したものである。
