@@ -1,11 +1,13 @@
-\chapter{序論}
-\label{chap:introduction}
+<!-- \chapter{序論}
+\label{chap:introduction} -->
+
+# 序論 {#chap:introduction}
 
 本章では、研究の目的と本論文の構成について述べる。
 
-# 研究の目的
+## 研究の目的
 
-# 用語定義
+## 用語定義
 
 本論文において使用する用語を以下のように定義する。
 
@@ -13,9 +15,12 @@
 - クラウドソーシング
 - アウトソーシング
 
-# 本論文の構成
+## 本論文の構成
 
-第\ref{chap:background}章では、背景について述べる。
+
+<!-- 第[](#chap:background) 章では、背景について述べる。 -->
+
+<!-- 第\ref{chap:background}章では、背景について述べる。 -->
 
 第\ref{chap:design}章では、人と計算機を同様に記述可能なプログラミング環境の設計について述べる。
 

@@ -1,9 +1,9 @@
 <!-- \chapter{関連研究} -->
 <!-- \label{chap:related} -->
 
-# 関連研究
+# 関連研究 {#chap:related}
 
-# HumanComputation / Crowdsourcing
+## HumanComputation / Crowdsourcing
 
 コンピュータの計算能力だけでは解決できない問題を、人間の処理能力を計算資源として利用することによって解決する手法は、
 ヒューマンコンピュテーション\cite{humancomputation}と呼ばれ、様々な研究が行なわれている。
@@ -16,10 +16,9 @@ Vizwiz\cite{vizwiz}は、
 
 Soylent\cite{soylent}は、
 
-```
-a = b();
 
-# CrowdSourcing
+
+## CrowdSourcing
 
 インターネットを介して不特定多数の人間に仕事を依頼する仕組みはクラウドソーシングと呼ばれ、近年注目を浴びている。
 クラウドソーシングとは、業務の一部を外部に委託することを示すアウトソーシングという言葉を改変した造語である\cite{riseofcrowdsourcing}。
@@ -29,11 +28,10 @@ a = b();
 多くの利用例が生まれている。
 その中でも、本研究と類似している研究について、述べる。
 
-## Turkit
+### Turkit {#subsec:turkit}
 
 Littleらは、このMTurkをプログラムから簡単に利用するためのツールキットであるTurkit\cite{turkit}を提案している。
-<!-- Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる\ref{fig:turkit}。 -->
-Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる@fig:turkit。
+Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる\ref{fig:turkit}。
 また、クラウドソーシングによる処理結果の保存をしておくことで、その後の処理でプログラム実行に失敗しても
 再度クラウドソーシングに処理依頼をするのではなく、保存済みの結果を元にプログラムを再度実行できるような仕組み
 であるthe crash-and-return プログラミングモデルを提唱している。
@@ -42,19 +40,13 @@ Turkitでは、通常のプログラミング記法と同じような記法で�
 Turkitでは特定個人に対する処理依頼を記述することはできない。
 また、MTurkに依存しているため、クライアントサイドなどを自由に記述することはできない。
 
-
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.6\linewidth,bb=0 0 651 345]{images/turkit.png}
-  \end{center}
-  \caption{Turkit}
-  \label{fig:turkit}
-\end{figure}
-
-![fig:turkit](images/turkit.eps)
+![Turkit \label{fig:turkit}](images/turkit.eps "hoge | 0.5")
 
 
-## Automan
+
+<!-- <img width="60%" src="images/turkit.eps" alt="Turkit \label{fig:turkit}" /> -->
+
+### Automan
 
 Barowyらは、Automanというプログラミング言語Scala上で動作するDomain Specific Languageを提案した\cite{automan}。
 可能な限り通常のプログラミング記法を崩さずにクラウドソーシングを活用した人力処理を組み込むことを目的としており、
@@ -87,7 +79,7 @@ Franklinらは、CrowdDBというSQLを拡張した。
 コンピュータのみでは実現できなかったような処理や、より大規模な人力処理を実現させている。
 本研究では、不特定多数の人ではなく、特定可能な人を対象としたものである。
 
-# Social Computing
+## Social Computing
 
 コンピュータ・ネットワーク上における群衆の様々な行動や叡智をフィードバックデータとして
 システムに組み込み活用していくことはソーシャルコンピューティングと呼ばれている。
@@ -102,7 +94,7 @@ Franklinらは、CrowdDBというSQLを拡張した。
 \cite{social-machines},
 \cite{personal-api},
 
-# Human as Sensor
+## Human as Sensor
 
 人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman as Sensorと呼ばれる。
 
@@ -111,13 +103,13 @@ Franklinらは、CrowdDBというSQLを拡張した。
 Raらは、medusa\cite{Ra-medusa}という
 Huらは、\cite{Hu:mobilecrowdsensing}
 
-# Human as Actuator
+## Human as Actuator
 <!-- Human Manipulation? -->
 
 アクチュエータ技術は進歩しているが、未だに人間のような汎用的に実世界に干渉できる装置はない。
 そこで、人間をアクチュエータの代替として利用し動かす、つまり、人間とロボットの協調によって問題を解決しようという研究がある。
 
-## Hapticturk
+### Hapticturk
 
 Hapticturk\cite{hapticturk}は、人間をモーションプラットフォームのモーターやメカニカル機構の代わりに使うことによって、
 モーションプラットフォームの動きを再現するというものだ。
@@ -135,7 +127,7 @@ Hapticturkでは、ゲームにその用途を限定している。
   \label{fig:hapticturk}
 \end{figure}
 
-## Sharedo
+### Sharedo
 
 加藤らは、ユーザとロボット間のタスクの分業
 
@@ -143,13 +135,13 @@ Hapticturkでは、ゲームにその用途を限定している。
 
 
 
-## グラフィカルデータフローによる調理レシピプログラミング言語の提案
+### グラフィカルデータフローによる調理レシピプログラミング言語の提案
 吉川らは調理レシピを記述するためのデータフロープログラミング言語を提案している\cite{recipe-programming}。
 料理レシピをグラフィカルなデータフローで記述する。
 料理レシピプログラムは、コンピュータではなく人間が実行するためのも のだ。
 本研究のように、人間がプログラムからの指示を実行することを前提としたものとなっている。
 
-## Cooky
+### Cooky
 
 Sugiuraらは、人間とロボットが協調して調理をするシステムCooky\cite{cooky}を提案している。
 料理支援ロボットと人とロボットが共有可能な調理器具やキッチン、調理手順を記述するシステムから成り立っている。

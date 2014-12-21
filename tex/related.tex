@@ -1,4 +1,4 @@
-\section{関連研究}\label{ux95a2ux9023ux7814ux7a76}
+\chapter{関連研究}\label{chap:related}
 
 \section{HumanComputation /
 Crowdsourcing}\label{humancomputation-crowdsourcing}
@@ -14,10 +14,6 @@ Vizwiz\cite{vizwiz}は、
 
 Soylent\cite{soylent}は、
 
-\begin{lstlisting}
-  a = b();
-\end{lstlisting}
-
 \section{CrowdSourcing}\label{crowdsourcing}
 
 インターネットを介して不特定多数の人間に仕事を依頼する仕組みはクラウドソーシングと呼ばれ、近年注目を浴びている。
@@ -29,10 +25,9 @@ Turk\cite{amt}(以降MTurk)等のクラウドソーシングプラットフォ�
 多くの利用例が生まれている。
 その中でも、本研究と類似している研究について、述べる。
 
-\subsection{Turkit}\label{turkit}
+\subsection{Turkit}\label{subsec:turkit}
 
-Littleらは、このMTurkをプログラムから簡単に利用するためのツールキットであるTurkit
-{[}@turkit{]} を提案している。
+Littleらは、このMTurkをプログラムから簡単に利用するためのツールキットであるTurkit\cite{turkit}を提案している。
 Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる\ref{fig:turkit}。
 また、クラウドソーシングによる処理結果の保存をしておくことで、その後の処理でプログラム実行に失敗しても
 再度クラウドソーシングに処理依頼をするのではなく、保存済みの結果を元にプログラムを再度実行できるような仕組み
@@ -45,7 +40,7 @@ Turkitでは特定個人に対する処理依頼を記述することはでき�
 \begin{figure}[htbp]
 \centering
 \includegraphics{images/turkit.eps}
-\caption{fig:turkit}
+\caption{Turkit \label{fig:turkit}}
 \end{figure}
 
 \subsection{Automan}\label{automan}

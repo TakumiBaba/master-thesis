@@ -1,15 +1,16 @@
-\chapter{Babascriptプログラミング環境の実装}
-\label{chap:implementation}
+<!-- \chapter{Babascriptプログラミング環境の実装}
+\label{chap:implementation} -->
+# Babascriptプログラミング環境の実装 {#chap:implementation}
 
 本章では、第\ref{chap:design}章で述べたプログラミング環境について述べる。
 
-# Babascriptプログラミング環境
+## Babascriptプログラミング環境
 
-## 概要
+### 概要
 
 
 
-## 処理手順
+### 処理手順
 
 1. 人への命令構文を実行する
 1. 命令がNode-Lindaサーバを経由してクライアントへと配信される
@@ -19,13 +20,13 @@
 1. プログラム側で指定されたコールバック関数が実行され、処理が継続される
 
 
-# Babascript
+## Babascript
 
 プログラムと人とのインタラクションを実現するためには、プログラム上で人間への指示を行える仕組みが必要だ。
 そこで、Babascriptという、人間への指示構文を実装したオブジェクト(以下、人間オブジェクト)を宣言できるプログラミングライブラリを実装した。
 BabascriptはJavascriptのサーバサイド実行環境であるNode.js及びプログラミング言語Ruby上で動作する。
 
-## 基本仕様
+### 基本仕様
 
 Babascriptでは、通常のメソッド実行とほぼ同じ記法で人間への指示を送ることができる。
 例えば、図\ref{fig:babascript_sample}のようなプログラムによって、人間オブジェクトを宣言し、人間へ指示を送ることができる。
@@ -91,7 +92,7 @@ methodmissingと呼ばれる。
 第二引数には人力処理の実行後に実行するコールバック関数を指定する。
 このコールバック関数は、指示に対して何かしらの値が返されたときに実行される。
 
-## オプション情報の付加
+### オプション情報の付加
 
 メソッド名以外に送信したい情報があるときには、第一引数にオプション情報としてオブジェクトを与える。
 クライアントアプリケーション側でオプション情報を得ることができるため、このオプション情報に応じて
@@ -136,7 +137,7 @@ methodmissingと呼ばれる。
 \end{figure}
 
 
-## コールバック関数の指定
+### コールバック関数の指定
 
 命令構文の第二引数にコールバック関数を指定すると、実行結果を取得した後にこのコールバック関数が呼ばれる
 resultの中に処理結果が入ってる
@@ -162,7 +163,7 @@ resultの中に処理結果が入ってる
 \end{figure}
 
 
-## コマンドラインでの利用
+### コマンドラインでの利用
 
 Babascriptはコマンドラインツールとしても利用可能だ。
 babaコマンドは、図\ref{fig:baba_command}のように利用することができる。
@@ -188,7 +189,7 @@ format情報などを付加したい場合は、オプションoの後に<key>=<
 \end{figure}
 
 
-# Babascript Client
+## Babascript Client
 
 Babascriptによって人への指示をプログラムに記述し、実行することが可能となったが、その指示を人に伝え、
 処理結果を返させるためのアプリケーションが必要となる。
@@ -197,7 +198,7 @@ Babascript Clientは、Babascriptとの通信を担うサービス部と返り�
 サービス部はJavascript上で動作する。
 インタフェース部は、各種アプリケーションに応じて動作環境が異なるが、主にNode.js上とWebブラウザ上で動作する。
 
-## サービス
+### サービス
 
 サービス部は、主にBabascriptとのやりとり、つまり、命令の受け取りや返り値の送信などを担う。
 
@@ -243,7 +244,7 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
   \label{fig:client_cancel_method}
 \end{figure}
 
-## ユーザインタフェース
+### ユーザインタフェース
 
 ユーザとのインタラクションを行う。
 命令をユーザに見せるのと、実際に実行結果を入力させる機能を持つ
@@ -255,7 +256,7 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 
 例として、Webアプリケーション、コマンドライン・インタフェース、slackインタフェースを実装した。
 
-## Webアプリケーション
+### Webアプリケーション
 
 インタフェースの例として、Webアプリケーションとして実装した。
 webブラウザ上で動作し、フレームワークにはBackbone.jsとMarionette.jsを利用した。
@@ -287,7 +288,7 @@ Webインタフェースでは、指示内容に応じて提示インタフェ�
   \label{fig:babascript_client_webapp_interface}
 \end{figure}
 
-## チャットボット
+### チャットボット
 
 チャットサービス上で稼働するボットにBabascript Clientの機能を実装した。
 ボットシステムにはHubotを採用した。
@@ -331,7 +332,7 @@ Babascript Clientの機能を利用できるということは有用なことで
 
 
 <!-- % Adapter -->
-# 通信手法
+## 通信手法
 <!-- もっと掘り下げる -->
 
 BabascriptとBabascript Client間でデータを交換するために、データ配信サーバとしてNode-LindaというWebサービスを用いる。
@@ -347,7 +348,7 @@ Babascript及びBabascript Clientは双方共にこのAdapterを利用して通�
 具体的にはSocket.IO AdapterとPush Notification Adapterの2つを実装した。
 以下の節で具体的に述べる。
 
-## Node-Linda
+### Node-Linda
 
 Node-Linda\cite{node-linda}は、分散並列処理のための仕組みであるLinda\cite{linda}をNode.js上に実装したものだ。
 Lindaは、タプルスペースという共有メモリを用いてプロセス間でデータの通信を行う並列処理のためのモデルだ。
@@ -388,7 +389,7 @@ Node-Lindaの各操作は、図\ref{fig:linda-usage}のようなプログラム�
 そこで、様々なデバイスが接続できるよう
 Node-Lindaに接続するための接続手法別のアダプターを2種類、実装した。
 
-## Socket.IO Adapter
+### Socket.IO Adapter
 
 Socket.IO Adapterは、リアルタイム通信のためのライブラリであるSocket.IO\footnote{http://socket.io/}を用いてNode-Lindaに接続するためのAdapterだ。
 WebsocketもしくはXHR-Pollingによって常にNode-Lindaサーバと通信をし続ける。
@@ -401,7 +402,7 @@ Socket.IO Adapterは、接続環境が良好な状態での利用が望ましい
 構成図を図\ref{fig:socket.io-adapter}に示す。
 
 
-## PushNotification Adapter
+### PushNotification Adapter
 
 Pushnotification Adapter は、HTTP RequestとPushNotificationを用いてNode-Lindaと通信を行うためのAdapterだ。
 Node-Lindaへのタプル書き込みや処理待ちの登録にはHTTP Requestを投げる。
@@ -411,7 +412,7 @@ Node-Linda側からAdapter側への通信には、PushNotificationを用いる�
 
 構成図を図\ref{fig:pushnotification-adapter}に示す。
 
-# プラグイン機構
+## プラグイン機構
 
 Babascript 及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
 
@@ -444,7 +445,7 @@ receiveイベントは、Babascript及びBabascript Clientが何かしらのデ�
 
 プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
 
-## 具体例
+### 具体例
 
 例えば、以下のようなプラグイン例が考えられる。
 
@@ -452,8 +453,8 @@ receiveイベントは、Babascript及びBabascript Clientが何かしらのデ�
 - DatasyncPlugin
 - WearableDevicePlugin
 
-### Logger Plugin
+#### Logger Plugin
 
 LoggerPluginは、
 
-### Datasync Plugin
+#### Datasync Plugin
