@@ -103,7 +103,43 @@ Raらは、medusa\cite{Ra-medusa}という
 Huらは、\cite{Hu:mobilecrowdsensing}
 
 # Human as Actuator
-\cite{hapticturk}
+<!-- Human Manipulation? -->
+
+アクチュエータ技術は進歩しているが、未だに人間のような汎用的に実世界に干渉できる装置はない。
+そこで、人間をアクチュエータの代替として利用し動かす、つまり、人間とロボットの協調によって問題を解決しようという研究がある。
+
+## Hapticturk
+
+Hapticturk\cite{hapticturk}は、人間をモーションプラットフォームのモーターやメカニカル機構の代わりに使うことによって、
+モーションプラットフォームの動きを再現するというものだ。
+人間への動きの指示はスマートフォンなどを経由して行なわれる。
+人間をアクチュエータの代わりに利用するといった点において、本研究と類似している。
+本研究では、その用途をアクチュエータに限ったものではない。
+また、プログラム上で汎用的に利用可能である。
+Hapticturkでは、ゲームにその用途を限定している。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.6\linewidth,bb=0 0 332 281]{images/hapticturk.png}
+  \end{center}
+  \caption{Hapticturk}
+  \label{fig:hapticturk}
+\end{figure}
+
+## Sharedo
+
+加藤らは、ユーザとロボット間のタスクの分業
+
 \cite{sharedo}
-\cite{recipe-programming}
-\cite{cooky}
+
+
+
+## グラフィカルデータフローによる調理レシピプログラミング言語の提案
+吉川らは調理レシピを記述するためのデータフロープログラミング言語を提案している\cite{recipe-programming}。
+料理レシピをグラフィカルなデータフローで記述する。
+料理レシピプログラムは、コンピュータではなく人間が実行するためのものだ。
+本研究のように、人間がプログラムからの指示を実行することを前提としたものとなっている。
+
+## Cooky
+
+Sugiuraらは、人間とロボットが協調して調理をするシステムCooky\cite{cooky}を提案している。
