@@ -1,6 +1,3 @@
-<!-- \chapter{結論}
-\label{chap:conclusion} -->
-
 # 結論 {#chap:conclusion}
 
 

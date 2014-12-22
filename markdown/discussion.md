@@ -1,5 +1,3 @@
-<!-- \chapter{議論}
-\label{chap:discussion} -->
 # 議論 {#chap:discussion}
 
 ## プログラム化する意味

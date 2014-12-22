@@ -1,6 +1,3 @@
-<!-- \chapter{関連研究} -->
-<!-- \label{chap:related} -->
-
 # 関連研究 {#chap:related}
 
 ## HumanComputation / Crowdsourcing
@@ -12,7 +9,7 @@ reCAPTCHA\cite{recaptcha}は、
 
 Duolingo\cite{duolingo}は、
 
-Vizwiz\cite{vizwiz}は、
+Vizwiz\cie{vizwiz}は、
 
 Soylent\cite{soylent}は、
 

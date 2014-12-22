@@ -1,8 +1,5 @@
 # 応用例 {#chap:application}
 
-<!-- \chapter{応用例}
-\label{chap:application} -->
-
 本章では、Babascriptプログラミング環境によって実現可能と考えられる応用例について述べる
 
 ## Activity as Code

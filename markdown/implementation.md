@@ -1,5 +1,3 @@
-<!-- \chapter{Babascriptプログラミング環境の実装}
-\label{chap:implementation} -->
 # Babascriptプログラミング環境の実装 {#chap:implementation}
 
 本章では、第\ref{chap:design}章で述べたプログラミング環境について述べる。

@@ -53,6 +53,7 @@ Dir::glob("./markdown/*").each do |f|
       while l = t.gets
         m = Kconv.kconv(l,Kconv::UTF8)
         next if m =~ /^%/
+        # m.gsub!(/^\s*\<\!--\s\s\{.*\}\s\s-->$/,'')
         m.gsub!(/^\s*\\begin\{.*\}$/,'')
         m.gsub!(/^\s*\\end\{.*\}$/,'')
         m.gsub!(/^\s*\\label\{.*\}$/,'')
