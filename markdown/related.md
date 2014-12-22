@@ -9,7 +9,7 @@ reCAPTCHA\cite{recaptcha}は、
 
 Duolingo\cite{duolingo}は、
 
-Vizwiz\cie{vizwiz}は、
+Vizwiz\cite{vizwiz}は、
 
 Soylent\cite{soylent}は、
 
