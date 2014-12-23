@@ -25,7 +25,7 @@ Soylent\cite{soylent}は、
 多くの利用例が生まれている。
 その中でも、本研究と類似している研究について、述べる。
 
-### Turkit {#subsec:turkit}
+### Turkit {#subsubsec:turkit}
 
 Littleらは、このMTurkをプログラムから簡単に利用するためのツールキットであるTurkit\cite{turkit}を提案している。
 Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる\ref{fig:turkit}。
@@ -37,8 +37,14 @@ Turkitでは、通常のプログラミング記法と同じような記法で�
 Turkitでは特定個人に対する処理依頼を記述することはできない。
 また、MTurkに依存しているため、クライアントサイドなどを自由に記述することはできない。
 
-![Turkit \label{fig:turkit}](images/turkit.eps "hoge | 0.5")
-
+<!-- ![Turkit \label{fig:turkit}](images/turkit.eps "hoge | 0.5") -->
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.6\linewidth]{images/turkit.eps}
+  \end{center}
+  \caption{Turkit}
+  \label{fig:turkit}
+\end{figure}
 
 
 <!-- <img width="60%" src="images/turkit.eps" alt="Turkit \label{fig:turkit}" /> -->
@@ -153,3 +159,9 @@ Sugiuraらは、人間とロボットが協調して調理をするシステムC
   \caption{Cooky}
   \label{fig:cooky}
 \end{figure}
+
+## ワークフロー系
+
+YAWL, XPDL
+atled, questetra
+サービスとしてあるかも
