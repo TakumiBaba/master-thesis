@@ -37,17 +37,20 @@ Turkitでは、通常のプログラミング記法と同じような記法で�
 Turkitでは特定個人に対する処理依頼を記述することはできない。
 また、MTurkに依存しているため、クライアントサイドなどを自由に記述することはできない。
 
-<!-- ![Turkit \label{fig:turkit}](images/turkit.eps "hoge | 0.5") -->
-<!-- \begin{figure}[htbp]
+
+![Turkit \label{fig:turkit}](images/turkit.eps "hoge") 
+
+
+\begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.6\linewidth]{images/turkit.eps}
   \end{center}
   \caption{Turkit}
   \label{fig:turkit}
-\end{figure} -->
+\end{figure}
 
 
-<img width="60%" src="images/turkit.eps" alt="Turkit \label{fig:turkit}" />
+<!-- <img width="60%" src="images/turkit.eps" alt="Turkit \label{fig:turkit}" ></img> -->
 
 ### Automan
 
@@ -58,6 +61,7 @@ Barowyらは、Automanというプログラミング言語Scala上で動作す�
 本研究における目的は人間と計算機への指示を融合させたプログラミングを実現させることとなっており、類似している。
 クラウドソーシング利用を前提としている点や、クライアントアプリケーションを自由に作ることができない点などにおいて
 本研究との違いである。
+
 
 \begin{figure}[htbp]
   \begin{center}
