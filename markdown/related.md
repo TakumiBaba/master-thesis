@@ -38,16 +38,16 @@ Turkitでは特定個人に対する処理依頼を記述することはでき�
 また、MTurkに依存しているため、クライアントサイドなどを自由に記述することはできない。
 
 <!-- ![Turkit \label{fig:turkit}](images/turkit.eps "hoge | 0.5") -->
-\begin{figure}[htbp]
+<!-- \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.6\linewidth]{images/turkit.eps}
   \end{center}
   \caption{Turkit}
   \label{fig:turkit}
-\end{figure}
+\end{figure} -->
 
 
-<!-- <img width="60%" src="images/turkit.eps" alt="Turkit \label{fig:turkit}" /> -->
+<img width="60%" src="images/turkit.eps" alt="Turkit \label{fig:turkit}" />
 
 ### Automan
 
