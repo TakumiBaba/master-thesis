@@ -47,8 +47,8 @@ end
 
 
 c = 0
-Dir::glob("./markdown/*").each do |f|
-  if f =~/^.*\.md$/
+Dir::glob("./tex/*").each do |f|
+  if f =~/^.*\.tex$/
     File.open(f,'r') do |t|
       while l = t.gets
         m = Kconv.kconv(l,Kconv::UTF8)
@@ -56,7 +56,7 @@ Dir::glob("./markdown/*").each do |f|
         # m.gsub!(/^\s*\<\!--\s\s\{.*\}\s\s-->$/,'')
         m.gsub!(/^\s*\\begin\{.*\}$/,'')
         m.gsub!(/^\s*\\end\{.*\}$/,'')
-        m.gsub!(/^\s*\\label\{.*\}$/,'')
+        m.gsub!(/^*\\label\{.*\}$/,'')
         m.gsub!(/^\s*\\usepackage\{.*\}$/,'')
         m.gsub!(/^\s*\\includegraphics(?:\[.*\])*\{.*\}$/,'')
         m.gsub!(/^\s*\\item\[(.*)\]\s?(.*)$/){$1+' '+$2}
