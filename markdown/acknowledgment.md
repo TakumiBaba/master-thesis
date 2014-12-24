@@ -4,4 +4,6 @@
 
 さんきゅーますいらぼ各位
 
+さんきゅー未踏
+
 \end{acknowledgment}
