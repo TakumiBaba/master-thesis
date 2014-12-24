@@ -38,7 +38,7 @@ Turkitでは特定個人に対する処理依頼を記述することはでき�
 また、MTurkに依存しているため、クライアントサイドなどを自由に記述することはできない。
 
 
-![Turkit \label{fig:turkit}](images/turkit.eps "hoge") 
+![Turkit \label{fig:turkit}](images/turkit.eps "hoge")
 
 
 \begin{figure}[htbp]
@@ -81,6 +81,7 @@ Franklinらは、CrowdDBというSQLを拡張した。
 \cite{cylog}
 \cite{crowdforge}
 \cite{community-based-crowdsourcing}
+\cite{realtime-captioning}
 
 クラウドソーシング分野の研究では、インターネットを介して不特定多数の人を計算資源として利用することによって、
 コンピュータのみでは実現できなかったような処理や、より大規模な人力処理を実現させている。
