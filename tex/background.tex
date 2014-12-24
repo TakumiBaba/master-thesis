@@ -5,15 +5,39 @@
 \section{コンピュータプログラムと人}\label{ux30b3ux30f3ux30d4ux30e5ux30fcux30bfux30d7ux30edux30b0ux30e9ux30e0ux3068ux4eba}
 
 コンピュータプログラムとは、コンピュータに実行させたい一連の処理手順を記述したものである。
-実行させたい処理を正確に記述し、コンピュータに実行させることによって、様々な利益を得ることが出来る。
+コンピュータはこのプログラムに記述された処理を解釈し、実行する。
 
 コンピュータプログラムの実行対象はコンピュータであるが、人が実行するプログラムも存在する。
-例えば、マニュアルやレシピといったものだ。
-マニュアルは、達成したい状況への
+マニュアルやレシピといった、人間にとっての手順書だ。
+人間は手順書に書いてある内容に沿って行動し、目的を達成する。
+例えば、何か料理を作りたいときなどは、料理のレシピを見ながら、そこに記述されている内容を自分で解釈し、実行する。
 
-\section{プログラムの処理領域}\label{ux30d7ux30edux30b0ux30e9ux30e0ux306eux51e6ux7406ux9818ux57df}
+コンピュータにとってのプログラムと人にとってのプログラムには類似性がある。
+双方ともに、実行する処理について記述されたものである。
+例えば、料理のレシピをコンピュータプログラムのような記述するならば、図\ref{fig:background_cooking}のようになる。
 
-\subsection{画面上から実世界へ}\label{ux753bux9762ux4e0aux304bux3089ux5b9fux4e16ux754cux3078}
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.4\linewidth,bb=0 0 281 98]{images/background_cooking.js.png}
+  \end{center}
+  \caption{料理レシピをコンピュータプログラム風に記述する}
+  \label{fig:background_cooking}
+\end{figure}
+
+また、小売店の店員マニュアルであれば、図\ref{fig:background_retail}のようになる
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.4\linewidth,bb=0 0 319 98]{images/background_retail.js.png}
+  \end{center}
+  \caption{料理レシピをコンピュータプログラム風に記述する}
+  \label{fig:background_retail}
+\end{figure}
+
+このように、人間にとっての処理もコンピュータにとっての処理も、同じような記法で記述することが可能である。
+しかし、両者の処理を統合して記述するための仕組みは存在しない。
+
+\section{プログラムの処理領域の拡張}\label{ux30d7ux30edux30b0ux30e9ux30e0ux306eux51e6ux7406ux9818ux57dfux306eux62e1ux5f35}
 
 プログラムによって制御を記述できるような領域はどんどん広がっている。
 近年では、Arduino\footnote{http://www.arduino.cc/}やRaspberryPi\footnote{http://www.raspberrypi.org/}等の登場によって、
@@ -23,7 +47,7 @@
 より高性能なロボットの登場によって、今まで人間がやっていたような領域においても、プログラムの制御が有効に働くようになるだろう。
 今後、プログラムによる制御は更に広がり、あらゆる制御をプログラムで記述するようになっていくのではないかと考えられる。
 
-\subsection{計算資源としての人}\label{ux8a08ux7b97ux8cc7ux6e90ux3068ux3057ux3066ux306eux4eba}
+\section{プログラムの実行対象}\label{ux30d7ux30edux30b0ux30e9ux30e0ux306eux5b9fux884cux5bfeux8c61}
 
 コンピュータプログラムに書かれた処理でも、コンピュータ以外がその処理を実行するといった事例も多く存在している。
 コンピュータは優れた処理能力を持つが、認識能力などの分野においてはまだ人間のほうが優れた能力を持っている。

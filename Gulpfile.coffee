@@ -97,6 +97,11 @@ gulp.task 'md2tex', ->
     args: ['--chapters', '--listings']
   .pipe gulp.dest 'tex/'
 
+gulp.task 'image2eps', ->
+  gaze './images/*.png', (err, watcher) ->
+    @on "changed", (filepath) ->
+      gulp.src filepath
+      .pipe exec "echo #{filepath}"
 
 gulp.task 'default', ['md2tex', 'compile', 'upload2gist'], ->
   gulp.src 'main.tex'
