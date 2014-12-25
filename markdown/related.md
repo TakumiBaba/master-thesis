@@ -38,7 +38,7 @@ Turkitでは特定個人に対する処理依頼を記述することはでき�
 また、MTurkに依存しているため、クライアントサイドなどを自由に記述することはできない。
 
 
-![Turkit \label{fig:turkit}](images/turkit.eps "hoge")
+<!-- ![Turkit \label{fig:turkit}](images/turkit.eps "hoge") -->
 
 
 \begin{figure}[htbp]
@@ -169,4 +169,6 @@ Sugiuraらは、人間とロボットが協調して調理をするシステムC
 
 YAWL, XPDL
 atled, questetra
+
+atled社が
 サービスとしてあるかも

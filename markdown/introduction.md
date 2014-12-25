@@ -28,6 +28,8 @@
 
 第\ref{chap:implementation}章では、。
 
+第\ref{chap:evaluation}章では、システム評価について述べる。
+
 第\ref{chap:application}章では、本提案で実現するプログラミング環境を利用して実現可能と考えられる応用例について述べる。
 
 第\ref{chap:discussion}章では、本提案に関する考察について述べる。
