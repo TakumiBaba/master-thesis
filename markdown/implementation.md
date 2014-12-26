@@ -1,4 +1,4 @@
-# Babascriptプログラミング環境の実装 {#chap:implementation}
+# 実装 {#chap:implementation}
 
 本章では、第\ref{chap:design}章で述べたプログラミング環境について述べる。
 
@@ -6,6 +6,17 @@
 
 ### 概要
 
+Babascriptプログラミング環境は、人間とコンピュータへの指示を同じような記法で
+実現・実行可能にするための仕組みである。
+以下の要素によって実現する。
+
+- Babascript
+- Babascript Client
+- Node-Linda
+
+Babascriptは人間への指示を記述可能にするプログラミングライブラリである。
+Babascript Clientは、指示に対する実行結果を入力できるソフトウェアだ。
+Node-Lindaは、Babascript及びBabascript Clientの間のデータ通信の仲介サーバとして機能する。
 
 ### 処理手順
 
@@ -16,6 +27,17 @@
 1. Node-Lindaサーバを経由して実行元プログラムに入力された処理結果が送信される
 1. プログラム側で指定されたコールバック関数が実行され、処理が継続される
 
+### 全体像
+
+Babascriptプログラミング環境は、図\ref{fig:system_image}のように成り立つ。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.8\linewidth,bb=0 0 563 151]{images/system_image.png}
+  \end{center}
+  \caption{システム全体像}
+  \label{fig:system_image}
+\end{figure}
 
 ## Babascript
 

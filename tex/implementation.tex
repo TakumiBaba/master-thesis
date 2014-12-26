@@ -1,10 +1,28 @@
-\chapter{Babascriptプログラミング環境の実装}\label{chap:implementation}
+\chapter{実装}\label{chap:implementation}
 
 本章では、第\ref{chap:design}章で述べたプログラミング環境について述べる。
 
 \section{Babascriptプログラミング環境}\label{babascriptux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux74b0ux5883}
 
 \subsection{概要}\label{ux6982ux8981}
+
+Babascriptプログラミング環境は、人間とコンピュータへの指示を同じような記法で
+実現・実行可能にするための仕組みである。 以下の要素によって実現する。
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Babascript
+\item
+  Babascript Client
+\item
+  Node-Linda
+\end{itemize}
+
+Babascriptは人間への指示を記述可能にするプログラミングライブラリである。
+Babascript Clientは、指示に対する実行結果を入力できるソフトウェアだ。
+Node-Lindaは、Babascript及びBabascript
+Clientの間のデータ通信の仲介サーバとして機能する。
 
 \subsection{処理手順}\label{ux51e6ux7406ux624bux9806}
 
@@ -24,6 +42,18 @@
 \item
   プログラム側で指定されたコールバック関数が実行され、処理が継続される
 \end{enumerate}
+
+\subsection{全体像}\label{ux5168ux4f53ux50cf}
+
+Babascriptプログラミング環境は、図\ref{fig:system_image}のように成り立つ。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.8\linewidth,bb=0 0 563 151]{images/system_image.png}
+  \end{center}
+  \caption{システム全体像}
+  \label{fig:system_image}
+\end{figure}
 
 \section{Babascript}\label{babascript}
 
