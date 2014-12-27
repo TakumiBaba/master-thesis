@@ -49,9 +49,11 @@ Soylent\cite{soylent}は、文章の校正をインターネットを介した�
 ##### CrowdDB
 \mbox{}
 
-Franklinらは、CrowdDB\cite{crowddb}というSQLを拡張した。
+計算機だけでは処理が困難なクエリに対して、人間を用いることで返答可能にする仕組みとして、
+CrowdDB\cite{crowddb}が提案されている。
+CrowdSQLという、SQLを拡張したものが記述言語として使われる。
 
-不明瞭であったり、不完全なデータの処理や、抽象的な比較
+
 
 <!-- 画像を入れたい -->
 
