@@ -5,15 +5,55 @@
 コンピュータの計算能力だけでは解決できない問題を、人間の処理能力を計算資源として利用することによって解決する手法は、
 ヒューマンコンピュテーション\cite{humancomputation}と呼ばれ、様々な研究が行なわれている。
 
-reCAPTCHA\cite{recaptcha}は、
+##### reCAPTCHA
+\mbox{}
 
-Duolingo\cite{duolingo}は、
+コンピュータの文字認識能力では処理しきれない文字の認識を人間に実行させるreCAPTCHA\cite{recaptcha}は、
+人間かコンピュータかを判別するために文字認識をさせるCAPTCHA\cite{captcha}を応用したものだ。
+人間かコンピュータかの判別を行いつつ、未解読の文字を解読することができる。
 
-Vizwiz\cite{vizwiz}は、
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 476 316]{images/recaptcha.png}
+  \end{center}
+  \caption{人間がコンピュータの代わりに文字認識をするシステム reCAPTCHA}
+  \label{fig:recaptcha}
+\end{figure}
 
-Soylent\cite{soylent}は、
+##### Duolingo
+\mbox{}
 
+Duolingo\cite{duolingo}は、ユーザの言語学習における翻訳作業を利用して、ウェブサイトや文書の翻訳を行うアプリケーションだ。
+言語学習自体もゲーミフィケーションを活用したものとなっており、翻訳作業しているということは隠蔽された形で語学学習できる。
+言語翻訳のための計算資源として人間を利用した事例である。
 
+<!-- 画像を入れたい -->
+
+##### Vizwiz
+\mbox{}
+
+人間を物体認識エンジンとして利用することのできるVizwiz\cite{vizwiz}というアプリケーションも存在する。
+認識したい物体をカメラで撮影し、質問内容などを録音して送ると、インターネットを介して結果を得ることが出来る。
+計算機だけでも特定可能な物体に関しては、人力エンジンを介さずに処理することも可能となっている。
+
+<!-- 画像を入れたい -->
+
+##### Soylent
+\mbox{}
+
+Soylent\cite{soylent}は、文章の校正をインターネットを介した人間の力を利用して行うソフトウェアだ。
+文章を意味が通じる状態を維持して短くしたり、文法的に正しくても意味の通じない文章を意味が通じるようにする作業は、人間のほうが得意である。
+
+<!-- 画像を入れたい -->
+
+##### CrowdDB
+\mbox{}
+
+Franklinらは、CrowdDB\cite{crowddb}というSQLを拡張した。
+
+不明瞭であったり、不完全なデータの処理や、抽象的な比較
+
+<!-- 画像を入れたい -->
 
 ## CrowdSourcing
 
@@ -25,7 +65,9 @@ Soylent\cite{soylent}は、
 多くの利用例が生まれている。
 その中でも、本研究と類似している研究について、述べる。
 
-### Turkit {#subsubsec:turkit}
+
+##### Turkit
+\mbox{}
 
 Littleらは、このMTurkをプログラムから簡単に利用するためのツールキットであるTurkit\cite{turkit}を提案している。
 Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる\ref{fig:turkit}。
@@ -37,10 +79,6 @@ Turkitでは、通常のプログラミング記法と同じような記法で�
 Turkitでは特定個人に対する処理依頼を記述することはできない。
 また、MTurkに依存しているため、クライアントサイドなどを自由に記述することはできない。
 
-
-<!-- ![Turkit \label{fig:turkit}](images/turkit.eps "hoge") -->
-
-
 \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.6\linewidth]{images/turkit.eps}
@@ -49,10 +87,8 @@ Turkitでは特定個人に対する処理依頼を記述することはでき�
   \label{fig:turkit}
 \end{figure}
 
-
-<!-- <img width="60%" src="images/turkit.eps" alt="Turkit \label{fig:turkit}" ></img> -->
-
-### Automan
+##### Automan
+\mbox{}
 
 Barowyらは、Automanというプログラミング言語Scala上で動作するDomain Specific Languageを提案した\cite{automan}。
 可能な限り通常のプログラミング記法を崩さずにクラウドソーシングを活用した人力処理を組み込むことを目的としており、
@@ -71,17 +107,26 @@ Barowyらは、Automanというプログラミング言語Scala上で動作す�
   \label{fig:automan}
 \end{figure}
 
-
-
-Franklinらは、CrowdDBというSQLを拡張した。
-
-不明瞭であったり、不完全なデータの処理や、抽象的な比較
-\cite{crowddb}
+##### Cylog
+\mbox{}
 
 \cite{cylog}
+
+##### CrowdForge
+\mbox{}
+
 \cite{crowdforge}
+
+##### Community Based Crowdsourcing
+\mbox{}
+
 \cite{community-based-crowdsourcing}
+
+##### Realitime-Captioning
+\mbox{}
+
 \cite{realtime-captioning}
+
 
 クラウドソーシング分野の研究では、インターネットを介して不特定多数の人を計算資源として利用することによって、
 コンピュータのみでは実現できなかったような処理や、より大規模な人力処理を実現させている。
@@ -97,19 +142,55 @@ Franklinらは、CrowdDBというSQLを拡張した。
 
 次に、特に本研究と関連するソーシャルコンピューティングの事例を紹介する。
 
+##### The Dog Programming Language
+\mbox{}
+
 \cite{dog},
+
+##### The Jabberwocky Programming Environmets
+\mbox{}
+
 \cite{jabberwocky},
+
+##### Social Machines
+\mbox{}
+
 \cite{social-machines},
+
+##### Human personal apis
+\mbox{}
+
 \cite{personal-api},
+
+
 
 ## Human as Sensor
 
 人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman as Sensorと呼ばれる。
+ユビキタスコンピューティングなどの研究分野において、こういった手法が多く研究されている。
+その事例を以下に紹介する。
+
+##### PRISM
+\mbox{}
 
 \cite{prism}
+
+##### Moboq
+\mbox{}
+
 \cite{moboq}
+
+##### Medusa
+\mbox{}
+
 Raらは、medusa\cite{Ra-medusa}という
+
+##### Mobile Crowdsourcing
+\mbox{}
+
 Huらは、\cite{Hu:mobilecrowdsensing}
+
+
 
 ## Human as Actuator
 <!-- Human Manipulation? -->
@@ -117,7 +198,10 @@ Huらは、\cite{Hu:mobilecrowdsensing}
 アクチュエータ技術は進歩しているが、未だに人間のような汎用的に実世界に干渉できる装置はない。
 そこで、人間をアクチュエータの代替として利用し動かす、つまり、人間とロボットの協調によって問題を解決しようという研究がある。
 
-### Hapticturk
+
+##### HapticTurk
+\mbox{}
+
 
 Hapticturk\cite{hapticturk}は、人間をモーションプラットフォームのモーターやメカニカル機構の代わりに使うことによって、
 モーションプラットフォームの動きを再現するというものだ。
@@ -135,7 +219,9 @@ Hapticturkでは、ゲームにその用途を限定している。
   \label{fig:hapticturk}
 \end{figure}
 
-### Sharedo
+##### Sharedo
+\mbox{}
+
 
 加藤らは、ユーザとロボット間のタスクの分業
 
@@ -143,13 +229,18 @@ Hapticturkでは、ゲームにその用途を限定している。
 
 
 
-### グラフィカルデータフローによる調理レシピプログラミング言語の提案
+##### グラフィカルデータフローによる調理レシピプログラミング言語の提案
+\mbox{}
+
+
 吉川らは調理レシピを記述するためのデータフロープログラミング言語を提案している\cite{recipe-programming}。
 料理レシピをグラフィカルなデータフローで記述する。
 料理レシピプログラムは、コンピュータではなく人間が実行するためのも のだ。
 本研究のように、人間がプログラムからの指示を実行することを前提としたものとなっている。
 
-### Cooky
+##### Cooky
+\mbox{}
+
 
 Sugiuraらは、人間とロボットが協調して調理をするシステムCooky\cite{cooky}を提案している。
 料理支援ロボットと人とロボットが共有可能な調理器具やキッチン、調理手順を記述するシステムから成り立っている。

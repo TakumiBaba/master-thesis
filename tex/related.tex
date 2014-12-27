@@ -6,13 +6,52 @@ Crowdsourcing}\label{humancomputation-crowdsourcing}
 コンピュータの計算能力だけでは解決できない問題を、人間の処理能力を計算資源として利用することによって解決する手法は、
 ヒューマンコンピュテーション\cite{humancomputation}と呼ばれ、様々な研究が行なわれている。
 
-reCAPTCHA\cite{recaptcha}は、
+\paragraph{reCAPTCHA}\label{recaptcha}
 
-Duolingo\cite{duolingo}は、
+\mbox{}
 
-Vizwiz\cite{vizwiz}は、
+コンピュータの文字認識能力では処理しきれない文字の認識を人間に実行させるreCAPTCHA\cite{recaptcha}は、
+人間かコンピュータかを判別するために文字認識をさせるCAPTCHA\cite{captcha}を応用したものだ。
+人間かコンピュータかの判別を行いつつ、未解読の文字を解読することができる。
 
-Soylent\cite{soylent}は、
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 476 316]{images/recaptcha.png}
+  \end{center}
+  \caption{人間がコンピュータの代わりに文字認識をするシステム reCAPTCHA}
+  \label{fig:recaptcha}
+\end{figure}
+
+\paragraph{Duolingo}\label{duolingo}
+
+\mbox{}
+
+Duolingo\cite{duolingo}は、ユーザの言語学習における翻訳作業を利用して、ウェブサイトや文書の翻訳を行うアプリケーションだ。
+言語学習自体もゲーミフィケーションを活用したものとなっており、翻訳作業しているということは隠蔽された形で語学学習できる。
+言語翻訳のための計算資源として人間を利用した事例である。
+
+\paragraph{Vizwiz}\label{vizwiz}
+
+\mbox{}
+
+人間を物体認識エンジンとして利用することのできるVizwiz\cite{vizwiz}というアプリケーションも存在する。
+認識したい物体をカメラで撮影し、質問内容などを録音して送ると、インターネットを介して結果を得ることが出来る。
+計算機だけでも特定可能な物体に関しては、人力エンジンを介さずに処理することも可能となっている。
+
+\paragraph{Soylent}\label{soylent}
+
+\mbox{}
+
+Soylent\cite{soylent}は、文章の校正をインターネットを介した人間の力を利用して行うソフトウェアだ。
+文章を意味が通じる状態を維持して短くしたり、文法的に正しくても意味の通じない文章を意味が通じるようにする作業は、人間のほうが得意である。
+
+\paragraph{CrowdDB}\label{crowddb}
+
+\mbox{}
+
+Franklinらは、CrowdDB\cite{crowddb}というSQLを拡張した。
+
+不明瞭であったり、不完全なデータの処理や、抽象的な比較
 
 \section{CrowdSourcing}\label{crowdsourcing}
 
@@ -25,7 +64,9 @@ Turk\cite{amt}(以降MTurk)等のクラウドソーシングプラットフォ�
 多くの利用例が生まれている。
 その中でも、本研究と類似している研究について、述べる。
 
-\subsection{Turkit}\label{subsubsec:turkit}
+\paragraph{Turkit}\label{turkit}
+
+\mbox{}
 
 Littleらは、このMTurkをプログラムから簡単に利用するためのツールキットであるTurkit\cite{turkit}を提案している。
 Turkitでは、通常のプログラミング記法と同じような記法でタスクをクラウドソーシングすることができる\ref{fig:turkit}。
@@ -45,7 +86,9 @@ Turkitでは特定個人に対する処理依頼を記述することはでき�
   \label{fig:turkit}
 \end{figure}
 
-\subsection{Automan}\label{automan}
+\paragraph{Automan}\label{automan}
+
+\mbox{}
 
 Barowyらは、Automanというプログラミング言語Scala上で動作するDomain
 Specific Languageを提案した\cite{automan}。
@@ -64,11 +107,29 @@ Specific Languageを提案した\cite{automan}。
   \label{fig:automan}
 \end{figure}
 
-Franklinらは、CrowdDBというSQLを拡張した。
+\paragraph{Cylog}\label{cylog}
 
-不明瞭であったり、不完全なデータの処理や、抽象的な比較 \cite{crowddb}
+\mbox{}
 
-\cite{cylog} \cite{crowdforge} \cite{community-based-crowdsourcing}
+\cite{cylog}
+
+\paragraph{CrowdForge}\label{crowdforge}
+
+\mbox{}
+
+\cite{crowdforge}
+
+\paragraph{Community Based
+Crowdsourcing}\label{community-based-crowdsourcing}
+
+\mbox{}
+
+\cite{community-based-crowdsourcing}
+
+\paragraph{Realitime-Captioning}\label{realitime-captioning}
+
+\mbox{}
+
 \cite{realtime-captioning}
 
 クラウドソーシング分野の研究では、インターネットを介して不特定多数の人を計算資源として利用することによって、
@@ -85,15 +146,61 @@ Franklinらは、CrowdDBというSQLを拡張した。
 
 次に、特に本研究と関連するソーシャルコンピューティングの事例を紹介する。
 
-\cite{dog}, \cite{jabberwocky}, \cite{social-machines},
+\paragraph{The Dog Programming
+Language}\label{the-dog-programming-language}
+
+\mbox{}
+
+\cite{dog},
+
+\paragraph{The Jabberwocky Programming
+Environmets}\label{the-jabberwocky-programming-environmets}
+
+\mbox{}
+
+\cite{jabberwocky},
+
+\paragraph{Social Machines}\label{social-machines}
+
+\mbox{}
+
+\cite{social-machines},
+
+\paragraph{Human personal apis}\label{human-personal-apis}
+
+\mbox{}
+
 \cite{personal-api},
 
 \section{Human as Sensor}\label{human-as-sensor}
 
 人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman
 as Sensorと呼ばれる。
+ユビキタスコンピューティングなどの研究分野において、こういった手法が多く研究されている。
+その事例を以下に紹介する。
 
-\cite{prism} \cite{moboq} Raらは、medusa\cite{Ra-medusa}という
+\paragraph{PRISM}\label{prism}
+
+\mbox{}
+
+\cite{prism}
+
+\paragraph{Moboq}\label{moboq}
+
+\mbox{}
+
+\cite{moboq}
+
+\paragraph{Medusa}\label{medusa}
+
+\mbox{}
+
+Raらは、medusa\cite{Ra-medusa}という
+
+\paragraph{Mobile Crowdsourcing}\label{mobile-crowdsourcing}
+
+\mbox{}
+
 Huらは、\cite{Hu:mobilecrowdsensing}
 
 \section{Human as Actuator}\label{human-as-actuator}
@@ -101,7 +208,9 @@ Huらは、\cite{Hu:mobilecrowdsensing}
 アクチュエータ技術は進歩しているが、未だに人間のような汎用的に実世界に干渉できる装置はない。
 そこで、人間をアクチュエータの代替として利用し動かす、つまり、人間とロボットの協調によって問題を解決しようという研究がある。
 
-\subsection{Hapticturk}\label{hapticturk}
+\paragraph{HapticTurk}\label{hapticturk}
+
+\mbox{}
 
 Hapticturk\cite{hapticturk}は、人間をモーションプラットフォームのモーターやメカニカル機構の代わりに使うことによって、
 モーションプラットフォームの動きを再現するというものだ。
@@ -119,13 +228,17 @@ Hapticturkでは、ゲームにその用途を限定している。
   \label{fig:hapticturk}
 \end{figure}
 
-\subsection{Sharedo}\label{sharedo}
+\paragraph{Sharedo}\label{sharedo}
+
+\mbox{}
 
 加藤らは、ユーザとロボット間のタスクの分業
 
 \cite{sharedo}
 
-\subsection{グラフィカルデータフローによる調理レシピプログラミング言語の提案}\label{ux30b0ux30e9ux30d5ux30a3ux30abux30ebux30c7ux30fcux30bfux30d5ux30edux30fcux306bux3088ux308bux8abfux7406ux30ecux30b7ux30d4ux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux8a00ux8a9eux306eux63d0ux6848}
+\paragraph{グラフィカルデータフローによる調理レシピプログラミング言語の提案}\label{ux30b0ux30e9ux30d5ux30a3ux30abux30ebux30c7ux30fcux30bfux30d5ux30edux30fcux306bux3088ux308bux8abfux7406ux30ecux30b7ux30d4ux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux8a00ux8a9eux306eux63d0ux6848}
+
+\mbox{}
 
 吉川らは調理レシピを記述するためのデータフロープログラミング言語を提案している\cite{recipe-programming}。
 料理レシピをグラフィカルなデータフローで記述する。
@@ -133,7 +246,9 @@ Hapticturkでは、ゲームにその用途を限定している。
 のだ。
 本研究のように、人間がプログラムからの指示を実行することを前提としたものとなっている。
 
-\subsection{Cooky}\label{cooky}
+\paragraph{Cooky}\label{cooky}
+
+\mbox{}
 
 Sugiuraらは、人間とロボットが協調して調理をするシステムCooky\cite{cooky}を提案している。
 料理支援ロボットと人とロボットが共有可能な調理器具やキッチン、調理手順を記述するシステムから成り立っている。

@@ -1,10 +1,9 @@
 # 実装 {#chap:implementation}
 
 本章では、第\ref{chap:design}章で述べたプログラミング環境について述べる。
+全体の概要について述べた後、個別の要素に関して述べる。
 
 ## Babascriptプログラミング環境
-
-### 概要
 
 Babascriptプログラミング環境は、人間とコンピュータへの指示を同じような記法で
 実現・実行可能にするための仕組みである。
@@ -18,16 +17,14 @@ Babascriptは人間への指示を記述可能にするプログラミングラ�
 Babascript Clientは、指示に対する実行結果を入力できるソフトウェアだ。
 Node-Lindaは、Babascript及びBabascript Clientの間のデータ通信の仲介サーバとして機能する。
 
-### 処理手順
+以下のような手順で、処理が進む。
 
-1. 人への命令構文を実行する
-1. 命令がNode-Lindaサーバを経由してクライアントへと配信される
-1. 命令を受け取ったクライアントがユーザに処理を促す
-1. 命令実行者が、処理結果を入力する
+1. 人への指示構文を実行する
+1. 指示内容がNode-Lindaサーバを経由してクライアントへと配信される
+1. 指示を受け取ったクライアントがユーザに処理を促す
+1. 指示実行者が、指示に従って行動し、その結果を入力する
 1. Node-Lindaサーバを経由して実行元プログラムに入力された処理結果が送信される
 1. プログラム側で指定されたコールバック関数が実行され、処理が継続される
-
-### 全体像
 
 Babascriptプログラミング環境は、図\ref{fig:system_image}のように成り立つ。
 
@@ -38,6 +35,8 @@ Babascriptプログラミング環境は、図\ref{fig:system_image}のように
   \caption{システム全体像}
   \label{fig:system_image}
 \end{figure}
+
+以下の節において、個別の要素に関して詳しく述べる。
 
 ## Babascript
 
@@ -432,7 +431,11 @@ Node-Linda側からAdapter側への通信には、PushNotificationを用いる�
 
 構成図を図\ref{fig:pushnotification-adapter}に示す。
 
-## プラグイン機構
+## まとめ
+
+人間と計算機の処理を融合させたプログラミング環境の具体的な実装や利用方法について述べた。
+
+<!-- ## プラグイン機構
 
 Babascript 及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
 
@@ -477,4 +480,4 @@ receiveイベントは、Babascript及びBabascript Clientが何かしらのデ�
 
 LoggerPluginは、
 
-#### Datasync Plugin
+#### Datasync Plugin -->

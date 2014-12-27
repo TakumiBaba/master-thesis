@@ -1,10 +1,9 @@
 \chapter{実装}\label{chap:implementation}
 
 本章では、第\ref{chap:design}章で述べたプログラミング環境について述べる。
+全体の概要について述べた後、個別の要素に関して述べる。
 
 \section{Babascriptプログラミング環境}\label{babascriptux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux74b0ux5883}
-
-\subsection{概要}\label{ux6982ux8981}
 
 Babascriptプログラミング環境は、人間とコンピュータへの指示を同じような記法で
 実現・実行可能にするための仕組みである。 以下の要素によって実現する。
@@ -24,26 +23,24 @@ Babascript Clientは、指示に対する実行結果を入力できるソフト
 Node-Lindaは、Babascript及びBabascript
 Clientの間のデータ通信の仲介サーバとして機能する。
 
-\subsection{処理手順}\label{ux51e6ux7406ux624bux9806}
+以下のような手順で、処理が進む。
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \itemsep1pt\parskip0pt\parsep0pt
 \item
-  人への命令構文を実行する
+  人への指示構文を実行する
 \item
-  命令がNode-Lindaサーバを経由してクライアントへと配信される
+  指示内容がNode-Lindaサーバを経由してクライアントへと配信される
 \item
-  命令を受け取ったクライアントがユーザに処理を促す
+  指示を受け取ったクライアントがユーザに処理を促す
 \item
-  命令実行者が、処理結果を入力する
+  指示実行者が、指示に従って行動し、その結果を入力する
 \item
   Node-Lindaサーバを経由して実行元プログラムに入力された処理結果が送信される
 \item
   プログラム側で指定されたコールバック関数が実行され、処理が継続される
 \end{enumerate}
-
-\subsection{全体像}\label{ux5168ux4f53ux50cf}
 
 Babascriptプログラミング環境は、図\ref{fig:system_image}のように成り立つ。
 
@@ -54,6 +51,8 @@ Babascriptプログラミング環境は、図\ref{fig:system_image}のように
   \caption{システム全体像}
   \label{fig:system_image}
 \end{figure}
+
+以下の節において、個別の要素に関して詳しく述べる。
 
 \section{Babascript}\label{babascript}
 
@@ -455,66 +454,6 @@ SimpleNotificationServiceを利用し、PushNotificationを実現している。
 
 構成図を図\ref{fig:pushnotification-adapter}に示す。
 
-\section{プラグイン機構}\label{ux30d7ux30e9ux30b0ux30a4ux30f3ux6a5fux69cb}
+\section{まとめ}\label{ux307eux3068ux3081}
 
-Babascript
-及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
-
-図\ref{fig:babascript_plugin}の様に使うことで、Babascript及びBabascriptClientによってイベントが発生した時に、
-それに応じたデータを受け取り、自由に操作することができる。
-
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.7\linewidth,bb=0 0 416 226]{images/babascript_plugin.js.png}
-  \end{center}
-  \caption{Babascript Plugin}
-  \label{fig:babascript_plugin}
-\end{figure}
-
-Babascript及びBabascriptClientは、以下のイベントを受け取る。
-また、イベントを受け取った際にはイベントに応じたデータを受け取る。
-
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  load
-\item
-  connect
-\item
-  send
-\item
-  receive
-\end{itemize}
-
-loadイベントは、プラグインが読み込まれた際に発生する。
-例えば、設定ファイルの読み込みなどの処理を行う。
-connectイベントは、Babascript及びBabascript
-ClientがNode-Lindaサーバに接続した際に発生する。
-sendイベントは、Babascript及びBabascript
-Clientが何かしらのデータをNode-Lindaサーバに書き込む際に発生する。
-例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
-receiveイベントは、Babascript及びBabascript
-Clientが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
-指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
-
-プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
-
-\subsection{具体例}\label{ux5177ux4f53ux4f8b}
-
-例えば、以下のようなプラグイン例が考えられる。
-
-\begin{itemize}
-\itemsep1pt\parskip0pt\parsep0pt
-\item
-  LoggingPlugin
-\item
-  DatasyncPlugin
-\item
-  WearableDevicePlugin
-\end{itemize}
-
-\subsubsection{Logger Plugin}\label{logger-plugin}
-
-LoggerPluginは、
-
-\subsubsection{Datasync Plugin}\label{datasync-plugin}
+人間と計算機の処理を融合させたプログラミング環境の具体的な実装や利用方法について述べた。
