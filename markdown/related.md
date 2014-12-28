@@ -225,7 +225,6 @@ Hapticturkでは、ゲームにその用途を限定している。
 ##### Sharedo
 \mbox{}
 
-
 加藤らは、ユーザとロボット間のタスクの分業
 
 \cite{sharedo}

@@ -1,5 +1,6 @@
 {
   "name": "master_thesis",
+  "private": "true",
   "version": "0.0.1",
   "description": "TakumiBaba's master thesis",
   "main": "main.tex",

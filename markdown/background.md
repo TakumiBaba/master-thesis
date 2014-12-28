@@ -195,7 +195,7 @@ reCAPTCHAによって、人は自分が人間であることを証明しなが�
   \begin{center}
   \includegraphics[width=.4\linewidth,bb=0 0 281 98]{images/background_cooking.js.png}
   \end{center}
-  \caption{料理レシピをコンピュータプログラム風に記述する}
+  \caption{料理レシピをプログラム風に記述する}
   \label{fig:background_cooking}
 \end{figure}
 
@@ -205,7 +205,7 @@ reCAPTCHAによって、人は自分が人間であることを証明しなが�
   \begin{center}
   \includegraphics[width=.4\linewidth,bb=0 0 319 98]{images/background_retail.js.png}
   \end{center}
-  \caption{料理レシピをコンピュータプログラム風に記述する}
+  \caption{小売店の店員の挙動をプログラム風に記述する}
   \label{fig:background_retail}
 \end{figure}
 
@@ -230,7 +230,8 @@ reCAPTCHAによって、人は自分が人間であることを証明しなが�
 自分の家で、自分の日常行動をプログラムにしたいとき等は、自分自身を対象として指定できなくてはならない。
 また、家族等の身内にしか実行してほしくない処理の内容も存在することから、クラウドソーシング等の枠組みを利用することはできない。
 
-そこで、本研究では、コンピュータと人間への指示を融合させたプログラミングが可能な環境を実現する。
+そこで、本研究では、コンピュータと人間への指示を融合させたプログラミングが可能な環境を提案する。
+このプログラミング環境によって、人間指向プログラミングを実現する。
 
 <!--
 プログラムが記述できる世界は広がっており、コンピュータの中だけでなく、実世界の制御など、あらゆる処理を記述するようになっている。

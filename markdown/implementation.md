@@ -275,7 +275,7 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 
 例として、Webアプリケーション、コマンドライン・インタフェース、slackインタフェースを実装した。
 
-### Webアプリケーション
+#### Webアプリケーション
 
 インタフェースの例として、Webアプリケーションとして実装した。
 webブラウザ上で動作し、フレームワークにはBackbone.jsとMarionette.jsを利用した。
@@ -288,7 +288,7 @@ Heroku上で稼働している。
   \begin{center}
   \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_webapp_system.png}
   \end{center}
-  \caption{Babascript Client Slackインタフェース}
+  \caption{Babascript Client webアプリケーションシステム図}
   \label{fig:babascript_client_webapp_system}
 \end{figure}
 
@@ -303,11 +303,11 @@ Webインタフェースでは、指示内容に応じて提示インタフェ�
   \begin{center}
   \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_webapp_interface.png}
   \end{center}
-  \caption{Babascript Client Slackインタフェース}
+  \caption{Babascript Client Webアプリケーションインタフェース}
   \label{fig:babascript_client_webapp_interface}
 \end{figure}
 
-### チャットボット
+#### チャットボット
 
 チャットサービス上で稼働するボットにBabascript Clientの機能を実装した。
 ボットシステムにはHubotを採用した。
@@ -354,42 +354,39 @@ Babascript Clientの機能を利用できるということは有用なことで
 ## 通信手法
 <!-- もっと掘り下げる -->
 
-BabascriptとBabascript Client間でデータを交換するために、データ配信サーバとしてNode-LindaというWebサービスを用いる。
+BabascriptとBabascript Client間の通信のために、仲介サーバとしてNode-Lindaを利用する。
+通信手法はデバイスごとに利用可能な手法が異なったり限定されるため、プラガブルにする必要がある。
+そこで、シンプルで接続方式の追加が簡単に可能な実装となっているNode-Lindaを仲介サーバソフトウェアとして採用した。
 
-BabascriptとBabascript Client間のデータ通信には、Node-LindaというWebサービスを利用する。
-Node-Lindaは、分散並列処理のための仕組みであるLindaをNode.js上に実装したものである。
-Node-Lindaはネットワーク経由のデータ通信を前提としており、複数の通信手法を実装可能だ。
-本研究では、デバイスごとに利用可能な通信手法が異なるという状況を想定したものである。
-そこで、このNode-Lindaに接続するための複数のAdapterを実装した。
-このAdapterは簡単に切り替えることができ、各実装に影響を与えることがないよう設計されている。
-Babascript及びBabascript Clientは双方共にこのAdapterを利用して通信を行う。
+Babascript及びBabascript ClientがNode-Lindaに接続するために実装されたモジュールを、Babascript Adapterと呼ぶ。
+このAdapterは簡単に切り替えが可能で、かつ他の実装に影響を与えることがないように設計されている。
+Babascript及びBabascript ClientはこのAdapterを介してNode-Lindaに接続し、情報のやりとりを行う。
 
-具体的にはSocket.IO AdapterとPush Notification Adapterの2つを実装した。
-以下の節で具体的に述べる。
+本節では、この仲介サーバとして用いるNode-Lindaについて述べた後、2種類のBabascript Adapterを紹介する。
 
 ### Node-Linda
 
 Node-Linda\cite{node-linda}は、分散並列処理のための仕組みであるLinda\cite{linda}をNode.js上に実装したものだ。
 Lindaは、タプルスペースという共有メモリを用いてプロセス間でデータの通信を行う並列処理のためのモデルだ。
-従来のLindaは、以下のようにタプル空間を操作できる。
+Node-Lindaでは、Lindaを拡張し、ネットワーク経由でも利用できるようにしている。
+ネットワーク経由での利用のため、あらゆるプログラミング言語から利用可能だ。
+接続のためのプログラムさえ記述すれば、あらゆるデバイスがNode-Lindaに接続可能である。
+Linda及びNode-Lindaのタプル空間への操作を表\ref{table:tuple-management}にまとめる。
 
-- out(書き込み)
-- rd(読み込み)
-- rdp(処理をブロックして読み込み)
-- in(読み込みつつ削除)
-- inp(処理をブロックして読み込みつつ削除)
+Table: Linda及びNode-Lindaのタプル空間への操作 \label{table:tuple-managemnet}
 
-Node-Lindaでは、Lindaをネットワーク経由でも利用できるようにしている。
-ネットワーク経由で利用可能になったことで、様々なデバイスなども並列処理に加わることができる。
-また、上記のタプル空間への操作を以下のように変更している
-
-- write(書き込み)
-- read(読み込み)
-- take(読み込みつつ削除)
-- watch(書き込みを読み続ける)
+操作                        Linda       Node-Linda
+-------------------------- ---------- ---------------
+書き込み                      out         write
+読み込み                      rd          read
+読み込みつつ削除                in          take
+ブロックして読み込み            rdp           -
+ブロックして読み込みつつ削除      inp           -
+書き込みを読み続ける             -           watch
 
 watch操作は従来のLindaの仕様にはなく、Node-Linda独自の仕様である。
-Node-Lindaを用いることによって、タスクの分散配信等が実現する。
+また、Node-Lindaでは非同期処理が前提となっており、ブロック処理は仕様から削除されている。
+
 実世界コンピューティングでの利用を前提としており、様々なセンサーやアクチュエータが接続することが想定される。
 Babascriptによる人間の指示実行結果も、センサーやアクチュエータの処理を同じようにNode-Linda上で共有される。
 つまり、Node-Linda上において人間はセンサーやアクチュエータと同じような存在になる。
@@ -404,29 +401,30 @@ Node-Lindaの各操作は、図\ref{fig:linda-usage}のようなプログラム�
   \label{fig:linda-usage}
 \end{figure}
 
-各デバイスによって、利用可能な通信手法は異なる。
-そこで、様々なデバイスが接続できるよう
-Node-Lindaに接続するための接続手法別のアダプターを2種類、実装した。
-
 ### Socket.IO Adapter
 
-Socket.IO Adapterは、リアルタイム通信のためのライブラリであるSocket.IO\footnote{http://socket.io/}を用いてNode-Lindaに接続するためのAdapterだ。
+Socket.IO Adapterは、リアルタイム通信のためのライブラリであるSocket.IO\footnote{http://socket.io/}を用いて
+Node-Lindaに接続するためのAdapterだ。
 WebsocketもしくはXHR-Pollingによって常にNode-Lindaサーバと通信をし続ける。
 全ての処理はSocket.IOによる通信によって実現する。
 
-常時通信している都合上、バッテリー消費の問題が生じたり、デバイスによっては通信を強制的に切断されてしまうこともある。
+常時通信している都合上、バッテリー消費の問題が生じたり、デバイスによっては通信を強制的に切断されてしまうことがある。
 Socket.IO Adapterは、接続環境が良好な状態での利用が望ましい。
-例えば、常時ネット接続しているようなデバイスでの利用が想定される。
+例えば、常設型のコンピュータ等においての利用が想定される。
 
 構成図を図\ref{fig:socket.io-adapter}に示す。
 
-
 ### PushNotification Adapter
 
-Pushnotification Adapter は、HTTP RequestとPushNotificationを用いてNode-Lindaと通信を行うためのAdapterだ。
-Node-Lindaへのタプル書き込みや処理待ちの登録にはHTTP Requestを投げる。
+PushNotification Adapter は、HTTP RequestとPushNotificationを用いてNode-Lindaと通信を行うためのAdapterだ。
+Node-Lindaへのタプル操作はHTTP Requestの実行によって実現する。
 Node-Linda側からAdapter側への通信には、PushNotificationを用いる。
-現在は、Amazon AWS SimpleNotificationServiceを利用し、PushNotificationを実現している。
+Amazon AWS SimpleNotificationService\footnote{http://aws.amazon.com/jp/sns/}を利用し、
+PushNotificationを実現している。
+PushNotification Adapterを利用するためには、Node-Linda側でPushNotification Adapter用のライブラリを読み込む必要がある。
+
+PushNotification Adapterは、モバイルデバイス等の常時接続が難しいデバイス上で、可能な限りリアルタイムなやりとりを実現するために
+実装された通信モジュールだ。
 主にAndroidやiPhone等のモバイルデバイスからNode-Lindaと接続する際に利用する。
 
 構成図を図\ref{fig:pushnotification-adapter}に示す。
