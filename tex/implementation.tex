@@ -226,8 +226,6 @@ Babascriptによって人への指示をプログラムに記述し、実行す�
 処理結果を返させるためのアプリケーションが必要となる。
 そこで、Babascript Clientというアプリケーション群を実装した。 Babascript
 Clientは、Babascriptとの通信を担うサービス部と返り値の入力等を担うインターフェス部から構成される。
-サービス部はJavascript上で動作する。
-インタフェース部は、各種アプリケーションに応じて動作環境が異なるが、主にNode.js上とWebブラウザ上で動作する。
 
 \subsection{サービス}\label{ux30b5ux30fcux30d3ux30b9}
 
@@ -286,7 +284,7 @@ Clientは構築可能である。
 この際、Babascriptの指示でオプション情報として返り値の型を指定していた場合、指定した型以外の入力を受け付けないような実装を行っている。
 返り値の型は現在、Boolean, String, Numberに対応している。
 
-例として、Webアプリケーション、コマンドライン・インタフェース、slackインタフェースを実装した。
+例として、Webアプリケーション、slackインタフェースを実装した。
 
 \subsubsection{Webアプリケーション}\label{webux30a2ux30d7ux30eaux30b1ux30fcux30b7ux30e7ux30f3}
 
@@ -450,6 +448,57 @@ Adapterは、モバイルデバイス等の常時接続が難しいデバイス�
 主にAndroidやiPhone等のモバイルデバイスからNode-Lindaと接続する際に利用する。
 
 構成図を図\ref{fig:pushnotification-adapter}に示す。
+
+\section{プラグイン機構}\label{ux30d7ux30e9ux30b0ux30a4ux30f3ux6a5fux69cb}
+
+Babascript
+及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
+
+図\ref{fig:babascript_plugin}の様に使うことで、Babascript及びBabascriptClientによってイベントが発生した時に、
+それに応じたデータを受け取り、自由に操作することができる。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.7\linewidth,bb=0 0 416 226]{images/babascript_plugin.js.png}
+  \end{center}
+  \caption{Babascript Plugin}
+  \label{fig:babascript_plugin}
+\end{figure}
+
+Babascript及びBabascriptClientは、表\ref{table:plugin-events}にあるイベントを受け取る。
+また、イベントを受け取った際にはイベントに応じたデータを受け取る。
+
+\begin{longtable}[c]{@{}lrr@{}}
+\caption{Babascript及びBabascript Clientが発行するイベント一覧
+\label{table:plugin-events}}\tabularnewline
+\toprule
+イベント名 & Babascript & BabascriptClient\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+イベント名 & Babascript & BabascriptClient\tabularnewline
+\midrule
+\endhead
+load & ○ & ○\tabularnewline
+connect & ○ & ○\tabularnewline
+send & ○ & ×\tabularnewline
+return\_Value & × & ○\tabularnewline
+receive & ○ & ○\tabularnewline
+\bottomrule
+\end{longtable}
+
+loadイベントは、プラグインが読み込まれた際に発生する。
+例えば、設定ファイルの読み込みなどの処理を行う。
+connectイベントは、Babascript及びBabascript
+ClientがNode-Lindaサーバに接続した際に発生する。
+sendイベントは、Babascript及びBabascript
+Clientが何かしらのデータをNode-Lindaサーバに書き込む際に発生する。
+例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
+receiveイベントは、Babascript及びBabascript
+Clientが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
+指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
+
+プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
 
 \section{まとめ}\label{ux307eux3068ux3081}
 

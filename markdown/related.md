@@ -1,17 +1,23 @@
 # 関連研究 {#chap:related}
 
-## HumanComputation / Crowdsourcing
+## HumanComputation
 
 コンピュータの計算能力だけでは解決できない問題を、人間の処理能力を計算資源として利用することによって解決する手法は、
 ヒューマンコンピュテーション\cite{humancomputation}と呼ばれ、様々な研究が行なわれている。
+現在のコンピュータの技術では、パターン認識など、高い精度で処理することが困難な分野が存在する。
+こういった分野において、人間という柔軟な思考能力を持つ資源とコンピュータの代替として用いることで、
+より高い精度の処理を実現することが可能である。
+様々な分野において、人を計算資源とした仕組みが研究されている。
 
 ##### reCAPTCHA
 \mbox{}
 
 コンピュータの文字認識能力では処理しきれない文字の認識を人間に実行させるreCAPTCHA\cite{recaptcha}は、
 人間かコンピュータかを判別するために文字認識をさせるCAPTCHA\cite{captcha}を応用したものだ。
-人間かコンピュータかの判別を行いつつ、未認識の文字の認識をすることができる。
-reCAPTCHAを解く人間側にとっては、人間であることを証明しているだけのつもりが、実は文字認識を手伝っている。
+reCAPTCHAでは、人間に2種類の単語が書かれた画像が提示され、書かれている文字を入力させる。
+片方の画像は文字認識がされており、書かれている内容がわかっている。
+もう片方は文字認識されていないもので、人間に認識させることでその答えを学習させる。
+人間かコンピュータかの判別を行いつつ、未認識の文字の認識をすることができる仕組みである。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -26,16 +32,15 @@ reCAPTCHAを解く人間側にとっては、人間であることを証明し�
 
 Duolingo\cite{duolingo}は、ユーザの言語学習における翻訳作業を利用して、ウェブサイトや文書の翻訳を行うアプリケーションだ。
 言語学習自体もゲーミフィケーションを活用したものとなっており、翻訳作業しているということは隠蔽された形で語学学習できる。
-言語翻訳のための計算資源として人間を利用した事例である。
+言語翻訳のための計算資源として人間を利用している。
 
 <!-- 画像を入れたい -->
 
 ##### Vizwiz
 \mbox{}
 
-人間を物体認識エンジンとして利用することのできるVizwiz\cite{vizwiz}というアプリケーションも存在する。
-認識したい物体をカメラで撮影し、質問内容などを録音して送ると、インターネットを介して結果を得ることが出来る。
-計算機だけでも特定可能な物体に関しては、人力エンジンを介さずに処理することも可能となっている。
+人間を物体認識エンジンとして利用することのできるアプリケーションが、Vizwiz\cite{vizwiz}だ。
+認識したい物体をカメラで撮影し、質問内容などを録音して送ると、インターネットを介して人に処理を依頼し、結果を得ることが出来る。
 
 <!-- 画像を入れたい -->
 
@@ -55,7 +60,6 @@ CrowdDB\cite{crowddb}が提案されている。
 CrowdSQLという、SQLを拡張したものが記述言語として使われる。
 
 
-
 <!-- 画像を入れたい -->
 
 ## CrowdSourcing
@@ -63,11 +67,13 @@ CrowdSQLという、SQLを拡張したものが記述言語として使われる
 インターネットを介して不特定多数の人間に仕事を依頼する仕組みはクラウドソーシングと呼ばれ、近年注目を浴びている。
 クラウドソーシングとは、業務の一部を外部に委託することを示すアウトソーシングという言葉を改変した造語である\cite{riseofcrowdsourcing}。
 インターネットを介した不特定多数の人間たち(crowd)に仕事をアウトソースすることから、crowdsourcingと呼ぶ。
-非常に安価で、かつ、必要な人員をすぐに確保して仕事依頼が可能なことから、多くの利用例が生まれている。
+非常に安価で、かつ、必要な人員をすぐに確保して仕事依頼が可能である。
 近年では、Amazon Mechanical Turk\cite{amt}(以降MTurk)等のクラウドソーシングプラットフォームが登場してきたことによって
 多くの利用例が生まれている。
-その中でも、本研究と類似している研究について、述べる。
+クラウドソーシング分野の研究では、ヒューマンコンピュテーションの概念をクラウドソーシングを利用することで
+大規模な人力処理を実現させている。
 
+本節では、クラウドソーシングをより便利に扱えるようにすることで、人間を計算資源として利用することの助力と成りうる研究について述べる。
 
 ##### Turkit
 \mbox{}
@@ -118,7 +124,17 @@ Barowyらは、Automanというプログラミング言語Scala上で動作す�
 ##### CrowdForge
 \mbox{}
 
-\cite{crowdforge}
+Kitturら\cite{crowdforge}は、複雑な仕事をクラウドソーシング上で実現するための仕組みとして
+CrowdForgeというシステムを提案している。
+CrowdForgeはMapReduceの仕組みをクラウドソーシングに適応させた。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.6\linewidth,bb=0 0 318 276]{images/crowdforge.png}
+  \end{center}
+  \caption{CrowdForge}
+  \label{fig:crowdforge}
+\end{figure}
 
 ##### Community Based Crowdsourcing
 \mbox{}
@@ -131,67 +147,98 @@ Barowyらは、Automanというプログラミング言語Scala上で動作す�
 \cite{realtime-captioning}
 
 
-クラウドソーシング分野の研究では、インターネットを介して不特定多数の人を計算資源として利用することによって、
-コンピュータのみでは実現できなかったような処理や、より大規模な人力処理を実現させている。
-本研究では、不特定多数の人ではなく、特定可能な人を対象としたものである。
-
 ## Social Computing
 
 コンピュータ・ネットワーク上における群衆の様々な行動や叡智をフィードバックデータとして
 システムに組み込み活用していくことはソーシャルコンピューティングと呼ばれている。
-例えば、群衆による叡智が集められた情報をまとめるためのプラットフォームとしてはWiki\cite{wiki}が存在する。
+例えば、群衆による叡智が集められた情報をまとめるためのプラットフォームとしてはWiki\cite{wiki-way}が存在する。
+Wikiの具体的なシステム例で有名なWebサービスがWikipedia\footnote{http://wikipedia.org}である。
 また、人々が作るwebページのリンク関係から重要度を算出するアルゴリズムとしては、\cite{pagerank}が存在する。
-また、群衆の嗜好情報等を蓄積し、個人間の嗜好等の類似度から情報の推薦等を行う手法は協調フィルタリングと呼ばれる\cite{collaborative-filtering}。
+群衆の嗜好情報等を蓄積し、個人間の嗜好等の類似度から情報の推薦等を行う手法は協調フィルタリングと呼ばれる\cite{collaborative-filtering}。
 
+このように、インターネットを介した群衆の叡智を利用してシステムもしくはそのコンテンツを改良していく仕組みは
+非常に有用で、利用されている多くのWebサービスに活かされている。
 次に、特に本研究と関連するソーシャルコンピューティングの事例を紹介する。
 
 ##### The Dog Programming Language
 \mbox{}
 
-\cite{dog},
+Webアプリケーションにおけるユーザとのインタラクションの記述に特化したプログラミング言語として、Dog\cite{dog}が提唱されている。
+本研究も、人とのインタラクションの記述に特化したものであり、類似している。
+DogはWebアプリケーションの実装時によくあるユーザとのインタラクションの記述に特化したものであるが、
+本研究は人間を計算資源として様々な処理の実行指示を送るための仕組みである。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.6\linewidth,bb=0 0 426 414]{images/dog.png}
+  \end{center}
+  \caption{The Dog Programming Language}
+  \label{fig:dog}
+\end{figure}
 
 ##### The Jabberwocky Programming Environmets
 \mbox{}
 
-\cite{jabberwocky},
+Ahmadらは、Jabberwockyというソーシャルコンピューティングのためのプログラミング環境を提案している\cite{jabberwocky}。
+Jabberwockyは、様々なクラウドソーシングプラットフォームを統合して管理できるDormouseと、
+Dormousとのインタラクションに特化したDog,
+MapReduceを人力処理に適応したManReduceから構成される。
 
-##### Social Machines
+
+
+<!-- ##### Social Machines
 \mbox{}
 
-\cite{social-machines},
+\cite{social-machines}, -->
 
-##### Human personal apis
+##### Personal APIs As an Enabler for Designing and Implementing People As Social Machines
 \mbox{}
 
+Buregioらは、
+
+前述のSocialMachinesの文脈に沿って、
 \cite{personal-api},
 
 
 
 ## Human as Sensor
 
-人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman as Sensorと呼ばれる。
+人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman as Sensorや参加型センシングと呼ばれる。
 ユビキタスコンピューティングなどの研究分野において、こういった手法が多く研究されている。
 その事例を以下に紹介する。
 
 ##### PRISM
 \mbox{}
 
-\cite{prism}
+Dasらは、PRISM\cite{prism}というスマートフォンを利用した参加型センシング実現のためのプラットフォームを提案している。
+参加型センシングをより現実的に実行可能にするためには、セキュリティやスケーラビリティのバランスが取れた
+より使いやすいプラットフォームが必要とされているとし、そのためのプラットフォームとしてPRISMを提案している。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.6\linewidth,bb=0 0 399 384]{images/prism.png}
+  \end{center}
+  \caption{PRISM: Platform for Remote Sensing using Smartphones}
+  \label{fig:prism}
+\end{figure}
+
 
 ##### Moboq
 \mbox{}
 
-\cite{moboq}
+Liuらは、リアルタイムな位置情報ベースQ&AサービスのMoboQを提案している\cite{moboq}。
+マイクロブログサービスを利用したシステムであり、指定した場所にいる人間を対象とした参加型センシングシステムとなっている。
 
-##### Medusa
+<!-- 時間があったらちゃんと読んで書く -->
+<!-- ##### Medusa
 \mbox{}
 
-Raらは、medusa\cite{Ra-medusa}という
+Raらは、medusa\cite{Ra-medusa}という -->
 
-##### Mobile Crowdsourcing
+<!-- ##### Mobile Crowdsourcing
 \mbox{}
 
-Huらは、\cite{Hu:mobilecrowdsensing}
+Huらは、\cite{Hu:mobilecrowdsensing} -->
 
 
 
@@ -201,10 +248,8 @@ Huらは、\cite{Hu:mobilecrowdsensing}
 アクチュエータ技術は進歩しているが、未だに人間のような汎用的に実世界に干渉できる装置はない。
 そこで、人間をアクチュエータの代替として利用し動かす、つまり、人間とロボットの協調によって問題を解決しようという研究がある。
 
-
 ##### HapticTurk
 \mbox{}
-
 
 Hapticturk\cite{hapticturk}は、人間をモーションプラットフォームのモーターやメカニカル機構の代わりに使うことによって、
 モーションプラットフォームの動きを再現するというものだ。
@@ -225,11 +270,21 @@ Hapticturkでは、ゲームにその用途を限定している。
 ##### Sharedo
 \mbox{}
 
-加藤らは、ユーザとロボット間のタスクの分業
+加藤ら\cite{sharedo}は、ロボットや様々なソフトウェアエージェントと人間のタスクを
+同列に記述可能なタスク共有アプリケーションを提案している。
+タスクの実行主体は人間でもコンピュータでも良いようになっており、人間とコンピュータは処理実行対象として
+同等となっている。
+また、Human Actuation等の概念についても論文内において触れられている。
+処理実行対象を選ばないという点において、本研究と類似している。
 
-\cite{sharedo}
 
-
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 497 611]{images/sharedo.png}
+  \end{center}
+  \caption{Sharedo}
+  \label{fig:sharedo}
+\end{figure}
 
 ##### グラフィカルデータフローによる調理レシピプログラミング言語の提案
 \mbox{}
@@ -237,7 +292,7 @@ Hapticturkでは、ゲームにその用途を限定している。
 
 吉川らは調理レシピを記述するためのデータフロープログラミング言語を提案している\cite{recipe-programming}。
 料理レシピをグラフィカルなデータフローで記述する。
-料理レシピプログラムは、コンピュータではなく人間が実行するためのも のだ。
+料理レシピプログラムは、コンピュータではなく人間が実行するためのものである。
 本研究のように、人間がプログラムからの指示を実行することを前提としたものとなっている。
 
 ##### Cooky
@@ -258,7 +313,7 @@ Sugiuraらは、人間とロボットが協調して調理をするシステムC
   \label{fig:cooky}
 \end{figure}
 
-## ワークフロー系
+## Workflow Programming
 
 仕事などにおけるプロセスを文書などによってパターンとして規定し、検証や再利用しやすくするためのものとして
 ワークフローというものがある。

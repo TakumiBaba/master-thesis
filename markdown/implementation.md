@@ -214,8 +214,6 @@ Babascriptによって人への指示をプログラムに記述し、実行す�
 処理結果を返させるためのアプリケーションが必要となる。
 そこで、Babascript Clientというアプリケーション群を実装した。
 Babascript Clientは、Babascriptとの通信を担うサービス部と返り値の入力等を担うインターフェス部から構成される。
-サービス部はJavascript上で動作する。
-インタフェース部は、各種アプリケーションに応じて動作環境が異なるが、主にNode.js上とWebブラウザ上で動作する。
 
 ### サービス
 
@@ -273,7 +271,7 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 この際、Babascriptの指示でオプション情報として返り値の型を指定していた場合、指定した型以外の入力を受け付けないような実装を行っている。
 返り値の型は現在、Boolean, String, Numberに対応している。
 
-例として、Webアプリケーション、コマンドライン・インタフェース、slackインタフェースを実装した。
+例として、Webアプリケーション、slackインタフェースを実装した。
 
 #### Webアプリケーション
 
@@ -429,11 +427,7 @@ PushNotification Adapterは、モバイルデバイス等の常時接続が難�
 
 構成図を図\ref{fig:pushnotification-adapter}に示す。
 
-## まとめ
-
-人間と計算機の処理を融合させたプログラミング環境の具体的な実装や利用方法について述べた。
-
-<!-- ## プラグイン機構
+## プラグイン機構
 
 Babascript 及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
 
@@ -448,13 +442,18 @@ Babascript 及びBabascriptClientはその機能を拡張するために、プ�
   \label{fig:babascript_plugin}
 \end{figure}
 
-Babascript及びBabascriptClientは、以下のイベントを受け取る。
+Babascript及びBabascriptClientは、表\ref{table:plugin-events}にあるイベントを受け取る。
 また、イベントを受け取った際にはイベントに応じたデータを受け取る。
 
-- load
-- connect
-- send
-- receive
+Table: Babascript及びBabascript Clientが発行するイベント一覧 \label{table:plugin-events}
+
+イベント名       Babascript   BabascriptClient
+-------------- ----------- ------------------
+load               ○               ○
+connect            ○               ○
+send               ○               ×
+return_Value       ×               ○
+receive            ○               ○
 
 loadイベントは、プラグインが読み込まれた際に発生する。
 例えば、設定ファイルの読み込みなどの処理を行う。
@@ -466,16 +465,6 @@ receiveイベントは、Babascript及びBabascript Clientが何かしらのデ�
 
 プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
 
-### 具体例
+## まとめ
 
-例えば、以下のようなプラグイン例が考えられる。
-
-- LoggingPlugin
-- DatasyncPlugin
-- WearableDevicePlugin
-
-#### Logger Plugin
-
-LoggerPluginは、
-
-#### Datasync Plugin -->
+人間と計算機の処理を融合させたプログラミング環境の具体的な実装や利用方法について述べた。
