@@ -48,6 +48,9 @@ end
 
 c = 0
 Dir::glob("./tex/*").each do |f|
+  if f =~/(abstract|acknowledgment|appendix|bibliography|publication)\.tex/
+    next
+  end
   if f =~/^.*\.tex$/
     File.open(f,'r') do |t|
       while l = t.gets
