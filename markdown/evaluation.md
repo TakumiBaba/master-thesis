@@ -1,4 +1,4 @@
-# 評価 {#chap:evaluation}
+# 実験 {#chap:evaluation}
 
 ## ユーザ評価実験 {#sec:user-evaluation}
 
@@ -20,7 +20,7 @@
 通信するサーバはHeroku上で運用した。
 
 \begin{figure}[htbp]
-  \begin{center}
+  \begin{center}r
   \includegraphics[width=.5\linewidth]{images/nexus7.eps}
   \end{center}
   \caption{Nexus 7}
