@@ -5,17 +5,33 @@
 %		※ 不要ならばコマンドごと消せば出力されない。 -->
 
 
+<!--
+- プログラム上で人間と計算機への指示を同じように記述可能なシステムについて述べる。
+- 人間を計算資源としてシステムに組み込み利用するヒューマンコンピュテーションの研究が流行している。
+- しかし、その多くは人間を演算装置として利用するものであり、入出力装置として利用していない。
+- また、例えば自分自身など、具体的な人を指定することができず、実世界におけるタスクの処理などには向いていない。
+- 本研究では、センシングやアクチュエーションを含んだ人間への行動指示と指示結果の取得の仕組みを
+- 従来のプログラミング言語に組み込んだシステムを提案する。
+- よりシンプルな記述法で、人間と計算機への指示が混ざったプログラムを記述・実行することができる。
+- このシステムによって、世の中に存在する様々な処理を
+- 計算機が得意なことは計算機が、人間が得意なことは人間が実行するというより効率的な人間と計算機の共生を実現する。
+-->
+
 
 <!-- % 日本語のアブストラクト -->
 \begin{jabstract}
 
-テンプレートの説明を、テンプレート自身を使って説明する。これは @kurokobo による卒業論文のための\LaTeX テンプレートを修士論文用に改造し、さらにUTF-8化やMakefile等の添付をしたものである。
+プログラム上で人間と計算機への指示を同じように記述可能なシステムについて述べる。
+人間を計算資源としてシステムに組み込み利用するヒューマンコンピュテーションの研究が流行している。
+しかし、その多くは人間を演算装置として利用するものであり、入出力装置として利用していない。
+また、例えば自分自身など、具体的な人を指定することができず、実世界におけるタスクの処理などには向いていない。
 
-この部分には一般には論文のアブストラクトを書く。日本語のアブストラクトを書きたいなら、\verb|\begin{jabstract}| と \verb|\end{jabstract}| の間に文章を書けば、今のこのページのように体裁が勝手に整って出力される。英語のアブストラクトは \verb|\begin{eabstract}| と \verb|\end{eabstract}| の間に書けば、次ページのような体裁で出力される。
-
-両方を書けば、日本語と英語の両方のアブストラクトが並んで出力される（この文書はサンブルなので両方書いてある）。ページ順序は、コマンドを書いた順序の通り。どちらか一方のみを出力したい場合は、不要な方をコマンド自体を含め削除する。
-
-このあたりの詳細もあとで書く。基本的には、{\tt main.tex}を上から順にいじっていけばできるはず。
+このような状況を踏まえ、本研究では、センシングやアクチュエーションを含んだ人間への行動指示と指示結果の取得の仕組みを
+従来のプログラミング言語に組み込んだシステムを提案する。
+よりシンプルな記述法で、人間と計算機への指示が混ざったプログラムを記述・実行することができる。
+このシステムによって、世の中に存在する様々な処理を
+計算機が得意なことは計算機が、人間が得意なことは人間が実行するという、人間と計算機の共生を実現する。
+<!-- 人間と計算機の共生という言葉をやめたい。 -->
 
 \end{jabstract}
 
@@ -24,14 +40,9 @@
 <!-- % 英語のアブストラクト -->
 \begin{eabstract}
 
-Eigo ga dekinai node Roma-ji de soreppoi hunniki wo daseruto iina.
-
-Murippoi desu ne.
-
-Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here.
-
- Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here. Write down your abstract here.
-
-Write down your abstract here. Write down your abstract here.
+In this research, We introduce a programming environment that supports the integration of human resources and compuing resources.
+Although HumanComputation system is becoming popular,
+I can't write english well...
+ganbatte kakukaku
 
 \end{eabstract}
