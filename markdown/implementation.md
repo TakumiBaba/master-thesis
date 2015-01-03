@@ -325,8 +325,20 @@ Listであれば、選択フォームが表示され、リストの中から返�
   \label{fig:babascript_client_webapp_interface}
 \end{figure}
 
-<!-- 指示が実行できない場合には、エラーを値として返すことができる。
-例えば、自宅にいるにも関わらず、大学の研究室にいないと出来ないような指示が来た場合には、少なくともその時点で -->
+
+指示が実行できない場合には、エラーを値として返すことができる。
+例えば、自宅にいるにも関わらず、大学の研究室にいないと出来ないような指示が来た場合には、少なくともその時点では
+指示を実行に移すことは出来ない。
+エラー処理のインタフェースを図\ref{fig:throw-error}に示す。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 768 518]{images/throw-error.png}
+  \end{center}
+  \caption{Babascript Client エラー処理インタフェース}
+  \label{fig:error}
+\end{figure}
+
 
 #### チャットボット
 
