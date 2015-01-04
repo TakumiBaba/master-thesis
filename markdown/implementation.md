@@ -24,13 +24,13 @@ Node-Lindaは、Babascript及びBabascript Clientの間のデータ通信の仲�
 1. 指示を受け取ったクライアントがユーザに処理を促す
 1. 指示実行者が、指示に従って行動し、その結果を入力する
 1. Node-Lindaサーバを経由して実行元プログラムに入力された処理結果が送信される
-1. プログラム側で指定されたコールバック関数が実行され、処理が継続される
+1. プログラム側で指定されたコールバック関数が実行される
 
 Babascriptプログラミング環境は、図\ref{fig:system_image}のように成り立つ。
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 563 151]{images/system_image.png}
+  \includegraphics[width=.4\linewidth,bb=0 0 397 608]{images/overview.png}
   \end{center}
   \caption{システム全体像}
   \label{fig:system_image}
@@ -43,23 +43,26 @@ Babascriptプログラミング環境は、図\ref{fig:system_image}のように
 プログラムと人とのインタラクションを実現するためには、プログラム上で人間への指示を行える仕組みが必要だ。
 そこで、Babascriptという、人間への指示構文を実装したオブジェクト(以下、人間オブジェクト)を宣言できるプログラミングライブラリを実装した。
 BabascriptはJavascriptのサーバサイド実行環境であるNode.js及びプログラミング言語Ruby上で動作する。
+本論文で示すサンプルソースコードは全てJavascriptで記述したものを掲載する。
 
 ### 基本仕様
 
-Babascriptでは、人間への指示構文を伴ったオブジェクト(以下、人間オブジェクト)を通して人間とのインタラクションを行う。
+Babascriptでは、人間オブジェクトを通して人間とプログラムのメッセージングを行う。
 通常のメソッド実行とほぼ同じ記法で人間への指示を送ることができる。
+つまり、オブジェクトにメッセージングするという従来のオブジェクト指向プログラミングの作法をそのまま実行することで
+人間に指示を送っている。
 例えば、図\ref{fig:babascript_sample}のようなプログラムによって、人間オブジェクトを宣言し、人間へ指示を送ることができる。
 
 \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.8\linewidth,bb=0 0 563 151]{images/babascript_sample.js.png}
   \end{center}
-  \caption{人への命令構文}
+  \caption{人への指示構文}
   \label{fig:babascript_sample}
 \end{figure}
 
 人間オブジェクトはインスタンス生成時にidを指定する必要がある。
-人への命令構文は、このidを元に命令配信先を決定する。
+人への指示構文は、このidを元に命令配信先を決定する。
 例えば、id=baba に命令を送りたければ、人オブジェクト宣言時の第一引数にはbabaという文字列を指定する。
 指定したidに命令が配信されるため、Babascript Client側でも同じidを指定する必要がある。
 <!-- また、指定したidを監視しているクライアントが複数ある場合は、命令がラウンドロビン方式で配信される。
@@ -69,13 +72,13 @@ Babascriptでは、人間への指示構文を伴ったオブジェクト(以下
 そのため、実装されていないメソッド名であれば、あらゆる命令をメソッドとして表現し実行することが可能である。
 例えば、「toString」や「call」等のメソッドは、javascriptにおいてはほぼすべてのオブジェクトが持つメソッドだ。
 一方で、「clean_up_your_room」や「bake_bread」のようなメソッドは定義しない限りは存在しないメソッドである。
-Babascriptは、この定義されていないメソッドをエラーとして評価せず、人への命令構文として評価する。
+Babascriptは、この定義されていないメソッドをエラーとして評価せず、人への指示構文として評価する。
 
 \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.8\linewidth,bb=0 0 577 330]{images/methodmissing_sample.js.png}
   \end{center}
-  \caption{人への命令構文}
+  \caption{通常のメソッドと指示構文の例}
   \label{fig:methodmissing_sample}
 \end{figure}
 
@@ -84,9 +87,9 @@ execメソッドを利用する場合は、第一引数に命令内容、第二�
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 577 330]{images/babascript_exec_method.js.png}
+  \includegraphics[width=.6\linewidth,bb=0 0 444 149]{images/babascript_exec_method.js.png}
   \end{center}
-  \caption{人への命令構文}
+  \caption{execメソッドによる指示構文}
   \label{fig:babascript_exec_method}
 \end{figure}
 
@@ -107,7 +110,7 @@ methodmissingと呼ばれる。
 \end{figure}
 
 メソッド名が自由に設定できるため、内容は指示ではなく、質問のようなものもあり得るが、本研究では統一して指示と呼ぶ。
-人への命令構文の第一引数にはオプション情報を指定する。
+人への指示構文の第一引数にはオプション情報を指定する。
 第二引数には人力処理の実行後に実行するコールバック関数を指定する。
 このコールバック関数は、指示に対して何かしらの値が返されたときに実行される。
 
@@ -129,7 +132,7 @@ methodmissingと呼ばれる。
   \begin{center}
   \includegraphics[width=.8\linewidth,bb=0 0 563 149]{images/babascript_option_sample.js.png}
   \end{center}
-  \caption{オプション情報のサンプルソースコード}
+  \caption{オプション情報のサンプルソースコード その1}
   \label{fig:babascript_option}
 \end{figure}
 
@@ -137,9 +140,9 @@ methodmissingと呼ばれる。
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.5\linewidth,bb=0 0 574 513]{images/babascript_option_list.js.png}
+  \includegraphics[width=.6\linewidth,bb=0 0 574 513]{images/babascript_option_list.js.png}
   \end{center}
-  \caption{オプション情報のサンプルソースコード}
+  \caption{オプション情報のサンプルソースコード その2}
   \label{fig:babascript_option_list}
 \end{figure}
 
@@ -154,7 +157,6 @@ interruptオプションは、他の指示が先に送られていた場合で�
 
 オプション情報である第一引数は省略可能である。
 省略した場合は、自動的に図\ref{fig:option_default}のようなオブジェクトが代入される。
-図\ref{fig:option_default}のオプション情報の場合、返り値の型はBooleanで返すように指定できる。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -166,8 +168,9 @@ interruptオプションは、他の指示が先に送られていた場合で�
 
 
 ### コールバック関数の指定
+<!-- なおしたい。 -->
 
-命令構文の第二引数にコールバック関数を指定すると、実行結果を取得した後にこのコールバック関数が呼ばれる
+指示構文の第二引数にコールバック関数を指定すると、実行結果を取得した後にこのコールバック関数が呼ばれる
 resultの中に処理結果が入ってる
 
 \begin{figure}[htbp]
@@ -181,12 +184,16 @@ resultの中に処理結果が入ってる
 人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている
 
 また、Promiseによる処理関数の指定も可能である。
+Promiseとは、
+人への指示構文実行時、コールバック関数を指定しなかった場合、Promiseオブジェクトがその時点での返り値として返される。
+Promiseオブジェクトのthenメソッドに指示に対する処理結果が得られた場合に実行する関数を、
+catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する。
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.5\linewidth,bb=0 0 574 513]{images/babascript_promise.js.png}
+  \includegraphics[width=.8\linewidth,bb=0 0 559 174]{images/babascript_promise.js.png}
   \end{center}
-  \caption{コールバック関数の指定}
+  \caption{Promiseによる関数指定}
   \label{fig:babascript_promise}
 \end{figure}
 
@@ -197,6 +204,7 @@ Babascriptはコマンドラインツールとしても利用可能だ。
 babaコマンドは、図\ref{fig:baba_command}のように利用することができる。
 オプションeの直後に指示内容を、オプションnの直後に指示先のIDを指定する。
 format情報などを付加したい場合は、オプションoの後に<key>=<value>の形で指定することができる。
+コマンドラインで実行することによって、人間による処理をpipeに組み込むといったことも可能になる。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -205,17 +213,6 @@ format情報などを付加したい場合は、オプションoの後に<key>=<
   \caption{Babaコマンド}
   \label{fig:baba_command}
 \end{figure}
-
-図\ref{fig:baba_command_pipe}のように、pipeして使うなどの利用方法が考えられる。
-
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.4\linewidth,bb=0 0 465 17]{images/baba_command_pipe.sh.png}
-  \end{center}
-  \caption{Babaコマンドでpipeする}
-  \label{fig:baba_command_pipe}
-\end{figure}
-
 
 ## Babascript Client
 
@@ -232,9 +229,9 @@ Babascript Clientは、Babascriptとの通信を担うサービス部と返り�
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 560 253]{images/babascript_client_service.js.png}
+  \includegraphics[width=.6\linewidth,bb=0 0 560 253]{images/babascript_client_service.js.png}
   \end{center}
-  \caption{Babascript Client サービス部}
+  \caption{Babascript Client サービス部のソースコード例}
   \label{fig:babascript_client_service}
 \end{figure}
 
@@ -243,13 +240,13 @@ Babascript Clientは、Babascriptとの通信を担うサービス部と返り�
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 357 149]{images/babascript_client_service_returnvalue.js.png}
+  \includegraphics[width=.6\linewidth,bb=0 0 357 149]{images/babascript_client_service_returnvalue.js.png}
   \end{center}
-  \caption{Babascript Client 処理結果を返すメソッド}
+  \caption{Babascript Client 処理結果を返すメソッドの例}
   \label{fig:babascript_client_service_returnvalue}
 \end{figure}
 
-実行結果情報として返すデータの例を図\ref{return_value_data}に示す。
+実行結果情報として返すデータの例を図\ref{fig:return_value_data}に示す。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -259,16 +256,16 @@ Babascript Clientは、Babascriptとの通信を担うサービス部と返り�
   \label{fig:return_value_data}
 \end{figure}
 
-命令実行をキャンセルしたい場合は、cancelメソッドを用いる\ref{client_cancel_method}。
+命令実行をキャンセルしたい場合は、cancelメソッドを用いる\ref{fig:client_cancel_method}。
 cancelメソッドの第一引数に、キャンセルする理由を指定することができる。
-
+<!--
 \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.6\linewidth,bb=0 0 408 225]{images/client_cancel_method.js.png}
   \end{center}
-  \caption{タスク情報}
+  \caption{キャンセルメソッドの使用例}
   \label{fig:client_cancel_method}
-\end{figure}
+\end{figure} -->
 
 ### ユーザインタフェース
 
@@ -289,15 +286,15 @@ HTMLとJS、CSSによるwebアプリケーションとして実装し、
 Apache Cordova\footnote{http://cordova.apache.org/}を用いてスマートフォンアプリケーション化した。
 android及びiOSアプリケーションとして動作する。
 フレームワークにはBackbone.jsとMarionette.jsを利用した。
-CSSはSASSを、HTMLはJadeで記述した。
-システムは図\ref{fig:babascript_client_webapp_system}のように構成される。
+CSSはSASS、HTMLはJadeで記述した。
+システムは図\ref{fig:client-overview}のように構成される。
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_webapp_system.png}
+  \includegraphics[width=.5\linewidth,bb=0 0 511 650]{images/client-overview.png}
   \end{center}
   \caption{Babascript Client webアプリケーションシステム図}
-  \label{fig:babascript_client_webapp_system}
+  \label{fig:client-overview}
 \end{figure}
 
 プログラムからの指示を受け取ると、アプリによる通知を発行し、ユーザに値を返すよう促す\ref{fig:client-push-notification}  。
@@ -307,7 +304,7 @@ Webインタフェースでは、指示内容に応じて提示インタフェ�
 また、StringとNumberであれば、文字・数字の入力フォームと投稿ボタンが提示され、
 投稿ボタンを押した際にフォームに入力されていた内容が返り値としてプログラムに返される。
 Listであれば、選択フォームが表示され、リストの中から返り値を選択することができる。
-実際に提示されるインタフェースの例を図\ref{fig:babascript_client_webapp_interface}に示す。
+実際に提示されるインタフェースの例を図\ref{fig:client_format_list}に示す。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -319,10 +316,10 @@ Listであれば、選択フォームが表示され、リストの中から返�
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_webapp_interface.png}
+  \includegraphics[width=.8\linewidth,bb=0 0 500 209]{images/client_format_list.png}
   \end{center}
   \caption{Babascript Client Webアプリケーションインタフェース}
-  \label{fig:babascript_client_webapp_interface}
+  \label{fig:client_format_list}
 \end{figure}
 
 
@@ -361,7 +358,7 @@ Hubotは様々なチャットサービスに対応しているが、Slackとい�
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_slack.png}
+  \includegraphics[width=.4\linewidth,bb=0 0 273 402]{images/babascript_client_slack.png}
   \end{center}
   \caption{Babascript Client Slackインタフェース}
   \label{fig:babascript_client_slack}
@@ -399,6 +396,8 @@ Babascript及びBabascript ClientはこのAdapterを介してNode-Lindaに接続
 
 ### Node-Linda
 
+#### 概要
+
 Node-Linda\cite{node-linda}は、分散並列処理のための仕組みであるLinda\cite{linda}をNode.js上に実装したものだ。
 Lindaは、タプルスペースという共有メモリを用いてプロセス間でデータの通信を行う並列処理のためのモデルだ。
 Node-Lindaでは、Lindaを拡張し、ネットワーク経由でも利用できるようにしている。
@@ -406,7 +405,7 @@ Node-Lindaでは、Lindaを拡張し、ネットワーク経由でも利用で�
 接続のためのプログラムさえ記述すれば、あらゆるデバイスがNode-Lindaに接続可能である。
 Linda及びNode-Lindaのタプル空間への操作を表\ref{table:tuple-management}にまとめる。
 
-Table: Linda及びNode-Lindaのタプル空間への操作 \label{table:tuple-managemnet}
+Table: Linda及びNode-Lindaのタプル空間への操作 \label{table:tuple-management}
 
 操作                        Linda       Node-Linda
 -------------------------- ---------- ---------------
@@ -434,10 +433,14 @@ Node-Lindaの各操作は、図\ref{fig:linda-usage}のようなプログラム�
   \label{fig:linda-usage}
 \end{figure}
 
-#### Node-Lindaの操作
+#### Node-Lindaのタプル操作
 
-- どのタプルスペースに書いてるか、とか
-- 図で示す
+Babascript及びBabascript Agentは、Adapterを用いてNode-Lindaのタプルスペースの操作を行う。
+宣言時に指定するIDを元に使用するタプルスペースを決定する。
+通常の指示を書き込むnormalスペース、割り込み処理用に使うinterruptスペースを個別に利用することで、
+割り込み処理を優先的に読み込ませるようにしている。
+
+操作方法を図\ref{fig:manipulation_tuplespace}にまとめる。
 
 ### Socket.IO Adapter
 
