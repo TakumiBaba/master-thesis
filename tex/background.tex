@@ -78,28 +78,26 @@ IoTの考えに基づいて様々なモノが繋がれば、プログラムに�
 例えば、料理をするプログラムといったものが可能だ。
 料理レシピは調理する上で必要となる処理を記述するものであり、プログラムと似ている。
 人間はこのレシピを見て、実行すべき処理を読み取り、その内容に従って処理を実行する。
-料理レシピの一部をプログラムとして記述するならば、図\ref{fig:background_cooking}のようになる。
+料理レシピの一部をプログラムとして記述するならば、図\ref{code:background-cooking}のようになる。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.4\linewidth,bb=0 0 281 98]{images/background_cooking.js.png}
-  \end{center}
-  \caption{料理レシピの一部をプログラム風に記述する}
-  \label{fig:background_cooking}
-\end{figure}
+\begin{lstlisting}[caption=料理レシピの一部をプログラム風に記述する, label=code:background-cooking]
+if 鍋の水が沸騰する() == true
+  パスタを鍋に投入する()
+else
+  待つ()
+\end{lstlisting}
 
 また、仕事のマニュアルなども同様である。
 その時々で行うべき業務はマニュアルなどによって定義されており、人間はマニュアルを見たり、覚えておくことによって
 処理を実行する。
-例えば、小売店の店員の仕事は図\ref{fig:background_retail}のようなプログラムとして記述可能である。
+例えば、小売店の店員の仕事は図\ref{code:background_retail}のようなプログラムとして記述可能である。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.4\linewidth,bb=0 0 319 98]{images/background_retail.js.png}
-  \end{center}
-  \caption{小売店の店員の挙動の一部をプログラム風に記述する}
-  \label{fig:background_retail}
-\end{figure}
+\begin{lstlisting}[caption=小売店の店員の挙動の一部をプログラム風に記述する, label=code:background-retail]
+if レジに人が並んでいる() == true
+  2番レジを開ける()
+else
+  品出しをする()
+\end{lstlisting}
 
 レシピやマニュアルといったように、人間が実行すべき処理を記述してある手順書は多く存在する。
 これは、ただ実行する対象が人間なだけであって、プログラムと同類のものであると言える。

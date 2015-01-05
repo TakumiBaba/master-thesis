@@ -53,15 +53,17 @@ Babascriptでは、人間オブジェクトを通して人間とプログラム�
 通常のメソッド実行とほぼ同じ記法で人間への指示を送ることができる。
 つまり、オブジェクトにメッセージングするという従来のオブジェクト指向プログラミングの作法をそのまま実行することで
 人間に指示を送っている。
-例えば、図\ref{fig:babascript_sample}のようなプログラムによって、人間オブジェクトを宣言し、人間へ指示を送ることができる。
+例えば、図\ref{code:babascript_sample}のようなプログラムによって、人間オブジェクトを宣言し、人間へ指示を送ることができる。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 563 151]{images/babascript_sample.js.png}
-  \end{center}
-  \caption{人への指示構文}
-  \label{fig:babascript_sample}
-\end{figure}
+``` {#code:babascript_sample caption=人への指示構文}
+// ライブラリの読み込み
+var Babascript = require('babascript');
+// takumibabaという人間を対象とした人間オブジェクトの宣言
+var takumibaba = new Babascript('takumibaba');
+// takumibabaに対して"clean_up_your_room"という指示を送る
+takumibaba.clean_up_your_room();
+
+```
 
 人間オブジェクトはインスタンス生成時にidを指定する必要がある。
 人への指示構文は、このidを元に命令配信先を決定する。
@@ -74,26 +76,37 @@ Babascriptでは、人間オブジェクトを通して人間とプログラム�
 そのため、実装されていないメソッド名であれば、あらゆる命令をメソッドとして表現し実行することが可能である。
 例えば、「toString」や「call」等のメソッドは、javascriptにおいてはほぼすべてのオブジェクトが持つメソッドだ。
 一方で、「clean_up_your_room」や「bake_bread」のようなメソッドは定義しない限りは存在しないメソッドである。
-Babascriptは、この定義されていないメソッドをエラーとして評価せず、人への指示構文として評価する。
+Babascriptは、この定義されていないメソッドをエラーとして評価せず、
+人への指示構文として評価する(ソースコード:\ref{code:methodmissing_sample})。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 577 330]{images/methodmissing_sample.js.png}
-  \end{center}
-  \caption{通常のメソッドと指示構文の例}
-  \label{fig:methodmissing_sample}
-\end{figure}
+``` {#code:methodmissing_sample caption=通常のメソッドと指示構文の例}
+var Babascript = require('babascript');
+var baba = new Babascript('takumibaba');
+
+baba.exists_method = function(){return true}
+
+// 上記で定義したのメソッド, 人への命令構文ではない
+baba.exists_method();
+
+// 既に定義されているメソッド, 人への命令構文ではない
+baba.toString();
+
+// 定義されていないメソッド, 人への命令構文として解釈される
+baba.not_exists_method();
+```
 
 また、図\ref{fig:babascript_exec_method}のように、execメソッドを使うことで指示を送ることも可能だ。
 execメソッドを利用する場合は、第一引数に命令内容、第二引数にオプション情報、第三引数にコールバック関数を指定する。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.6\linewidth,bb=0 0 444 149]{images/babascript_exec_method.js.png}
-  \end{center}
-  \caption{execメソッドによる指示構文}
-  \label{fig:babascript_exec_method}
-\end{figure}
+``` {#code:babascript_exec_method caption=execメソッドによる指示構文}
+var Babascript = require('babascript');
+var takumibaba = new Babascript('takumibaba');
+
+takumibaba.exec("exec_test", {}, function(result){
+
+});
+
+```
 
 オブジェクトに存在しないメソッドが呼び出された時に、特定のメソッドにその処理を委譲するような仕組みは、プログラミング言語Rubyにおいては
 methodmissingと呼ばれる。
@@ -101,15 +114,20 @@ methodmissingと呼ばれる。
 
 人間への指示として評価されたメソッドは、そのメソッド名と引数を元にしたタスク情報を生成し、タスク配信サーバへと送信する。
 この際、メソッド名部分がユーザに命令として提示される文となる。
-タスク情報は図\ref{fig:task_format}のように構成される。
+タスク情報はソースコード\ref{code:task_format}のように構成される。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.6\linewidth,bb=0 0 354 225]{images/task_format.js.png}
-  \end{center}
-  \caption{タスク情報}
-  \label{fig:task_format}
-\end{figure}
+``` {#code:task_format caption=タスク情報の例}
+var task = {
+  name: "takumibaba", // 命令配信先ID
+  key: "instruction_body", // 指示内容
+  cid: "", // タスクID
+  type: "eval", // 命令のタイプ
+  option: { // オプション情報
+    format: "boolean", // 想定返り値型
+  }
+}
+
+```
 
 メソッド名が自由に設定できるため、内容は指示ではなく、質問のようなものもあり得るが、本研究では統一して指示と呼ぶ。
 人への指示構文の第一引数にはオプション情報を指定する。
@@ -130,23 +148,43 @@ methodmissingと呼ばれる。
 図\ref{fig:babascript_option}の場合であれば、返り値の型はstringで、3分後までに返り値を得られなかった場合は、
 人力処理を止め、第二引数で指定するコールバック関数を実行し、処理を続行させるといったことをオプション情報として記述している。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 563 149]{images/babascript_option_sample.js.png}
-  \end{center}
-  \caption{オプション情報のサンプルソースコード その1}
-  \label{fig:babascript_option}
-\end{figure}
+
+``` {#code:babascript_option caption=オプション情報のサンプルソースコードその1}
+var Babascript = require('babascript');
+var baba = new Babascript('takumibaba');
+
+baba.hogefuga({format: 'string', timeout: 1000*60*3}, function(){
+
+});
+
+```
 
 また、図\ref{fig:babascript_option_list}の場合であれば、listで指定した選択肢の中から選んで返り値を返す、といった指定が可能だ。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.6\linewidth,bb=0 0 574 513]{images/babascript_option_list.js.png}
-  \end{center}
-  \caption{オプション情報のサンプルソースコード その2}
-  \label{fig:babascript_option_list}
-\end{figure}
+``` {#code:babascript_option_list caption=オプション情報のサンプルソースコードその2}
+var Babascript = require('babascript');
+var takumibaba = new Babascript('takumibaba');
+
+var option = {
+  format: 'string'
+  list: ['良い', '普通', '悪い']
+};
+takumibaba.会場の雰囲気はどうですか(option, function(result){
+  // 人が処理した結果が引数に格納される。
+  // 返り値に応じて処理を分岐させる
+  if(result.value == '良い'){
+    // ...
+  }else if(result.value == '普通'){
+    // ...
+  }else if(result.value == '悪い'){
+    // ...
+  }else{
+    // ...
+  }
+});
+
+
+```
 
 特別なオプション情報として、broadcastとinterruptが存在する。
 broadcastオプションは、同じ指示を複数のワーカーに同時に配信し、指定した数だけの値を得ることが出来た場合に
@@ -160,14 +198,12 @@ interruptオプションは、他の指示が先に送られていた場合で�
 オプション情報である第一引数は省略可能である。
 省略した場合は、自動的に図\ref{fig:option_default}のようなオブジェクトが代入される。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.4\linewidth,bb=0 0 210 70]{images/option_default.js.png}
-  \end{center}
-  \caption{デフォルトのオプション情報}
-  \label{fig:option_default}
-\end{figure}
+``` {#code:option_default caption=デフォルトのオプション情報}
+var defaultOption = {
+  format: 'boolean'
+}
 
+```
 
 ### コールバック関数の指定
 <!-- なおしたい。 -->
@@ -175,29 +211,32 @@ interruptオプションは、他の指示が先に送られていた場合で�
 人への指示構文の第二引数に関数を代入すると、実行結果を取得した後に指定した関数を実行する。
 処理が成功していた場合、この関数に渡される第二引数の中に、実行結果が代入される。
 処理が失敗していた場合、第一引数にエラーの内容が代入される。
-人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている。
+人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている(ソースコード:\ref{code:babascript_callback})。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.6\linewidth]{images/babascript_callback.js.eps}
-  \end{center}
-  \caption{コールバック関数の指定}
-  \label{fig:babascript_callback}
-\end{figure}
+``` {#code:babascript_callback caption=コールバック関数の指定}
+var Babascript = require('babascript');
+
+var baba = new Babascript('takumibaba');
+baba.do_callback({format: 'boolean'}, function(result){
+
+});
+```
 
 また、Promiseによる処理関数の指定も可能である。
 人への指示構文実行時、コールバック関数を指定しなかった場合、Promiseオブジェクトがその時点での返り値として返される。
 Promiseオブジェクトのthenメソッドに指示に対する処理結果が得られた場合に実行する関数を、
-catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する。
+catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する(ソースコード:\ref{code:babascript_promise})。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 559 174]{images/babascript_promise.js.png}
-  \end{center}
-  \caption{Promiseによる関数指定}
-  \label{fig:babascript_promise}
-\end{figure}
+``` {#code:babascript_promise caption=Promiseによる関数指定}
+var takumibaba = new Babascript("takumibaba");
 
+takumibaba.use_promise({}).then(function(result){
+  // 実行結果が正しく得られた場合の処理を記述する
+}).catch(function(error){
+  // エラー等で実行結果が得られなかった場合の処理を記述する
+});
+
+```
 
 ### コマンドラインでの利用
 
@@ -207,13 +246,17 @@ babaコマンドは、図\ref{fig:baba_command}のように利用することが
 format情報などを付加したい場合は、オプションoの後に<key>=<value>の形で指定することができる。
 コマンドラインで実行することによって、人間による処理をpipeに組み込むといったことも可能になる。
 
-\begin{figure}[htbp]
+``` {#baba_command caption=Babaコマンド}
+% baba -e hogefuga -o format=boolean
+```
+
+<!-- \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.6\linewidth,bb=0 0 465 17]{images/baba_command.sh.png}
   \end{center}
   \caption{Babaコマンド}
   \label{fig:baba_command}
-\end{figure}
+\end{figure} -->
 
 ## Babascript Client
 
@@ -227,35 +270,47 @@ Babascript Clientは、Babascriptとの通信を担うサービス部と返り�
 サービス部は、主にBabascriptとのやりとり、つまり、命令の受け取りや返り値の送信などを担う。
 
 命令を受け取ると、イベントを発行する
+``` {#code:babascript_client_service caption='Babascript Client サービス部のソースコード例'}
+var Client = require('babascript-client');
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.6\linewidth,bb=0 0 560 253]{images/babascript_client_service.js.png}
-  \end{center}
-  \caption{Babascript Client サービス部のソースコード例}
-  \label{fig:babascript_client_service}
-\end{figure}
+var client = new Client("takumibaba");
+client.on("get_task", function(task){
+  // babascriptからの命令を受信した時の挙動を記述
+});
+
+client.on("cancel_task", function(task){
+  // 命令が何かしらの理由でキャンセルされた時の挙動を記述
+});
+
+```
 
 何かしらの値を実行結果として返すときは、clientオブジェクトに実装されているretrnValueメソッドを用いる。
 図\ref{fig:babascript_client_service_returnvalue}のように、第一引数に結果として返すものを指定する。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.6\linewidth,bb=0 0 357 149]{images/babascript_client_service_returnvalue.js.png}
-  \end{center}
-  \caption{Babascript Client 処理結果を返すメソッドの例}
-  \label{fig:babascript_client_service_returnvalue}
-\end{figure}
+``` {#code:babascript_client_service_returnvalue caption='Babascript Client 処理結果を返すメソッドの例'}
+var Client = require('babascript-client')l
+var client = new Client('takumibaba');
+
+client.returnValue(true);
+client.returnValue(10);
+client.returnValue("string");
+
+```
 
 実行結果情報として返すデータの例を図\ref{fig:return_value_data}に示す。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.6\linewidth,bb=0 0 408 225]{images/return_value_data.js.png}
-  \end{center}
-  \caption{タスク情報}
-  \label{fig:return_value_data}
-\end{figure}
+``` {#code:return_value_data caption=タスク情報}
+value = {
+  _task: task, // 元タスクのオブジェクト情報
+  value: true, // ワーカーが入力する実行結果
+  cid: task.cid, // タスクのID情報
+  worker: 'takumibaba', //実行者情報
+  options: options,
+  type: "return"
+
+}
+
+```
 
 命令実行をキャンセルしたい場合は、cancelメソッドを用いる\ref{fig:client_cancel_method}。
 cancelメソッドの第一引数に、キャンセルする理由を指定することができる。
@@ -491,13 +546,18 @@ Babascript 及びBabascriptClientはその機能を拡張するために、プ�
 図\ref{fig:babascript_plugin}の様に使うことで、Babascript及びBabascriptClientによってイベントが発生した時に、
 それに応じたデータを受け取り、自由に操作することができる。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.7\linewidth,bb=0 0 416 226]{images/babascript_plugin.js.png}
-  \end{center}
-  \caption{Babascript Plugin}
-  \label{fig:babascript_plugin}
-\end{figure}
+``` {#code:babascript_plugin caption='Babascript Plugin'}
+var Babascript = require('babascript');
+var baba = new Babascript('takumibaba');
+
+var Client = require('babascript-client');
+var client = new Client('takumibaba');
+
+var logger = require('babascript-plugin-logger');
+
+baba.set logger()
+
+```
 
 Babascript及びBabascriptClientは、表\ref{table:plugin-events}にあるイベントを受け取る。
 また、イベントを受け取った際にはイベントに応じたデータを受け取る。

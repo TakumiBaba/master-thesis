@@ -124,15 +124,19 @@
 例えば、データベースに問い合わせ、保存されているデータを取得するプログラムでの記述と同じような記法で
 人間に問い合わせ、データを取得するようなプログラムが記述できるべきである。
 データベースに情報があるならば、データベースに問い合わせる処理を実行すれば良いし、
-ないならば、人間に問い合わせれば良い(図\ref{fig:design_integrated_style})。
+ないならば、人間に問い合わせれば良い(ソースコード:\ref{code:design-integrated-program-style})。
 
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.9\linewidth]{images/design_integrated_style.js.eps}
-  \end{center}
-  \caption{人間への指示を計算機への指示と類似させる}
-  \label{fig:design_integrated_style}
-\end{figure}
+``` {#code:design-integrated-program-style caption=人間への指示を計算機への指示と類似させる}
+// データベース問い合わせの擬似コード
+new db('tasks').find({id: 1}, function(err, doc){
+
+});
+// 人間への問い合わせの擬似コード
+new Human('takumibaba').find({message: ''}, function(err, result){
+
+});
+
+```
 
 同様に、センサーを利用して部屋の温度を取得するプログラムの記述と同じような記法で
 人間を利用して、部屋のセンシングに利用するようなプログラムが記述できるべきだ。
