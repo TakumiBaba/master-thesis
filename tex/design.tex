@@ -67,10 +67,26 @@
 しかし、本研究では人間の実世界のタスクの処理能力にも注目しているため、具体的な人物の指定が必須となる。
 例えば、自分の家におけるタスクを処理するためには、自分や家族を指定することが望まれる。
 
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth]{images/crowdsourcing_model.eps}
+  \end{center}
+  \caption{クラウドソーシングのモデル}
+  \label{fig:crowdsourcing_model}
+\end{figure}
+
 そこで、プログラム上に人間をオブジェクトとして扱えるようにし、そのオブジェクトの宣言時にidを指定することで、
 そのidを持った人間に指示を送るような仕組みを採用することで、具体的に人物を指定した指示を実現する。
 また、このオブジェクトへのメッセージングは人間へのメッセージングとして解釈する。
 このような仕組みを実装することによって、具体的な人間を指定したプログラムと人間のインタラクションの実現させる。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth]{images/unique_id_model.eps}
+  \end{center}
+  \caption{提案手法のモデル}
+  \label{fig:unique_id_model}
+\end{figure}
 
 \subsection{統一的な記法}\label{ux7d71ux4e00ux7684ux306aux8a18ux6cd5}
 
@@ -82,11 +98,20 @@
 例えば、ロボットでも出来そうな処理ならばロボットに実行させ、人間は感性を必要とする判断等、人間にしか出来ないことに
 専念すべきであるが、もしロボットがなければ人間に実行させるといったことが実現可能であるべきだ。
 
-こういったことを実現するためには、現在の仕組みでは難しい。
+上記のようなことの実現は現在の仕組みでは難しい。
 例えば、データベースに問い合わせ、保存されているデータを取得するプログラムでの記述と同じような記法で
 人間に問い合わせ、データを取得するようなプログラムが記述できるべきである。
 データベースに情報があるならば、データベースに問い合わせる処理を実行すれば良いし、
-ないならば、人間に問い合わせれば良い。
+ないならば、人間に問い合わせれば良い(図\ref{fig:design_integrated_style})。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.9\linewidth]{images/design_integrated_style.js.eps}
+  \end{center}
+  \caption{人間への指示を計算機への指示と類似させる}
+  \label{fig:design_integrated_style}
+\end{figure}
+
 同様に、センサーを利用して部屋の温度を取得するプログラムの記述と同じような記法で
 人間を利用して、部屋のセンシングに利用するようなプログラムが記述できるべきだ。
 センサーが部屋にないならば、人間に問い合わせれば良い。
@@ -158,8 +183,7 @@
 
 \section{新しいプログラミング環境の要件のまとめ}\label{ux65b0ux3057ux3044ux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux74b0ux5883ux306eux8981ux4ef6ux306eux307eux3068ux3081}
 
-前節までの設計検討から、人間と計算機への指示を融合させた新しいプログラミング環境の要件について以下の様にまとめる。
-
+前節までの設計検討から、人間と計算機への指示を融合させた新しいプログラミング環境の要件についてまとめる。
 まず、\ref{sec:program-human-interaction-design}節から、
 プログラム上で人間とのインタラクションを可能にするプログラムモジュールと、
 プログラムと人間の仲介となるソフトウェアエージェントが必要となる。

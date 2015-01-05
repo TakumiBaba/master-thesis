@@ -68,6 +68,7 @@ gulp.task 'upload2gist', ->
       gulp.src filepath
       .pipe p2g()
       .pipe exec 'gist2image <%= file.url %> ./images/<%= file.name %>.png'
+      .pipe exec 'convert ./images/<%= file.name %>.png ./images/<%= file.name %>.eps'
     @on "changed", upload
     @on "added", upload
 

@@ -1,13 +1,15 @@
 # 実装 {#chap:implementation}
 
-本章では、第\ref{chap:design}章で述べたプログラミング環境について述べる。
-全体の概要について述べた後、個別の要素に関して述べる。
+本章では、人間と計算への指示を融合させたプログラミング環境の具体的な実装について述べる。
+全体の概要について述べた後、個別の要素について詳しく説明する。
 
 ## Babascriptプログラミング環境
 
-Babascriptプログラミング環境は、人間とコンピュータへの指示を同じような記法で
-実現・実行可能にするための仕組みである。
-以下の要素によって実現する。
+本研究では、第\ref{chap:design}章にて設計した人間と計算への指示を融合させたプログラミング環境の
+具体的な実装として、Babscriptプログラミング環境を提案する。
+Babascriptプログラミング環境では、人間をコンピュータと同じ計算資源として扱うことで
+実世界におけるタスクの処理など、人間の力を利用した新しい処理を実現可能である。
+以下の要素を組み合わせることによって実現する。
 
 - Babascript
 - Babascript Client
@@ -26,13 +28,13 @@ Node-Lindaは、Babascript及びBabascript Clientの間のデータ通信の仲�
 1. Node-Lindaサーバを経由して実行元プログラムに入力された処理結果が送信される
 1. プログラム側で指定されたコールバック関数が実行される
 
-Babascriptプログラミング環境は、図\ref{fig:system_image}のように成り立つ。
+Babascriptプログラミング環境の概要を図\ref{fig:system_image}に示す。
 
 \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=.4\linewidth,bb=0 0 397 608]{images/overview.png}
   \end{center}
-  \caption{システム全体像}
+  \caption{システム概要}
   \label{fig:system_image}
 \end{figure}
 
@@ -170,21 +172,20 @@ interruptオプションは、他の指示が先に送られていた場合で�
 ### コールバック関数の指定
 <!-- なおしたい。 -->
 
-指示構文の第二引数にコールバック関数を指定すると、実行結果を取得した後にこのコールバック関数が呼ばれる
-resultの中に処理結果が入ってる
+人への指示構文の第二引数に関数を代入すると、実行結果を取得した後に指定した関数を実行する。
+処理が成功していた場合、この関数に渡される第二引数の中に、実行結果が代入される。
+処理が失敗していた場合、第一引数にエラーの内容が代入される。
+人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている。
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.5\linewidth,bb=0 0 574 513]{images/babascript_callback_func.js.png}
+  \includegraphics[width=.6\linewidth]{images/babascript_callback.js.eps}
   \end{center}
   \caption{コールバック関数の指定}
-  \label{fig:babascript_callback_func}
+  \label{fig:babascript_callback}
 \end{figure}
 
-人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている
-
 また、Promiseによる処理関数の指定も可能である。
-Promiseとは、
 人への指示構文実行時、コールバック関数を指定しなかった場合、Promiseオブジェクトがその時点での返り値として返される。
 Promiseオブジェクトのthenメソッドに指示に対する処理結果が得られた場合に実行する関数を、
 catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する。
@@ -279,7 +280,7 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 
 例として、スマートフォンアプリケーション、slackインタフェースを実装した。
 
-#### スマートフォンアプリケーション
+#### スマートフォンアプリケーション プロトタイプ1
 
 インタフェースの例として、スマートフォンアプリケーションとして実装した。
 HTMLとJS、CSSによるwebアプリケーションとして実装し、
@@ -336,6 +337,15 @@ Listであれば、選択フォームが表示され、リストの中から返�
   \label{fig:error}
 \end{figure}
 
+#### スマートフォンアプリケーション プロトタイプ2
+
+プロトタイプ1では、複数の指示が受けた場合でも一つ一つの指示しか表示できなかった。
+人間は実世界で様々な処理を並列で実行していることから、Babascript Agentにおいても
+取得した指示を並列に示すことが望ましい。
+
+そこで、基本的なインタフェースはプロトタイプ1を踏襲し、受けた指示の一覧をTODOリスト風のインタフェースを用いて
+ワーカーに提示するアプリケーションを実装した。
+こちらのアプリケーションをプロトタイプ2とする。
 
 #### チャットボット
 
@@ -455,6 +465,8 @@ Socket.IO Adapterは、接続環境が良好な状態での利用が望ましい
 
 構成図を図\ref{fig:socket.io-adapter}に示す。
 
+<!-- 速度 -->
+
 ### PushNotification Adapter
 
 PushNotification Adapter は、HTTP RequestとPushNotificationを用いてNode-Lindaと通信を行うためのAdapterだ。
@@ -469,6 +481,8 @@ PushNotification Adapterは、モバイルデバイス等の常時接続が難�
 主にAndroidやiPhone等のモバイルデバイスからNode-Lindaと接続する際に利用する。
 
 構成図を図\ref{fig:pushnotification-adapter}に示す。
+
+<!-- 速度 -->
 
 ## プラグイン機構
 
@@ -500,9 +514,10 @@ receive            ○               ○
 
 loadイベントは、プラグインが読み込まれた際に発生する。
 例えば、設定ファイルの読み込みなどの処理を行う。
-connectイベントは、Babascript及びBabascript ClientがNode-Lindaサーバに接続した際に発生する。
-sendイベントは、Babascript及びBabascript Clientが何かしらのデータをNode-Lindaサーバに書き込む際に発生する。
+connectイベントは、Babascript及びBabascript ClientがNode-Lindaサーバに接続した際に発生するイベントだ。
+sendイベントは、Babascriptによって人間への指示構文が実行された際に発生する。
 例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
+return_valueイベントは、Babascript Clientが指示に対して実行結果を返すときに発生する。
 receiveイベントは、Babascript及びBabascript Clientが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
 指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
 

@@ -86,7 +86,7 @@ else
   message_core = "現在の"
   message_core += username+"さんの" if username
   message_core += "修論の文字数は約#{c}文字です."
-  message_core += "あなたのプルリクエストをお待ちしております. http://github.com/TakumiBaba/master-thesis"
+  message_core += "あなたのプルリクエスト、Issueをお待ちしております. http://github.com/TakumiBaba/master-thesis"
   message = message_core + " #{remain}" unless no_limit
   message += " #sfcdogeza #sfchametsu" unless no_tags
   if slash
