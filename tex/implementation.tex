@@ -111,6 +111,11 @@ baba.toString();
 baba.not_exists_method();
 \end{lstlisting}
 
+オブジェクトに存在しないメソッドが呼び出された時に、特定のメソッドにその処理を委譲するような仕組みは、
+プログラミング言語Rubyにおいてはmethodmissingと呼ばれる。
+各言語によって名称は異なるが、類似する仕組みが存在する言語は複数存在する。
+Babascriptにおいては、node-methodmissing\footnote{https://github.com/geta6/node-methodmissing}というライブラリを利用している。
+
 また、図\ref{fig:babascript_exec_method}のように、execメソッドを使うことで指示を送ることも可能だ。
 execメソッドを利用する場合は、第一引数に命令内容、第二引数にオプション情報、第三引数にコールバック関数を指定する。
 
@@ -119,13 +124,9 @@ var Babascript = require('babascript');
 var takumibaba = new Babascript('takumibaba');
 
 takumibaba.exec("message_to_human", {}, function(result){
-
+  // 処理を記述する
 });
 \end{lstlisting}
-
-オブジェクトに存在しないメソッドが呼び出された時に、特定のメソッドにその処理を委譲するような仕組みは、プログラミング言語Rubyにおいては
-methodmissingと呼ばれる。
-各言語によって名称は異なるが、類似する仕組みが存在する言語は複数存在する。
 
 人間への指示として評価されたメソッドは、そのメソッド名と引数を元にしたタスク情報を生成し、タスク配信サーバへと送信する。
 この際、メソッド名部分がユーザに命令として提示される文となる。
@@ -135,7 +136,7 @@ methodmissingと呼ばれる。
 var task = {
   name: "takumibaba", // 命令配信先ID
   key: "instruction_body", // 指示内容
-  cid: "", // タスクID
+  cid: "1420569060.52_0.9777606867719442", // タスクID
   type: "eval", // 命令のタイプ
   option: { // オプション情報
     format: "boolean", // 想定返り値型
