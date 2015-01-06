@@ -14,7 +14,8 @@
     "through2": "^0.6.3"
   },
   "devDependencies": {
-    "gaze": "^0.6.4"
+    "gaze": "^0.6.4",
+    "gulp-gm": "0.0.7"
   },
   "repository": {
     "type": "git",

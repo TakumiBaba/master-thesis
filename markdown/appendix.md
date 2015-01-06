@@ -1,6 +1,8 @@
 # 付録 {#chap:appendix}
 
-## 実験結果
+## 事前実験
+
+### 結果
 
 Table: タスク達成時間
 
@@ -20,3 +22,19 @@ Table: タスク実行結果
 03      男   19  true   4    コーヒーメーカー   電気ポット          実行を確認
 
 ### 実験記録用紙
+
+<!-- \begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.7\linewidth]{images/pre-evaluation-0.eps}
+  \end{center}
+  \caption{事前実験記録用紙その1}
+  \label{fig:pre-evaluation-1}
+\end{figure}
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.7\linewidth]{images/pre-evaluation-1.eps}
+  \end{center}
+  \caption{事前実験記録用紙その2}
+  \label{fig:pre-evaluation-2}
+\end{figure} -->

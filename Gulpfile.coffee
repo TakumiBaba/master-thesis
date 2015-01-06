@@ -4,6 +4,7 @@ through2 = require 'through2'
 gistupload = require './upload2gist'
 gaze = require 'gaze'
 pandoc = require 'gulp-pandoc'
+gm = require 'gulp-gm'
 
 gulp.task 'compile', ->
   gulp.src "main.tex"
@@ -59,18 +60,18 @@ p2g = ->
       @push data
       callback null
 
-gulp.task 'upload2gist', ->
-  gaze 'scripts/*.*', (err, watcher) ->
-    upload = (filepath) ->
-      paths = filepath.split '/'
-      # 対処療法につきすぐ直す
-      return if paths[paths.length-2] isnt 'scripts'
-      gulp.src filepath
-      .pipe p2g()
-      .pipe exec 'gist2image <%= file.url %> ./images/<%= file.name %>.png'
-      .pipe exec 'convert ./images/<%= file.name %>.png ./images/<%= file.name %>.eps'
-    @on "changed", upload
-    @on "added", upload
+# gulp.task 'upload2gist', ->
+#   gaze 'scripts/*.*', (err, watcher) ->
+#     upload = (filepath) ->
+#       paths = filepath.split '/'
+#       # 対処療法につきすぐ直す
+#       return if paths[paths.length-2] isnt 'scripts'
+#       gulp.src filepath
+#       .pipe p2g()
+#       .pipe exec 'gist2image <%= file.url %> ./images/<%= file.name %>.png'
+#       .pipe exec 'convert ./images/<%= file.name %>.png ./images/<%= file.name %>.eps'
+#     @on "changed", upload
+#     @on "added", upload
 
 gulp.task 'image_reset', ->
   gulp.src 'main.tex'
@@ -98,13 +99,26 @@ gulp.task 'md2tex', ->
     args: ['--chapters', '--listings']
   .pipe gulp.dest 'tex/'
 
-gulp.task 'image2eps', ->
-  gaze './images/*.png', (err, watcher) ->
-    @on "changed", (filepath) ->
-      gulp.src filepath
-      .pipe exec "echo #{filepath}"
+gulp.task 'image2eps', () ->
+  gulp.watch 'images/*.png', (file) ->
+    console.log file.path
+    func = (f) ->
+      return f.setFormat 'eps'
+    gulp.src file.path
+    # .pipe exec 'convert <$'
+    .pipe gm func, {imageMagick: true}
+    .pipe gulp.dest 'images/'
+  # gulp.src 'images/*.png'
+  # .pipe exec 'echo <%= file.name %>'
+  # gaze './images/*.png', (err, watcher) ->
+  #   @on "changed", (filepath) ->
+  #     gulp.src filepath
+  #     .pipe gm (file) ->
+  #       return gm.setFormat 'eps'
+  #     .pipe gulp.dest 'images/'
 
-gulp.task 'default', ['md2tex', 'compile', 'upload2gist'], ->
+
+gulp.task 'default', ['md2tex', 'compile'], ->
   gulp.src 'main.tex'
   .pipe exec 'open main.pdf'
   .pipe exec.reporter
@@ -112,3 +126,4 @@ gulp.task 'default', ['md2tex', 'compile', 'upload2gist'], ->
     stderr: true
     stdout: true
   gulp.watch './**/*.tex', ['compile']
+  # gulp.watch 'images/*.png', ['image2eps']
