@@ -185,15 +185,16 @@
 \renewcommand{\listoftables}{%
   \section*{\listtablename}
   \@starttoc{lot}
-  \cleardoublepage
+  \newpage
 }
 
-% % コード目次環境再定義
-% \renewcommand{\listofcodes}{%
-%   \section*{\listtablename}
-%   \@starttoc{loc}
-%   \cleardoublepage
-% }
+% コード目次環境再定義
+\newcommand{\listofcodes}{%
+  % \lstlistoflistings
+  \section*{\lstlistlistingname}
+  \@starttoc{lol}
+  \cleardoublepage
+}
 
 % 謝辞環境の作成
 \newenvironment{acknowledgment}{%
