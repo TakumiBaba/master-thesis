@@ -12,12 +12,12 @@ Babascriptプログラミング環境では、人間をコンピュータと同�
 以下の要素を組み合わせることによって実現する。
 
 - Babascript
-- Babascript Client
+- Babascript Agent
 - Node-Linda
 
 Babascriptは人間への指示を記述可能にするプログラミングライブラリである。
-Babascript Clientは、指示に対する実行結果を入力できるソフトウェアだ。
-Node-Lindaは、Babascript及びBabascript Clientの間のデータ通信の仲介サーバとして機能する。
+Babascript Agentは、指示に対する実行結果を入力できるソフトウェアだ。
+Node-Lindaは、Babascript及びBabascript Agentの間のデータ通信の仲介サーバとして機能する。
 
 以下のような手順で、処理が進む。
 
@@ -68,7 +68,7 @@ takumibaba.clean_up_your_room();
 人間オブジェクトはインスタンス生成時にidを指定する必要がある。
 人への指示構文は、このidを元に命令配信先を決定する。
 例えば、id=baba に命令を送りたければ、人オブジェクト宣言時の第一引数にはbabaという文字列を指定する。
-指定したidに命令が配信されるため、Babascript Client側でも同じidを指定する必要がある。
+指定したidに命令が配信されるため、Babascript Agent側でも同じidを指定する必要がある。
 <!-- また、指定したidを監視しているクライアントが複数ある場合は、命令がラウンドロビン方式で配信される。
 そのため、masuilabのような、特定のグループの人たちに命令を配信したいときなどにも利用可能である。 -->
 
@@ -260,19 +260,19 @@ format情報などを付加したい場合は、オプションoの後に<key>=<
   \label{fig:baba_command}
 \end{figure} -->
 
-## Babascript Client
+## Babascript Agent
 
 Babascriptによって人への指示をプログラムに記述し、実行することが可能となったが、その指示を人に伝え、
 処理結果を返させるためのアプリケーションが必要となる。
-そこで、Babascript Clientというアプリケーション群を実装した。
-Babascript Clientは、Babascriptとの通信を担うサービス部と返り値の入力等を担うインターフェス部から構成される。
+そこで、Babascript Agent というアプリケーションを実装した。
+Babascript Agent は、Babascriptとの通信を担うサービス部と返り値の入力等を担うインターフェス部から構成される。
 
 ### サービス
 
 サービス部は、主にBabascriptとのやりとり、つまり、命令の受け取りや返り値の送信などを担う。
 
 命令を受け取ると、イベントを発行する
-``` {#code:babascript_client_service caption='Babascript Client サービス部のソースコード例'}
+``` {#code:babascript_client_service caption='Babascript Agent サービス部のソースコード例'}
 var Client = require('babascript-client');
 
 var client = new Client("takumibaba");
@@ -289,7 +289,7 @@ client.on("cancel_task", function(task){
 何かしらの値を実行結果として返すときは、clientオブジェクトに実装されているretrnValueメソッドを用いる。
 図\ref{fig:babascript_client_service_returnvalue}のように、第一引数に結果として返すものを指定する。
 
-``` {#code:babascript_client_service_returnvalue caption='Babascript Client 処理結果を返すメソッドの例'}
+``` {#code:babascript_client_service_returnvalue caption='Babascript Agent 処理結果を返すメソッドの例'}
 var Client = require('babascript-client')l
 var client = new Client('takumibaba');
 
@@ -330,7 +330,7 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 ユーザとのインタラクションを行う。
 命令をユーザに見せるのと、実際に実行結果を入力させる機能を持つ
 
-サービス部と独立した実装のため、異なるデバイスや環境上でもインタフェース部を実装するだけでBabascript Clientは構築可能である。
+サービス部と独立した実装のため、異なるデバイスや環境上でもインタフェース部を実装するだけでBabascript Agent は構築可能である。
 基本的には、指示内容と返り値の入力インタフェースをユーザに提示し、返り値の入力を受け付ける機能を担う。
 この際、Babascriptの指示でオプション情報として返り値の型を指定していた場合、指定した型以外の入力を受け付けないような実装を行っている。
 返り値の型は現在、Boolean, String, Numberに対応している。
@@ -351,7 +351,7 @@ CSSはSASS、HTMLはJadeで記述した。
   \begin{center}
   \includegraphics[width=.5\linewidth,bb=0 0 511 650]{images/client-overview.png}
   \end{center}
-  \caption{Babascript Client webアプリケーションシステム図}
+  \caption{Babascript Agent webアプリケーションシステム図}
   \label{fig:client-overview}
 \end{figure}
 
@@ -368,7 +368,7 @@ Listであれば、選択フォームが表示され、リストの中から返�
   \begin{center}
   \includegraphics[width=.7\linewidth,bb=0 0 300 192]{images/client-push-notification.png}
   \end{center}
-  \caption{Babascript Client Push通知例}
+  \caption{Babascript Agent Push通知例}
   \label{fig:client-push-notification}
 \end{figure}
 
@@ -376,7 +376,7 @@ Listであれば、選択フォームが表示され、リストの中から返�
   \begin{center}
   \includegraphics[width=.8\linewidth,bb=0 0 500 209]{images/client_format_list.png}
   \end{center}
-  \caption{Babascript Client Webアプリケーションインタフェース}
+  \caption{Babascript Agent Webアプリケーションインタフェース}
   \label{fig:client_format_list}
 \end{figure}
 
@@ -390,7 +390,7 @@ Listであれば、選択フォームが表示され、リストの中から返�
   \begin{center}
   \includegraphics[width=.5\linewidth,bb=0 0 768 518]{images/throw-error.png}
   \end{center}
-  \caption{Babascript Client エラー処理インタフェース}
+  \caption{Babascript Agent エラー処理インタフェース}
   \label{fig:error}
 \end{figure}
 
@@ -406,7 +406,7 @@ Listであれば、選択フォームが表示され、リストの中から返�
 
 #### チャットボット
 
-チャットサービス上で稼働するボットにBabascript Clientの機能を実装した。
+チャットサービス上で稼働するボットにBabascript Agentの機能を実装した。
 ボットシステムにはHubot\footnote{https://hubot.github.com/}を採用した。
 Hubotは様々なチャットサービスに対応しているが、Slackというチャットサービス上において運用している。
 このボットシステムは、Heroku\footnote{https://heroku.com}上で稼働している。
@@ -427,7 +427,7 @@ Hubotは様々なチャットサービスに対応しているが、Slackとい�
   \begin{center}
   \includegraphics[width=.4\linewidth,bb=0 0 273 402]{images/babascript_client_slack.png}
   \end{center}
-  \caption{Babascript Client Slackインタフェース}
+  \caption{Babascript Agent Slackインタフェース}
   \label{fig:babascript_client_slack}
 \end{figure}
 
@@ -444,20 +444,20 @@ Hubotは様々なチャットサービスに対応しているが、Slackとい�
 チャットボットインタフェースでは、Webアプリケーションの場合と違い、
 提示するインタフェースを返り値の型に応じて変化させるといったことができない。
 そのため、ユーザにとっては値を返しにくくなっているが、普段利用しているチャットサービス上で
-Babascript Clientの機能を利用できるということは有用なことであると考える。
+Babascript Agentの機能を利用できるということは有用なことであると考える。
 
 
 <!-- % Adapter -->
 ## 通信手法
 <!-- もっと掘り下げる -->
 
-BabascriptとBabascript Client間の通信のために、仲介サーバとしてNode-Lindaを利用する。
+BabascriptとBabascript Agent間の通信のために、仲介サーバとしてNode-Lindaを利用する。
 通信手法はデバイスごとに利用可能な手法が異なったり限定されるため、プラガブルにする必要がある。
 そこで、シンプルで接続方式の追加が簡単に可能な実装となっているNode-Lindaを仲介サーバソフトウェアとして採用した。
 
-Babascript及びBabascript ClientがNode-Lindaに接続するために実装されたモジュールを、Babascript Adapterと呼ぶ。
+Babascript及びBabascript AgentがNode-Lindaに接続するために実装されたモジュールを、Babascript Adapterと呼ぶ。
 このAdapterは簡単に切り替えが可能で、かつ他の実装に影響を与えることがないように設計されている。
-Babascript及びBabascript ClientはこのAdapterを介してNode-Lindaに接続し、情報のやりとりを行う。
+Babascript及びBabascript AgentはこのAdapterを介してNode-Lindaに接続し、情報のやりとりを行う。
 
 本節では、この仲介サーバとして用いるNode-Lindaについて述べた後、2種類のBabascript Adapterを紹介する。
 
@@ -543,9 +543,9 @@ PushNotification Adapterは、モバイルデバイス等の常時接続が難�
 
 ## プラグイン機構
 
-Babascript 及びBabascriptClientはその機能を拡張するために、プラグイン機構を持つ。
+Babascript 及びBabascriptClient Agentはその機能を拡張するために、プラグイン機構を持つ。
 
-図\ref{fig:babascript_plugin}の様に使うことで、Babascript及びBabascriptClientによってイベントが発生した時に、
+図\ref{fig:babascript_plugin}の様に使うことで、Babascript及びBabascript Agentによってイベントが発生した時に、
 それに応じたデータを受け取り、自由に操作することができる。
 
 ``` {#code:babascript_plugin caption='Babascript Plugin'}
@@ -561,12 +561,12 @@ baba.set logger()
 
 ```
 
-Babascript及びBabascriptClientは、表\ref{table:plugin-events}にあるイベントを受け取る。
+Babascript及びBabascript Agent は、表\ref{table:plugin-events}にあるイベントを受け取る。
 また、イベントを受け取った際にはイベントに応じたデータを受け取る。
 
-Table: Babascript及びBabascript Clientが発行するイベント一覧 \label{table:plugin-events}
+Table: Babascript及びBabascript Agentが発行するイベント一覧 \label{table:plugin-events}
 
-イベント名       Babascript   BabascriptClient
+イベント名       Babascript   Babascript Agent
 -------------- ----------- ------------------
 load               ○               ○
 connect            ○               ○
@@ -576,11 +576,11 @@ receive            ○               ○
 
 loadイベントは、プラグインが読み込まれた際に発生する。
 例えば、設定ファイルの読み込みなどの処理を行う。
-connectイベントは、Babascript及びBabascript ClientがNode-Lindaサーバに接続した際に発生するイベントだ。
+connectイベントは、Babascript及びBabascript AgentがNode-Lindaサーバに接続した際に発生するイベントだ。
 sendイベントは、Babascriptによって人間への指示構文が実行された際に発生する。
 例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
-return_valueイベントは、Babascript Clientが指示に対して実行結果を返すときに発生する。
-receiveイベントは、Babascript及びBabascript Clientが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
+return_valueイベントは、Babascript Agentが指示に対して実行結果を返すときに発生する。
+receiveイベントは、Babascript及びBabascript Agentが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
 指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
 
 プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
