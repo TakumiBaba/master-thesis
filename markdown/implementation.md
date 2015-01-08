@@ -53,9 +53,9 @@ Babascriptでは、人間オブジェクトを通して人間とプログラム�
 通常のメソッド実行とほぼ同じ記法で人間への指示を送ることができる。
 つまり、オブジェクトにメッセージングするという従来のオブジェクト指向プログラミングの作法をそのまま実行することで
 人間に指示を送っている。
-例えば、図\ref{code:babascript_sample}のようなプログラムによって、人間オブジェクトを宣言し、人間へ指示を送ることができる。
+例えば、ソースコード:\ref{code:babascript-sample}のようなプログラムによって、人間オブジェクトを宣言し、人間へ指示を送ることができる。
 
-``` {#code:babascript_sample caption=人への指示構文}
+``` {#code:babascript-sample caption=人への指示構文}
 // ライブラリの読み込み
 var Babascript = require('babascript');
 // takumibabaという人間を対象とした人間オブジェクトの宣言
@@ -77,9 +77,9 @@ takumibaba.clean_up_your_room();
 例えば、「toString」や「call」等のメソッドは、javascriptにおいてはほぼすべてのオブジェクトが持つメソッドだ。
 一方で、「clean_up_your_room」や「bake_bread」のようなメソッドは定義しない限りは存在しないメソッドである。
 Babascriptは、この定義されていないメソッドをエラーとして評価せず、
-人への指示構文として評価する(ソースコード:\ref{code:methodmissing_sample})。
+人への指示構文として評価する(ソースコード:\ref{code:methodmissing-sample})。
 
-``` {#code:methodmissing_sample caption=通常のメソッドと指示構文の例}
+``` {#code:methodmissing-sample caption=通常のメソッドと指示構文の例}
 var Babascript = require('babascript');
 var baba = new Babascript('takumibaba');
 
@@ -99,10 +99,10 @@ baba.not_exists_method();
 各言語によって名称は異なるが、類似する仕組みが存在する言語は複数存在する。
 Babascriptにおいては、node-methodmissing\footnote{https://github.com/geta6/node-methodmissing}というライブラリを利用している。
 
-また、図\ref{fig:babascript_exec_method}のように、execメソッドを使うことで指示を送ることも可能だ。
+また、ソースコード:\ref{fig:babascript-exec-method}のように、execメソッドを使うことで指示を送ることも可能だ。
 execメソッドを利用する場合は、第一引数に命令内容、第二引数にオプション情報、第三引数にコールバック関数を指定する。
 
-``` {#code:babascript_exec_method caption=execメソッドによる指示構文}
+``` {#code:babascript-exec-method caption=execメソッドによる指示構文}
 var Babascript = require('babascript');
 var takumibaba = new Babascript('takumibaba');
 
@@ -114,9 +114,9 @@ takumibaba.exec("message_to_human", {}, function(result){
 
 人間への指示として評価されたメソッドは、そのメソッド名と引数を元にしたタスク情報を生成し、タスク配信サーバへと送信する。
 この際、メソッド名部分がユーザに命令として提示される文となる。
-タスク情報はソースコード\ref{code:task_format}のように構成される。
+タスク情報はソースコード\ref{code:task-format}のように構成される。
 
-``` {#code:task_format caption=タスク情報の例}
+``` {#code:task-format caption=タスク情報の例}
 var task = {
   name: "takumibaba", // 命令配信先ID
   key: "instruction_body", // 指示内容
@@ -146,12 +146,12 @@ var task = {
 ユーザに提示する画面を変更するといったことが可能である。
 
 オプション情報の例としては、返り値の型情報や、タイムアウト情報などが考えられる。
-オプション情報は図\ref{fig:babascript_option}のように記述する。
-図\ref{fig:babascript_option}の場合であれば、返り値の型はstringで、3分後までに返り値を得られなかった場合は、
+オプション情報はソースコード\ref{code:babascript-option}のように記述する。
+この場合であれば、返り値の型はstringで、3分後までに返り値を得られなかった場合は、
 人力処理を止め、第二引数で指定するコールバック関数を実行し、処理を続行させるといったことをオプション情報として記述している。
 
 
-``` {#code:babascript_option caption=オプション情報のサンプルソースコードその1}
+``` {#code:babascript-option caption=オプション情報のサンプルソースコードその1}
 var Babascript = require('babascript');
 var baba = new Babascript('takumibaba');
 
@@ -161,9 +161,9 @@ baba.hogefuga({format: 'string', timeout: 1000*60*3}, function(){
 
 ```
 
-また、図\ref{fig:babascript_option_list}の場合であれば、listで指定した選択肢の中から選んで返り値を返す、といった指定が可能だ。
+また、ソースコード:\ref{code:babascript-option-list}の場合であれば、listで指定した選択肢の中から選んで返り値を返す、といった指定が可能だ。
 
-``` {#code:babascript_option_list caption=オプション情報のサンプルソースコードその2}
+``` {#code:babascript-option-list caption=オプション情報のサンプルソースコードその2}
 var Babascript = require('babascript');
 var takumibaba = new Babascript('takumibaba');
 
@@ -198,9 +198,9 @@ interruptオプションは、他の指示が先に送られていた場合で�
 現在実行されているタスクの次のタスクとして登録される。
 
 オプション情報である第一引数は省略可能である。
-省略した場合は、自動的に図\ref{fig:option_default}のようなオブジェクトが代入される。
+省略した場合は、自動的にソースコード:\ref{code:option-default}のようなオブジェクトが代入される。
 
-``` {#code:option_default caption=デフォルトのオプション情報}
+``` {#code:option-default caption=デフォルトのオプション情報}
 var defaultOption = {
   format: 'boolean'
 }
@@ -213,9 +213,9 @@ var defaultOption = {
 人への指示構文の第二引数に関数を代入すると、実行結果を取得した後に指定した関数を実行する。
 処理が成功していた場合、この関数に渡される第二引数の中に、実行結果が代入される。
 処理が失敗していた場合、第一引数にエラーの内容が代入される。
-人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている(ソースコード:\ref{code:babascript_callback})。
+人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている(ソースコード:\ref{code:babascript-callback})。
 
-``` {#code:babascript_callback caption=コールバック関数の指定}
+``` {#code:babascript-callback caption=コールバック関数の指定}
 var Babascript = require('babascript');
 
 var baba = new Babascript('takumibaba');
@@ -227,9 +227,9 @@ baba.do_callback({format: 'boolean'}, function(result){
 また、Promiseによる処理関数の指定も可能である。
 人への指示構文実行時、コールバック関数を指定しなかった場合、Promiseオブジェクトがその時点での返り値として返される。
 Promiseオブジェクトのthenメソッドに指示に対する処理結果が得られた場合に実行する関数を、
-catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する(ソースコード:\ref{code:babascript_promise})。
+catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する(ソースコード:\ref{code:babascript-promise})。
 
-``` {#code:babascript_promise caption=Promiseによる関数指定}
+``` {#code:babascript-promise caption=Promiseによる関数指定}
 var takumibaba = new Babascript("takumibaba");
 
 takumibaba.use_promise({}).then(function(result){
@@ -243,12 +243,12 @@ takumibaba.use_promise({}).then(function(result){
 ### コマンドラインでの利用
 
 Babascriptはコマンドラインツールとしても利用可能だ。
-babaコマンドは、図\ref{fig:baba_command}のように利用することができる。
+babaコマンドは、ソースコード:\ref{code:baba-command}のように利用することができる。
 オプションeの直後に指示内容を、オプションnの直後に指示先のIDを指定する。
 format情報などを付加したい場合は、オプションoの後に<key>=<value>の形で指定することができる。
 コマンドラインで実行することによって、人間による処理をpipeに組み込むといったことも可能になる。
 
-``` {#baba_command caption=Babaコマンド}
+``` {#code:baba-command caption=Babaコマンド}
 % baba -e hogefuga -o format=boolean
 ```
 
@@ -272,7 +272,8 @@ Babascript Agent は、Babascriptとの通信を担うサービス部と返り�
 サービス部は、主にBabascriptとのやりとり、つまり、命令の受け取りや返り値の送信などを担う。
 
 命令を受け取ると、イベントを発行する
-``` {#code:babascript_client_service caption='Babascript Agent サービス部のソースコード例'}
+
+``` {#code:babascript-client-service caption='Babascript Agent サービス部のソースコード例'}
 var Client = require('babascript-client');
 
 var client = new Client("takumibaba");
@@ -287,9 +288,9 @@ client.on("cancel_task", function(task){
 ```
 
 何かしらの値を実行結果として返すときは、clientオブジェクトに実装されているretrnValueメソッドを用いる。
-図\ref{fig:babascript_client_service_returnvalue}のように、第一引数に結果として返すものを指定する。
+ソースコード:\ref{code:babascript-client-service-returnvalue}のように、第一引数に結果として返すものを指定する。
 
-``` {#code:babascript_client_service_returnvalue caption='Babascript Agent 処理結果を返すメソッドの例'}
+``` {#code:babascript-client-service-returnvalue caption='Babascript Agent 処理結果を返すメソッドの例'}
 var Client = require('babascript-client')l
 var client = new Client('takumibaba');
 
@@ -299,9 +300,9 @@ client.returnValue("string");
 
 ```
 
-実行結果情報として返すデータの例を図\ref{fig:return_value_data}に示す。
+実行結果情報として返すデータの例を図\ref{code:return-value-data}に示す。
 
-``` {#code:return_value_data caption=タスク情報}
+``` {#code:return-value-data caption=タスク情報}
 value = {
   _task: task, // 元タスクのオブジェクト情報
   value: true, // ワーカーが入力する実行結果
@@ -314,7 +315,7 @@ value = {
 
 ```
 
-命令実行をキャンセルしたい場合は、cancelメソッドを用いる\ref{fig:client_cancel_method}。
+命令実行をキャンセルしたい場合は、cancelメソッドを用いる。
 cancelメソッドの第一引数に、キャンセルする理由を指定することができる。
 <!--
 \begin{figure}[htbp]
@@ -391,7 +392,7 @@ Listであれば、選択フォームが表示され、リストの中から返�
   \includegraphics[width=.5\linewidth,bb=0 0 768 518]{images/throw-error.png}
   \end{center}
   \caption{Babascript Agent エラー処理インタフェース}
-  \label{fig:error}
+  \label{fig:throw-error}
 \end{figure}
 
 #### スマートフォンアプリケーション プロトタイプ2
