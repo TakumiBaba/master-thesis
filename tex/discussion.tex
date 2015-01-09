@@ -5,10 +5,19 @@
 
 \section{ユーザインタビュー}\label{ux30e6ux30fcux30b6ux30a4ux30f3ux30bfux30d3ux30e5ux30fc}
 
-実際に試用してもらった上で、インタビューを行った。
+システムの改善や利用者側の心理の確認のため、 7名の被験者(男性7名,
+平均23歳)に試用してもらった上でインタビューを行った。
+今回のユーザインタビューでは、現状において一番改善点が多いと思われたBabascript
+Agentに その議論を絞り、インタビューを行った。
+
 インタビューの内容は表\ref{table:interview}の通りである。
 
 \begin{longtable}[c]{@{}lc@{}}
+\caption{インタビュー内容 \label{table:interview}}\tabularnewline
+\toprule
+& 質問内容\tabularnewline
+\midrule
+\endfirsthead
 \toprule
 & 質問内容\tabularnewline
 \midrule
@@ -27,6 +36,38 @@
 命令元の人によって、指示に従うかどうかは変わりますか？\tabularnewline
 \bottomrule
 \end{longtable}
+
+\subsection{コンピュータと人間が対等な立場であることについて}\label{ux30b3ux30f3ux30d4ux30e5ux30fcux30bfux3068ux4ebaux9593ux304cux5bfeux7b49ux306aux7acbux5834ux3067ux3042ux308bux3053ux3068ux306bux3064ux3044ux3066}
+
+プログラムからの指示を受けるという、コンピュータと人間がまったく同じ立場になるということに関して、
+拒否感を覚える人がいるのではないかという仮説を確認するために質問をした。
+
+結果として、被験者全員が特に拒否感を覚えることはないと答えた。
+また、プログラムから指示を受けているという印象を受けなかったとの意見を得ることができた。
+
+インタフェースをより洗練させることで、プログラムから指示を受けているという印象を薄めていくことによって、
+一般の人にも受け入れてもらえるようにすることは可能と考えられる。
+
+\subsection{自分や他人をプログラムに組み込むこと}\label{ux81eaux5206ux3084ux4ed6ux4ebaux3092ux30d7ux30edux30b0ux30e9ux30e0ux306bux7d44ux307fux8fbcux3080ux3053ux3068}
+
+\subsection{返り値の型について}\label{ux8fd4ux308aux5024ux306eux578bux306bux3064ux3044ux3066}
+
+返り値の型指定について、どう感じたかを質問した。
+返り値によってインタフェースを制限することによって、ユーザが返しやすくなるのではないかという仮説はどうか
+
+\subsection{Babascript Agent
+について}\label{babascript-agent-ux306bux3064ux3044ux3066}
+
+Babascript
+Agentの現在のインタフェースはただ指示を表示し、処理結果を入力させるためだけの機能に絞られている。
+
+\subsection{命令元の提示について}\label{ux547dux4ee4ux5143ux306eux63d0ux793aux306bux3064ux3044ux3066}
+
+Babascript Agent
+の現在のインタフェースでは、誰が指示を送っているのかというのがわからない。
+命令元がまったくわからない状況において指示に従うことに関してどう感じているのかを聞いた。
+
+\subsection{その他}\label{ux305dux306eux4ed6}
 
 \section{処理実行単位としての人}\label{ux51e6ux7406ux5b9fux884cux5358ux4f4dux3068ux3057ux3066ux306eux4eba}
 
