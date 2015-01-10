@@ -37,6 +37,14 @@ Agentに その議論を絞り、インタビューを行った。
 \bottomrule
 \end{longtable}
 
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  nikezono done
+\item
+  hikaru done
+\end{itemize}
+
 \subsection{コンピュータと人間が対等な立場であることについて}\label{ux30b3ux30f3ux30d4ux30e5ux30fcux30bfux3068ux4ebaux9593ux304cux5bfeux7b49ux306aux7acbux5834ux3067ux3042ux308bux3053ux3068ux306bux3064ux3044ux3066}
 
 プログラムからの指示を受けるという、コンピュータと人間がまったく同じ立場になるということに関して、
@@ -50,16 +58,66 @@ Agentに その議論を絞り、インタビューを行った。
 
 \subsection{自分や他人をプログラムに組み込むこと}\label{ux81eaux5206ux3084ux4ed6ux4ebaux3092ux30d7ux30edux30b0ux30e9ux30e0ux306bux7d44ux307fux8fbcux3080ux3053ux3068}
 
+\begin{itemize}
+\item
+  想像つかない、ヒューリスティックな判断を学習に使ったりするのはうまくいかないと思う。
+\item
+  センサーが取れないデータみたいなのを人間にやらせるのは良いと思う。
+\item
+  人によって帰り値が相当変わりそう。プログラミングが難しそう。
+\item
+  楽になるなら良い。
+\item
+  自分で自分用には使えそう
+\item
+  自分で自分には送りたくない。
+\item
+  他人を動かすならよい
+\end{itemize}
+
 \subsection{返り値の型について}\label{ux8fd4ux308aux5024ux306eux578bux306bux3064ux3044ux3066}
 
 返り値の型指定について、どう感じたかを質問した。
 返り値によってインタフェースを制限することによって、ユーザが返しやすくなるのではないかという仮説はどうか
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  全部list or その他 でも良いと思ったぐらい。
+\item
+  必要
+\item
+  不便とは思わない
+\end{itemize}
+
+型指定は思考を狭めた？
+
+\begin{itemize}
+\item
+  選択肢があるようなやつは、おかげでどんな返しをすればよいのかがわかった。
+\item
+  listから選ぶのは楽。
+\item
+  あるなら欲しい Stringは、抽象的な指示が来た時に非常にやりにくい
+\end{itemize}
 
 \subsection{Babascript Agent
 について}\label{babascript-agent-ux306bux3064ux3044ux3066}
 
 Babascript
 Agentの現在のインタフェースはただ指示を表示し、処理結果を入力させるためだけの機能に絞られている。
+キャラクター性を持ったときにどう変わるか？
+
+\begin{itemize}
+\item
+  良くないバイアスがかかりそう。
+\item
+  好きな人なら聞く。嫌いな人なら突っぱねる。ノイズが大きくなりそう
+\item
+  もっと薄いインタフェースでやってほしい。既にインタラクション感が強い。通知とかのレベルで良い。
+\item
+  人間とコミュニケーションしてるかのような感じで提示されると気持ち良い
+\end{itemize}
 
 \subsection{命令元の提示について}\label{ux547dux4ee4ux5143ux306eux63d0ux793aux306bux3064ux3044ux3066}
 
@@ -67,7 +125,54 @@ Babascript Agent
 の現在のインタフェースでは、誰が指示を送っているのかというのがわからない。
 命令元がまったくわからない状況において指示に従うことに関してどう感じているのかを聞いた。
 
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  親近感を持つ人なら、従う。
+\item
+  完全にunknownな人なら従わない。
+\item
+  上司みたいな人なら従う。
+\item
+  従うと思う
+\item
+  unkndownには従いたくない
+\item
+  上司みたいな人なら従う。
+\item
+  命令の粒度による
+\item
+  大きすぎる命令は断る。
+\item
+  上司などなら多分聞く
+\item
+  unknnownでも、ワンアクションで終わるならやる
+\item
+  誰からの命令なのかを示して欲しい
+\item
+  知人のほうが、まだ従いやすい
+\item
+  上司などでも、あまり良い印象をいただかない
+\item
+  unknownなら絶対従わない
+\end{itemize}
+
 \subsection{その他}\label{ux305dux306eux4ed6}
+
+\begin{itemize}
+\item
+  指示でも強調すべきポイントを示せるようにすべき
+\item
+  比較表現のある指示はわからない
+\item
+  何を目標とした処理なのかを示さないとわからない
+\item
+  位置情報、音声、写真などを返り値として返せたら面白そう。
+\item
+  Stringの時に配列で処理結果を渡したいと思った
+\item
+  Stringの時が一番悩む
+\end{itemize}
 
 \section{処理実行単位としての人}\label{ux51e6ux7406ux5b9fux884cux5358ux4f4dux3068ux3057ux3066ux306eux4eba}
 
