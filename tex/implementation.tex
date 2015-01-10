@@ -3,6 +3,8 @@
 本章では、人間と計算への指示を融合させたプログラミング環境の具体的な実装について述べる。
 全体の概要について述べた後、個別の要素について詳しく説明する。
 
+\newpage
+
 \section{Babascriptプログラミング環境}\label{babascriptux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux74b0ux5883}
 
 本研究では、第\ref{chap:design}章にて設計した人間と計算への指示を融合させたプログラミング環境の
@@ -25,6 +27,14 @@ Babascriptは人間への指示を記述可能にするプログラミングラ�
 Babascript Agentは、指示に対する実行結果を入力できるソフトウェアだ。
 Node-Lindaは、Babascript及びBabascript
 Agentの間のデータ通信の仲介サーバとして機能する。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.7\linewidth,bb=0 0 1007 592]{images/overview-using.png}
+  \end{center}
+  \caption{利用例}
+  \label{fig:overview_using}
+\end{figure}
 
 以下のような手順で、処理が進む。
 
@@ -332,6 +342,14 @@ Agentの機能を構築可能である。
 \subsubsection{スマートフォンアプリケーション
 プロトタイプ1}\label{ux30b9ux30deux30fcux30c8ux30d5ux30a9ux30f3ux30a2ux30d7ux30eaux30b1ux30fcux30b7ux30e7ux30f3-ux30d7ux30edux30c8ux30bfux30a4ux30d71}
 
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.8\linewidth,bb=0 0 1019 454]{images/interface_list.png}
+  \end{center}
+  \caption{Babascript Agent Webアプリケーションインタフェース}
+  \label{fig:client_format_list}
+\end{figure}
+
 インタフェースの例として、スマートフォンアプリケーションとして実装した。
 HTMLとJS、CSSによるwebアプリケーションとして実装し、 Apache
 Cordova\footnote{http://cordova.apache.org/}を用いてスマートフォンアプリケーション化した。
@@ -342,7 +360,7 @@ CSSはSASS\footnote{http://sass-lang.com/}、HTMLはJade\footnote{http://jade-la
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.5\linewidth,bb=0 0 511 650]{images/client-overview.png}
+  \includegraphics[width=.8\linewidth,bb=0 0 675 312]{images/webapp-system.png}
   \end{center}
   \caption{Babascript Agent webアプリケーションシステム図}
   \label{fig:client-overview}
@@ -355,14 +373,6 @@ Webインタフェースでは、指示内容に応じて提示インタフェ�
 投稿ボタンを押した際にフォームに入力されていた内容が返り値としてプログラムに返される。
 Listであれば、選択フォームが表示され、リストの中から返り値を選択することができる。
 実際に提示されるインタフェースの例を図\ref{fig:client_format_list}に示す。
-
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=.8\linewidth,bb=0 0 500 209]{images/client_format_list.png}
-  \end{center}
-  \caption{Babascript Agent Webアプリケーションインタフェース}
-  \label{fig:client_format_list}
-\end{figure}
 
 プログラムからの指示を受け取ると、アプリによる通知を発行し、ユーザに値を返すよう促す(図\ref{fig:client-push-notification})。
 
@@ -408,10 +418,10 @@ Hubotは様々なチャットサービスに対応しているが、Slackとい�
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.3\linewidth,bb=0 0 273 402]{images/babascript_client_hubot_system.png}
+  \includegraphics[width=.9\linewidth,bb=0 0 936 312]{images/hubot-system.png}
   \end{center}
   \caption{Hubotシステム図}
-  \label{fig:babascript_client_hubot_system}
+  \label{fig:hubot-system}
 \end{figure}
 
 チャットボットシステムは、ユーザからのメッセージによる問い合わせに応じて返答を行う。
@@ -485,7 +495,7 @@ watch操作は従来のLindaの仕様にはなく、Node-Linda独自の仕様で
 Babascriptによる人間の指示実行結果も、センサーやアクチュエータの処理を同じようにNode-Linda上で共有される。
 つまり、Node-Linda上において人間はセンサーやアクチュエータと同じような存在になる。
 
-Node-Lindaの各操作は、ソースコード\ref{fig:linda-usage}のようなプログラムで実現する。
+Node-Lindaの各操作は、ソースコード\ref{code:linda-usage}のようなプログラムで実現する。
 
 \begin{lstlisting}[caption=Node-Lindaへの接続方法, label=code:linda-usage]
 // Node-Lindaに接続するクライアントの準備
@@ -517,13 +527,11 @@ tuplespace.watch({}, function(err, data){
 tuplespace.cancel(cid);
 \end{lstlisting}
 
-\subsubsection{Node-Lindaのタプル操作}\label{node-lindaux306eux30bfux30d7ux30ebux64cdux4f5c}
-
 Babascript及びBabascript
 Agentは、Adapterを用いてNode-Lindaのタプルスペースの操作を行う。
 宣言時に指定するIDを元に使用するタプルスペースを決定する。
 通常の指示を書き込むnormalスペース、割り込み処理用に使うinterruptスペースを個別に利用することで、
-割り込み処理を優先的に読み込ませるようにしている。
+割り込み処理の優先的に読み込みを実現している。
 
 \subsection{Socket.IO Adapter}\label{socket.io-adapter}
 
@@ -536,8 +544,6 @@ WebsocketもしくはXHR-Pollingによって常にNode-Lindaサーバと通信�
 常時通信している都合上、バッテリー消費の問題が生じたり、デバイスによっては通信を強制的に切断されてしまうことがある。
 Socket.IO Adapterは、接続環境が良好な状態での利用が望ましい。
 例えば、常設型のコンピュータ等においての利用が想定される。
-
-構成図を図\ref{fig:socket.io-adapter}に示す。
 
 \subsection{PushNotification Adapter}\label{pushnotification-adapter}
 
@@ -618,7 +624,6 @@ connectイベントは、Babascript及びBabascript
 AgentがNode-Lindaサーバに接続した際に発生するイベントだ。
 sendイベントは、Babascriptによって人間への指示構文が実行された際に発生する。
 例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
-
 return\_valueイベントは、Babascript
 Agentが指示に対して実行結果を返すときに発生する。
 receiveイベントは、Babascript及びBabascript
@@ -626,6 +631,9 @@ Agentが何かしらのデータをNode-Lindaサーバから受け取る際に�
 指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
 
 プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
+例えば、ログを取得してサーバに送信するプラグインや、 Babascript
+AgentとBabascript間でのデータの同期を実現するプラグイン、
+インセンティブを付与するためのプラグインなどが考えられる。
 
 \section{まとめ}\label{ux307eux3068ux3081}
 

@@ -3,6 +3,8 @@
 本章では、本研究で提案するプログラミング環境の設計について述べる。
 設計指針において必要な要素を列挙し、個別に説明する。
 
+\newpage
+
 \section{設計指針}\label{ux8a2dux8a08ux6307ux91dd}
 
 第\ref{chap:background}章では、計算資源としての人間について考察し、
@@ -118,7 +120,7 @@
 例えば、データベースに問い合わせ、保存されているデータを取得するプログラムでの記述と同じような記法で
 人間に問い合わせ、データを取得するようなプログラムが記述できるべきである。
 データベースに情報があるならば、データベースに問い合わせる処理を実行すれば良いし、
-ないならば、人間に問い合わせれば良い(ソースコード:\ref{code:design-integrated-program-style})。
+ないならば、人間に問い合わせれば良い(ソースコード\ref{code:design-integrated-program-style})。
 
 \begin{lstlisting}[caption=人間への指示を計算機への指示と類似させる, label=code:design-integrated-program-style]
 // データベース問い合わせの擬似コード
@@ -135,7 +137,8 @@ new Human('takumibaba').find({message: ''}, function(err, result){
 人間を利用して、部屋のセンシングに利用するようなプログラムが記述できるべきだ。
 センサーが部屋にないならば、人間に問い合わせれば良い。
 
-これらの処理の切り替えを容易に記述できるようにするためには、可能な限り類似の記法を踏襲する必要がある。
+人間と計算機やセンサー、アクチュエータを自由に切り替え利用出来るよう、
+人間への指示構文も既存の記法と類似させる。
 
 \subsection{人間とプログラムのインタフェース}\label{ux4ebaux9593ux3068ux30d7ux30edux30b0ux30e9ux30e0ux306eux30a4ux30f3ux30bfux30d5ux30a7ux30fcux30b9}
 
