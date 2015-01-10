@@ -43,20 +43,23 @@ Agentに その議論を絞り、インタビューを行った。
   nikezono done
 \item
   hikaru done
+\item
+  sakurai done
+\item
+  nekobato done
 \end{itemize}
 
-\subsection{コンピュータと人間が対等な立場であることについて}\label{ux30b3ux30f3ux30d4ux30e5ux30fcux30bfux3068ux4ebaux9593ux304cux5bfeux7b49ux306aux7acbux5834ux3067ux3042ux308bux3053ux3068ux306bux3064ux3044ux3066}
+\subsection{プログラムからの指示について}\label{ux30d7ux30edux30b0ux30e9ux30e0ux304bux3089ux306eux6307ux793aux306bux3064ux3044ux3066}
 
 プログラムからの指示を受けるという、コンピュータと人間がまったく同じ立場になるということに関して、
 拒否感を覚える人がいるのではないかという仮説を確認するために質問をした。
 
 結果として、被験者全員が特に拒否感を覚えることはないと答えた。
 また、プログラムから指示を受けているという印象を受けなかったとの意見を得ることができた。
-
 インタフェースをより洗練させることで、プログラムから指示を受けているという印象を薄めていくことによって、
 一般の人にも受け入れてもらえるようにすることは可能と考えられる。
 
-\subsection{自分や他人をプログラムに組み込むこと}\label{ux81eaux5206ux3084ux4ed6ux4ebaux3092ux30d7ux30edux30b0ux30e9ux30e0ux306bux7d44ux307fux8fbcux3080ux3053ux3068}
+\subsection{自分や他人をプログラムに組み込むことについて}\label{ux81eaux5206ux3084ux4ed6ux4ebaux3092ux30d7ux30edux30b0ux30e9ux30e0ux306bux7d44ux307fux8fbcux3080ux3053ux3068ux306bux3064ux3044ux3066}
 
 \begin{itemize}
 \item
@@ -317,8 +320,7 @@ Babascriptでは、人への指示構文の記述には制限がない。
 
 具体的過ぎる命令は、全体の処理内容にもよるが、プログラム自体が冗長となり得る。
 プログラムとワーカーの間のやりとりが増え、通信や待機時間、入力時間などによって処理全体が遅延すると考えられる。
-また、ワーカーにとっても、やりとりが増えることで、入力の手間が増え、負担増に繋がる。
-
+これはワーカーにとっても大きな負担となる。
 指示ごとに異なると考えられるが、命令文は適切な抽象度に設計しなくてはならない。
 
 \section{異なる種類の指示の複数同時実行}\label{ux7570ux306aux308bux7a2eux985eux306eux6307ux793aux306eux8907ux6570ux540cux6642ux5b9fux884c}

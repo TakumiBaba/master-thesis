@@ -122,11 +122,18 @@ Specific Languageを提案した\cite{automan}。
   \label{fig:automan}
 \end{figure}
 
-\paragraph{Cylog}\label{cylog}
+\paragraph{Cylog / Crowd4U}\label{cylog-crowd4u}
 
 \mbox{}
 
-\cite{cylog}
+Morishimaらは、人間と計算機の知の融合を目指した環境として、Cylog\cite{cylog}というDatalog\footnote{http://docs.racket-lang.org/datalog/}に類似した構文規則を持った
+プログラミング言語と、その実行基盤であるCrowd4U\footnote{http://crowd4u.org/}を提案している。
+Cylogでは人間を合理的に動くデータソースとして定義し、プログラム上で利用する。
+類似した文法で人間と計算機の双方への命令を記述できる。
+また、Crowd4Uという専用の実行基盤も実装しているなど、本研究との類似性が高い。
+
+本研究では、クラウドソーシングそのものを利用していない。
+また、Cylogでは人間をデータソースとして利用するが、本研究では人間はデータソースに限らず、汎用な処理の実行対象として利用する。
 
 \paragraph{CrowdForge}\label{crowdforge}
 
@@ -149,7 +156,9 @@ Crowdsourcing}\label{community-based-crowdsourcing}
 
 \mbox{}
 
-\cite{community-based-crowdsourcing}
+クラウドワーカーを何かの要素ごとにまとめたグループをコミュニティと呼び、
+そのコミュニティの人たち及びコミュニティを横断したクラウドソーシングの仕組みについて提案している\cite{community-based-crowdsourcing}。
+コミュニティは動的に変更することができるなど、柔軟にその構成を変化させることが出来る。
 
 \section{Social Computing}\label{social-computing}
 
@@ -199,15 +208,21 @@ Machines}\label{personal-apis-as-an-enabler-for-designing-and-implementing-peopl
 
 \mbox{}
 
-Buregioらは、
-
-前述のSocialMachinesの文脈に沿って、 \cite{personal-api},
+Buregioらは、Social
+Machine\cite{social-machines}という研究分野について整理し、その具体的な例として
+Personal APIs\cite{personal-api}を提唱している。 Social
+Machineは、SocialSoftwareとPeople as Computational Units、Software as
+Sociable Entitiesの 3つの領域が重なり合った研究領域である。
+この領域において、人間にAPIを付与し、情報にアクセス可能にするという仕組みが、Personal
+APIsという概念である。
+このAPIを通して、例えばカレンダー情報等にアクセスする。
+実装はなく、概念の提唱にとどまっている。
 
 \section{Human as Sensor}\label{human-as-sensor}
 
 人間をセンサー代わりにしたり、人間が持つスマートフォン等のデバイスのセンサーを利用する手法はHuman
-as Sensorや参加型センシングと呼ばれる。
-ユビキタスコンピューティングなどの研究分野において、こういった手法が多く研究されている。
+as Sensorや参加型センシング\cite{participatory-sensing}と呼ばれる。
+ユビキタスコンピューティング\cite{weiser1991computer}などの研究分野において、こういった手法が多く研究されている。
 その事例を以下に紹介する。
 
 \paragraph{PRISM}\label{prism}
@@ -293,8 +308,8 @@ Actuation等の概念についても論文内において触れられている�
 Sugiuraらは、人間とロボットが協調して調理をするシステムCooky\cite{cooky}を提案している。
 料理支援ロボットと人とロボットが共有可能な調理器具やキッチン、調理手順を記述するシステムから成り立っている。
 調理手順記述システムでは、人間とロボット双方の処理を分けて記述することができる。
-人間とロボットが協調して作業を実行していくモデルは、本研究が目的とするモデルと類似する。
-また、人間の作業タイミング時に人間に作業内容を提示するなど、類似する点は多い。
+人間とロボットが協調して作業を実行していくモデルは、本研究が実現したい目標とも似ている。
+また、人間の作業タイミング時に人間に作業内容を提示する仕組みなど類似する点は多い。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -323,6 +338,6 @@ questetra\footnote{http://www.questetra.com/ja/}といった
 
 \section{まとめ}\label{ux307eux3068ux3081}
 
-人間の力を積極的に利用し、様々な処理に活かすことは、既存研究からも有用であると考えられる。
-その多くは、コンピュータでは実現が難しい人間の柔軟な演算能力を用いるものである。
+人間の力を積極的に利用し様々な処理に活かすことは、既存研究からも有用であると考えられる。
+その多くはコンピュータでは実現が難しい人間の柔軟な演算能力を用いるものである。
 

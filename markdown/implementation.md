@@ -351,7 +351,6 @@ CSSはSASS\footnote{http://sass-lang.com/}、HTMLはJade\footnote{http://jade-la
   \label{fig:client-overview}
 \end{figure}
 
-プログラムからの指示を受け取ると、アプリによる通知を発行し、ユーザに値を返すよう促す(図\ref{fig:client-push-notification})。
 Webインタフェースでは、指示内容に応じて提示インタフェースを変化させる実装をしている。
 例えば、フォーマットにBooleanを指定していた場合、ユーザには「はい」と「いいえ」の2種類のボタンが提示される。
 それぞれのボタンにはtrueとfalseの値が設定されており、ボタンを押すことによって設定された値を返り値としてプログラムに送ることができる。
@@ -362,20 +361,21 @@ Listであれば、選択フォームが表示され、リストの中から返�
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.7\linewidth,bb=0 0 300 192]{images/client-push-notification.png}
-  \end{center}
-  \caption{Babascript Agent Push通知例}
-  \label{fig:client-push-notification}
-\end{figure}
-
-\begin{figure}[htbp]
-  \begin{center}
   \includegraphics[width=.8\linewidth,bb=0 0 500 209]{images/client_format_list.png}
   \end{center}
   \caption{Babascript Agent Webアプリケーションインタフェース}
   \label{fig:client_format_list}
 \end{figure}
 
+プログラムからの指示を受け取ると、アプリによる通知を発行し、ユーザに値を返すよう促す(図\ref{fig:client-push-notification})。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 300 192]{images/client-push-notification.png}
+  \end{center}
+  \caption{Babascript Agent Push通知例}
+  \label{fig:client-push-notification}
+\end{figure}
 
 指示が実行できない場合には、エラーを値として返すことができる。
 例えば、自宅にいるにも関わらず、大学の研究室にいないと出来ないような指示が来た場合には、少なくともその時点では
@@ -488,15 +488,38 @@ watch操作は従来のLindaの仕様にはなく、Node-Linda独自の仕様で
 Babascriptによる人間の指示実行結果も、センサーやアクチュエータの処理を同じようにNode-Linda上で共有される。
 つまり、Node-Linda上において人間はセンサーやアクチュエータと同じような存在になる。
 
-Node-Lindaの各操作は、図\ref{fig:linda-usage}のようなプログラムで実現する。
+Node-Lindaの各操作は、ソースコード\ref{fig:linda-usage}のようなプログラムで実現する。
 
-\begin{figure}[htbp]
-  \begin{center}
-    \includegraphics[width=.7\linewidth,bb=0 0 770 695]{images/linda-usage.js.png}
-  \end{center}
-  \caption{Node-Lindaへの接続方法}
-  \label{fig:linda-usage}
-\end{figure}
+``` {#code:linda-usage caption=Node-Lindaへの接続方法}
+// Node-Lindaに接続するクライアントの準備
+var LindaClient = require('linda').Client;
+var socket = require('socket.io-client').connect('http://babascript-linda.herokuapp.com/');
+var linda = new LindaClient().connect(socket);
+
+// タプルスペース(共有メモリ空間)の宣言
+var tuplespace = linda.tuplespace('babascript');
+
+// タプルスペースへの書き込み
+tuplespace.write({"type": "sensor"});
+
+// タプルスペースからデータを読み込む
+tuplespace.read({}, function(err, data){
+  //
+});
+
+// タプルスペースからデータを読み込んで消す
+tuplespace.take({}, function(err, data){
+
+});
+
+// タプルスペースへのデータ書き込みを監視する
+tuplespace.watch({}, function(err, data){
+
+});
+
+tuplespace.cancel(cid);
+
+```
 
 #### Node-Lindaのタプル操作
 
@@ -537,8 +560,16 @@ PushNotification Adapterは、モバイルデバイス等の常時接続が難�
 実装された通信モジュールだ。
 主にAndroidやiPhone等のモバイルデバイスからNode-Lindaと接続する際に利用する。
 
-構成図を図\ref{fig:pushnotification-adapter}に示す。
-<!-- 図を示す -->
+構成図を図\ref{fig:push-notification-adapter}に示す。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 529 303]{images/push-notification-adapter.png}
+  \end{center}
+  \caption{PushNotification Adapter}
+  \label{fig:push-notification-adapter}
+\end{figure}
+
 <!-- 速度 -->
 
 ## プラグイン機構
@@ -576,9 +607,11 @@ receive            ○               ○
 
 loadイベントは、プラグインが読み込まれた際に発生する。
 例えば、設定ファイルの読み込みなどの処理を行う。
+
 connectイベントは、Babascript及びBabascript AgentがNode-Lindaサーバに接続した際に発生するイベントだ。
 sendイベントは、Babascriptによって人間への指示構文が実行された際に発生する。
 例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
+
 return_valueイベントは、Babascript Agentが指示に対して実行結果を返すときに発生する。
 receiveイベントは、Babascript及びBabascript Agentが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
 指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
