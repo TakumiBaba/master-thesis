@@ -32,7 +32,7 @@ Babascriptプログラミング環境の概要を図\ref{fig:system_image}に示
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.4\linewidth,bb=0 0 397 608]{images/overview.png}
+  \includegraphics[width=.7\linewidth,bb=0 0 834 443]{images/overview.png}
   \end{center}
   \caption{システム概要}
   \label{fig:system_image}
