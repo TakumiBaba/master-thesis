@@ -168,7 +168,7 @@ var task = {
 var Babascript = require('babascript');
 var baba = new Babascript('takumibaba');
 
-baba.hogefuga({format: 'string', timeout: 1000*60*3}, function(){
+baba.3分以内に返事をしろ({format: 'string', timeout: 1000*60*3}, function(){
 
 });
 
@@ -232,7 +232,7 @@ var defaultOption = {
 var Babascript = require('babascript');
 
 var baba = new Babascript('takumibaba');
-baba.do_callback({format: 'boolean'}, function(result){
+baba.do_callback_to_human_message({format: 'boolean'}, function(result){
 
 });
 ```
@@ -245,7 +245,7 @@ catchメソッドに何かしらのエラーが起きて結果を得られなか
 ``` {#code:babascript-promise caption=Promiseによる関数指定}
 var takumibaba = new Babascript("takumibaba");
 
-takumibaba.use_promise({})
+takumibaba.use_promise_to_human_message({})
 .then(function(result){
   // 実行結果が正しく得られた場合の処理を記述する
 }).catch(function(error){
@@ -263,7 +263,7 @@ format情報などを付加したい場合は、オプションoの後に key=va
 コマンドラインで実行することによって、人間による処理をpipeに組み込むといったことも可能になる。
 
 ``` {#code:baba-command caption=Babaコマンド}
-% baba -e hogefuga -o format=boolean
+% baba -e to_human_message -o format=boolean
 ```
 
 ## Babascript Agent

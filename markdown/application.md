@@ -117,6 +117,11 @@ else
 
 ``` {#hoge caption=hogefuga}
 
+describe("", function(){
+
+
+});
+
 ```
 
 ## まとめ
