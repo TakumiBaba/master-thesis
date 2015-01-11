@@ -151,6 +151,7 @@ Cylogでは人間を合理的に動くデータソースとして定義し、プ
 Kitturら\cite{crowdforge}は、複雑な仕事をクラウドソーシング上で実現するための仕組みとして
 CrowdForgeというシステムを提案している。
 CrowdForgeはMapReduceの仕組みをクラウドソーシングに適応させた。
+複雑な仕事を適切な大きさに分割し実行させ、最終的には結合させる機能を実装している。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -163,7 +164,7 @@ CrowdForgeはMapReduceの仕組みをクラウドソーシングに適応させ�
 ##### Community Based Crowdsourcing
 \mbox{}
 
-クラウドワーカーを何かの要素ごとにまとめたグループをコミュニティと呼び、
+クラウドワーカーをある指標ごとにまとめたグループをコミュニティと呼び、
 そのコミュニティの人たち及びコミュニティを横断したクラウドソーシングの仕組みについて提案している\cite{community-based-crowdsourcing}。
 コミュニティは動的に変更することができるなど、柔軟にその構成を変化させることが出来る。
 
@@ -176,10 +177,11 @@ Wikiの具体的なシステム例で有名なWebサービスがWikipedia\footno
 また、人々が作るwebページのリンク関係からWebページの重要度を算出するアルゴリズムとしては、PageRank\cite{pagerank}が存在する。
 PageRankは検索サービスのGoogle\footnote{https://google.com}で利用されている。
 群衆の嗜好情報等を蓄積し、個人間の嗜好等の類似度から情報の推薦等を行う手法は協調フィルタリングと呼ばれる\cite{collaborative-filtering}。
+主に商品の推薦システムなどにおいて利用されることが多い。
 
 このように、インターネットを介した群衆の叡智を利用してシステムもしくはそのコンテンツを改良していく仕組みは
 非常に有用で、多くのWebサービスに活かされている。
-次に、特に本研究と関連するソーシャルコンピューティングの事例を紹介する。
+次に、特に本研究と関連するソーシャルコンピューティングシステムの事例を紹介する。
 
 ##### The Dog Programming Language
 \mbox{}
@@ -197,20 +199,13 @@ DogはWebアプリケーションの実装時によくあるユーザと�
   \label{fig:dog}
 \end{figure}
 
-##### The Jabberwocky Programming Environmets
+##### The Jabberwocky Programming Environment for Structured Social Computing
 \mbox{}
 
 Ahmadらは、Jabberwockyというソーシャルコンピューティングのためのプログラミング環境を提案している\cite{jabberwocky}。
 Jabberwockyは、様々なクラウドソーシングプラットフォームを統合して管理できるDormouseと、
 Dormousとのインタラクションに特化したDog,
 MapReduceを人力処理に適応したManReduceから構成される。
-
-
-
-<!-- ##### Social Machines
-\mbox{}
-
-\cite{social-machines}, -->
 
 ##### Personal APIs As an Enabler for Designing and Implementing People As Social Machines
 \mbox{}
@@ -325,7 +320,6 @@ Sugiuraらは、人間とロボットが協調して調理をするシステムC
 料理支援ロボットと人とロボットが共有可能な調理器具やキッチン、調理手順を記述するシステムから成り立っている。
 調理手順記述システムでは、人間とロボット双方の処理を分けて記述することができる。
 人間とロボットが協調して作業を実行していくモデルは、本研究が実現したい目標とも似ている。
-また、人間の作業タイミング時に人間に作業内容を提示する仕組みなど類似する点は多い。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -355,4 +349,5 @@ questetra\footnote{http://www.questetra.com/ja/}といった
 
 人間の力を積極的に利用し様々な処理に活かすことは、既存研究からも有用であると考えられる。
 その多くはコンピュータでは実現が難しい人間の柔軟な演算能力を用いるものである。
+
 <!-- 図でまとめたりしたい -->

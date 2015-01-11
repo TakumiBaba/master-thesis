@@ -7,7 +7,7 @@
 
 \section{Babascriptプログラミング環境}\label{babascriptux30d7ux30edux30b0ux30e9ux30dfux30f3ux30b0ux74b0ux5883}
 
-本研究では、第\ref{chap:design}章にて設計した人間と計算への指示を融合させたプログラミング環境の
+第\ref{chap:design}章にて設計した人間と計算への指示を融合させたプログラミング環境の
 具体的な実装として、Babscriptプログラミング環境を提案する。
 Babascriptプログラミング環境では、人間をコンピュータと同じ計算資源として扱うことで
 実世界におけるタスクの処理など、人間の力を最大限活用した新しい処理を実現可能である。
@@ -69,22 +69,20 @@ Babascriptプログラミング環境の概要を図\ref{fig:system_image}に示
   \label{fig:system_image}
 \end{figure}
 
-以下の節において、個別の要素に関して詳しく述べる。
-
 \section{Babascript}\label{babascript}
 
-プログラムと人とのインタラクションを実現するためには、プログラム上で人間への指示を行える仕組みが必要だ。
+プログラムと人とのインタラクションを実現するためには、プログラムと人間のメッセージングの実現が必要だ。
+つまり、プログラム上で人間への指示とその処理結果を受け取る仕組みが必要だ。
 そこで、Babascriptという、人間への指示構文を持ったオブジェクト(以下、人間オブジェクト)を宣言できるプログラミングライブラリを実装した。
-BabascriptはJavascriptのサーバサイド実行環境であるNode.js及びRuby上で動作する。
+BabascriptはJavascriptのサーバサイド実行環境であるNode.js及びRubyで実装した。
 本論文で示すサンプルソースコードは全てJavascriptで記述したものを掲載する。
 
 \subsection{基本仕様}\label{ux57faux672cux4ed5ux69d8}
 
 Babascriptでは、人間オブジェクトを通して人間とプログラムのメッセージングを行う。
-通常のメソッド実行とほぼ同じ記法で人間への指示を送ることができる。
-つまり、オブジェクトにメッセージングするという従来のオブジェクト指向プログラミングの作法をそのまま実行することで
-人間に指示を送っている。
-例えば、ソースコード:\ref{code:babascript-sample}のようなプログラムによって、人間オブジェクトを宣言し、人間へ指示を送ることができる。
+例えば、ソースコード:\ref{code:babascript-sample}のようなプログラムによって、
+人間オブジェクトを宣言し、人間へ指示を送ることができる。
+人間への指示を送る構文のことを、人間への指示構文と呼ぶ。
 
 \begin{lstlisting}[caption=人への指示構文, label=code:babascript-sample]
 // ライブラリの読み込み
@@ -96,14 +94,15 @@ takumibaba.clean_up_your_room();
 \end{lstlisting}
 
 人間オブジェクトは生成時にidを指定する必要がある。
-人への指示構文は、このidを元に命令配信先を決定する。 例えば、id=baba
+このidを元に、人間への指示構文は指示の配信先を決定する。 例えば、id=baba
 に命令を送りたい場合、人オブジェクト宣言時の第一引数にはbabaという文字列を指定する。
 指定したidに命令が配信されるため、Babascript
 Agent側でも同じidを指定する必要がある。
 
-人間オブジェクトは、自身に定義されていないメソッドが実行されると、エラーを返さずに、人間への指示として解釈する。
-そのため、実装されていないメソッド名であれば、あらゆる命令をメソッドとして表現し実行することが可能である。
-例えば、「toString」や「call」等のメソッドは、javascriptにおいてはほぼすべてのオブジェクトが持つメソッドだ。
+人間オブジェクトは、構文エラーが存在する場合を除き、
+自身に定義されていないメソッドが実行されると、エラーを返さずに人間への指示として解釈する。
+そのため、実装されていないメソッド名であれば、あらゆる指示をメソッドとして表現し実行することが可能である。
+例えば、「toString」や「call」等のメソッドは、javascriptにおいては多くのオブジェクトが持つメソッドだ。
 一方で、「clean\_up\_your\_room」や「bake\_bread」のようなメソッドは定義しない限りは存在しないメソッドである。
 Babascriptは、この定義されていないメソッドをエラーとして評価せず、
 人への指示構文として評価する(ソースコード:\ref{code:methodmissing-sample})。
@@ -120,7 +119,8 @@ baba.exists_method();
 baba.toString();
 
 // 定義されていないメソッド, 人への命令構文として解釈される
-baba.not_exists_method();
+baba.clean_up_your_room();
+baba.bake_bread();
 \end{lstlisting}
 
 オブジェクトに存在しないメソッドが呼び出された時に、特定のメソッドにその処理を委譲するような仕組みは、
@@ -164,14 +164,15 @@ var task = {
 
 \subsection{オプション情報の付加}\label{ux30aaux30d7ux30b7ux30e7ux30f3ux60c5ux5831ux306eux4ed8ux52a0}
 
-メソッド名以外に送信したい情報があるときには、第一引数にオプション情報としてオブジェクトを与える。
+指示内容以外に送信したい情報があるときには、人への指示構文の引数にオプション情報としてハッシュを与える。
 クライアントアプリケーション側でオプション情報を得ることができるため、このオプション情報に応じて
 ユーザに提示する画面を変更するといったことが可能である。
 
 オプション情報の例としては、返り値の型情報や、タイムアウト情報などが考えられる。
-オプション情報はソースコード\ref{code:babascript-option}のように記述する。
-この場合であれば、返り値の型はstringで、3分後までに返り値を得られなかった場合は、
-人力処理を止め、第二引数で指定するコールバック関数を実行し、処理を続行させるといったことをオプション情報として記述している。
+ソースコード\ref{code:babascript-option}の場合であれば、
+返り値の型はstringで、3分後までに返り値を得られなかった時は、
+人力処理を止め、第二引数で指定するコールバック関数を実行し、
+処理を続行させるといったことがオプション情報として記述されている。
 
 \begin{lstlisting}[caption=オプション情報のサンプルソースコードその1, label=code:babascript-option]
 var Babascript = require('babascript');
@@ -189,7 +190,7 @@ var Babascript = require('babascript');
 var takumibaba = new Babascript('takumibaba');
 
 var option = {
-  format: 'string'
+  format: 'list'
   list: ['良い', '普通', '悪い']
 };
 takumibaba.会場の雰囲気はどうですか(option, function(result){
@@ -213,11 +214,12 @@ broadcastオプションは、同じ指示を複数のワーカーに同時に�
 コールバック関数を実行するというものだ。
 指定した数の値が集まらない場合でも、コールバック関数を実行させることもできる。
 タイムアウトオプション等と組み合わせ、5分経ったら得られた値のみを使って処理を継続する、といったことが可能だ。
-interruptオプションは、他の指示が先に送られていた場合でも、指示が溜まったキューに割り込んで指示を追加することのできる
-オプションである。
+
+interruptオプションは、割り込み処理のためのオプションだ。
+他の指示が先に送られていても、interruptオプションをつけた指示は優先的に実行されるようキューに割り込んで追加する。
 現在実行されているタスクの次のタスクとして登録される。
 
-オプション情報である第一引数は省略可能である。
+オプション情報は省略可能である。
 省略した場合は、自動的にソースコード:\ref{code:option-default}のようなオブジェクトが代入される。
 
 \begin{lstlisting}[caption=デフォルトのオプション情報, label=code:option-default]
@@ -228,10 +230,9 @@ var defaultOption = {
 
 \subsection{コールバック関数の指定}\label{ux30b3ux30fcux30ebux30d0ux30c3ux30afux95a2ux6570ux306eux6307ux5b9a}
 
-人への指示構文の第二引数に関数を代入すると、実行結果を取得した後に指定した関数を実行する。
+人間への指示構文の最後の引数に関数を代入すると、実行結果を取得した後に代入した関数を実行する。
 処理が成功していた場合、この関数に渡される第二引数の中に、実行結果が代入される。
-処理が失敗していた場合、第一引数にエラーの内容が代入される。
-人間は計算機の処理に比べて遅延しがちであるため、非同期を前提とした実装をしている(ソースコード:\ref{code:babascript-callback})。
+処理が失敗していた場合、第一引数にエラーの内容が代入される(ソースコード:\ref{code:babascript-callback})。
 
 \begin{lstlisting}[caption=コールバック関数の指定, label=code:babascript-callback]
 var Babascript = require('babascript');
@@ -250,7 +251,8 @@ catchメソッドに何かしらのエラーが起きて結果を得られなか
 \begin{lstlisting}[caption=Promiseによる関数指定, label=code:babascript-promise]
 var takumibaba = new Babascript("takumibaba");
 
-takumibaba.use_promise({}).then(function(result){
+takumibaba.use_promise({})
+.then(function(result){
   // 実行結果が正しく得られた場合の処理を記述する
 }).catch(function(error){
   // エラー等で実行結果が得られなかった場合の処理を記述する
@@ -260,7 +262,7 @@ takumibaba.use_promise({}).then(function(result){
 \subsection{コマンドラインでの利用}\label{ux30b3ux30deux30f3ux30c9ux30e9ux30a4ux30f3ux3067ux306eux5229ux7528}
 
 Babascriptはコマンドラインツールとしても利用可能だ。
-babaコマンドは、ソースコード:\ref{code:baba-command}のように利用することができる。
+babaコマンドは、ソースコード\ref{code:baba-command}のように利用することができる。
 オプションeの直後に指示内容を、オプションnの直後に指示先のIDを指定する。
 format情報などを付加したい場合は、オプションoの後に key=value
 の形で指定することができる。
@@ -272,8 +274,8 @@ format情報などを付加したい場合は、オプションoの後に key=va
 
 \section{Babascript Agent}\label{babascript-agent}
 
-Babascriptによって人への指示をプログラムに記述し、実行することが可能となったが、その指示を人に伝え、
-処理結果を返させるためのアプリケーションが必要となる。
+Babascriptによって人への指示をプログラムに記述し、実行することが可能となったが、
+その指示を人に伝え、処理結果を送信するためのアプリケーションが必要となる。
 そこで、Babascript Agent というアプリケーションを実装した。 Babascript
 Agent
 は、Babascriptとの通信を担うサービス部と返り値の入力等を担うインタフェース部から構成される。
@@ -298,7 +300,7 @@ client.on("cancel_task", function(task){
 \end{lstlisting}
 
 何かしらの値を実行結果として返すときは、clientオブジェクトに実装されているretrnValueメソッドを用いる。
-ソースコード:\ref{code:babascript-client-service-returnvalue}のように、第一引数に結果として返すものを指定する。
+ソースコード\ref{code:babascript-client-service-returnvalue}のように、第一引数に結果として返すものを指定する。
 
 \begin{lstlisting}[caption=Babascript Agent 処理結果を返すメソッドの例, label=code:babascript-client-service-returnvalue]
 var Client = require('babascript-client')l
@@ -319,7 +321,6 @@ value = {
   worker: 'takumibaba', //実行者情報
   options: {},
   type: "return"
-
 }
 \end{lstlisting}
 
@@ -328,14 +329,13 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 
 \subsection{ユーザインタフェース}\label{ux30e6ux30fcux30b6ux30a4ux30f3ux30bfux30d5ux30a7ux30fcux30b9}
 
-ユーザとのインタラクションを行う。
-命令をユーザに見せるのと、実際に実行結果を入力させる機能を持つ
-
+指示のユーザへの提示と、実行結果の入力を担う。
 サービス部と独立した実装のため、異なるデバイスや環境上でもインタフェース部を実装するだけでBabascript
 Agentの機能を構築可能である。
-指示内容と返り値の入力インタフェースをユーザに提示し、返り値の入力を受け付ける機能を担う。
-この際、Babascriptの指示でオプション情報として返り値の型を指定していた場合、指定した型以外の入力を受け付けないような実装を行っている。
-返り値の型は現在、Boolean, String, Numberに対応している。
+指示内容と返り値の入力インタフェースをユーザに提示し、返り値の入力を受け付ける。
+この際、Babascriptの指示でオプション情報として返り値の型を指定していた場合、
+指定した型以外の入力を受け付けないよう実装している。
+返り値の型は現在、Boolean, String, Number、Listに対応している。
 
 例として、スマートフォンアプリケーション、slackインタフェースを実装した。
 
@@ -351,7 +351,7 @@ Agentの機能を構築可能である。
 \end{figure}
 
 インタフェースの例として、スマートフォンアプリケーションとして実装した。
-HTMLとJS、CSSによるwebアプリケーションとして実装し、 Apache
+webアプリケーションとして実装し、 Apache
 Cordova\footnote{http://cordova.apache.org/}を用いてスマートフォンアプリケーション化した。
 android及びiOSアプリケーションとして動作する。
 JavascriptのフレームワークにはBackbone.js\footnote{http://backbonejs.org/}とMarionette.js\footnote{http://marionettejs.com/}を利用している。
@@ -414,7 +414,7 @@ Agentにおいても 取得した指示を並列に示すことが望ましい�
 ボットシステムにはHubot\footnote{https://hubot.github.com/}を採用した。
 Hubotは様々なチャットサービスに対応しているが、Slackというチャットサービス上において運用している。
 このボットシステムは、Heroku\footnote{https://heroku.com}上で稼働している。
-チャットボットのシステム図を図\ref{fig:babascript_client_hubot_system}に示す。
+チャットボットのシステム図を図\ref{fig:hubot-system}に示す。
 
 \begin{figure}[htbp]
   \begin{center}
@@ -425,6 +425,7 @@ Hubotは様々なチャットサービスに対応しているが、Slackとい�
 \end{figure}
 
 チャットボットシステムは、ユーザからのメッセージによる問い合わせに応じて返答を行う。
+また、指示を受けた際には、指示内容をリプライとして投稿する。
 返答の例を図\ref{fig:babascript_client_slack}に示す。
 
 \begin{figure}[htbp]
@@ -444,16 +445,13 @@ Babascript Agentの機能を利用できるということは有用なことで�
 
 BabascriptとBabascript
 Agent間の通信のために、仲介サーバとしてNode-Linda\cite{node-linda}を利用する。
-通信手法はデバイスごとに利用可能な手法が異なったり限定されるため、プラガブルにする必要がある。
-そこで、接続方式の追加などを容易に実装可能なNode-Lindaを仲介サーバとして採用した。
+通信手法はデバイスごとに利用可能な手法が異なったり限定されるため、交換可能なモジュールとして実装する必要がある。
+そこで、分散処理プラットフォームであり、接続方式の追加などを容易に実装可能なNode-Lindaを仲介サーバとして採用した。
 
 Babascript及びBabascript
-AgentがNode-Lindaに接続するために実装されたモジュールを、Babascript
+AgentがNode-Lindaに接続するために実装された通信用のモジュールを、Babascript
 Adapterと呼ぶ。
-このAdapterは切り替えが可能で、かつ他の実装に影響を与えることがないように設計されている。
-Babascript及びBabascript
-AgentはこのAdapterを介してNode-Lindaに接続し、情報のやりとりを行う。
-
+このAdapterを介してNode-Lindaに接続し、情報のやりとりを行う。
 本節では、この仲介サーバとして用いるNode-Lindaについて述べた後、2種類のBabascript
 Adapterを紹介する。
 
@@ -463,8 +461,7 @@ Adapterを紹介する。
 
 Node-Linda\cite{node-linda}は、分散並列処理のための仕組みであるLinda\cite{linda}をNode.js上に実装したものだ。
 Lindaは、タプルスペースという共有メモリを用いてプロセス間でデータの通信を行う並列処理のためのモデルだ。
-Node-Lindaでは、Lindaを拡張し、ネットワーク経由でも利用できるようにしている。
-ネットワーク経由での利用のため、あらゆるプログラミング言語から利用可能だ。
+Node-Lindaでは、Lindaを独自に拡張し、Websocket等を利用して接続できるように実装されている。
 接続のためのプログラムさえ記述すれば、あらゆるデバイスがNode-Lindaに接続可能である。
 Linda及びNode-Lindaのタプル空間への操作を表\ref{table:tuple-management}にまとめる。
 
@@ -488,13 +485,12 @@ Linda及びNode-Lindaのタプル空間への操作を表\ref{table:tuple-manage
 \bottomrule
 \end{longtable}
 
-watch操作は従来のLindaの仕様にはなく、Node-Linda独自の仕様である。
+各種操作は名称も変更されている。
+watch操作と同等の機能は従来のLindaの仕様にはなく、Node-Linda独自の仕様である。
 また、Node-Lindaでは非同期処理が前提となっており、ブロック処理は仕様から削除されている。
 
 実世界コンピューティングでの利用を前提としており、様々なセンサーやアクチュエータが接続することが想定される。
-Babascriptによる人間の指示実行結果も、センサーやアクチュエータの処理を同じようにNode-Linda上で共有される。
-つまり、Node-Linda上において人間はセンサーやアクチュエータと同じような存在になる。
-
+Babascriptによる人間の指示や、その実行結果も、センサーやアクチュエータの処理を同じようにNode-Linda上で共有される。
 Node-Lindaの各操作は、ソースコード\ref{code:linda-usage}のようなプログラムで実現する。
 
 \begin{lstlisting}[caption=Node-Lindaへの接続方法, label=code:linda-usage]
@@ -543,7 +539,6 @@ WebsocketもしくはXHR-Pollingによって常にNode-Lindaサーバと通信�
 
 常時通信している都合上、バッテリー消費の問題が生じたり、デバイスによっては通信を強制的に切断されてしまうことがある。
 Socket.IO Adapterは、接続環境が良好な状態での利用が望ましい。
-例えば、常設型のコンピュータ等においての利用が想定される。
 
 \subsection{PushNotification Adapter}\label{pushnotification-adapter}
 
@@ -619,7 +614,6 @@ receive & ○ & ○\tabularnewline
 
 loadイベントは、プラグインが読み込まれた際に発生する。
 例えば、設定ファイルの読み込みなどの処理を行う。
-
 connectイベントは、Babascript及びBabascript
 AgentがNode-Lindaサーバに接続した際に発生するイベントだ。
 sendイベントは、Babascriptによって人間への指示構文が実行された際に発生する。
@@ -628,7 +622,7 @@ return\_valueイベントは、Babascript
 Agentが指示に対して実行結果を返すときに発生する。
 receiveイベントは、Babascript及びBabascript
 Agentが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
-指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックするプラグインを実装する必要がある。
+指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックすることで実現可能だ。
 
 プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
 例えば、ログを取得してサーバに送信するプラグインや、 Babascript
