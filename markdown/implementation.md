@@ -19,7 +19,7 @@ Babascriptプログラミング環境では、人間をコンピュータと同�
 - Node-Linda
 
 Babascriptは人間への指示を記述可能にするプログラミングライブラリである。
-Babascript Agentは、指示に対する実行結果を入力できるソフトウェアだ。
+Babascript Agentは、指示に対する実行結果を入力できるソフトウェアである。
 Node-Lindaは、Babascript及びBabascript Agentの間のデータ通信の仲介サーバとして機能する。
 
 \begin{figure}[htbp]
@@ -53,7 +53,7 @@ Babascriptプログラミング環境の概要を図\ref{fig:system_image}に示
 ## Babascript
 
 プログラムと人とのインタラクションを実現するためには、プログラムと人間のメッセージングの実現、
-つまり、プログラム上で人間への指示とその処理結果を受け取る仕組みが必要だ。
+つまり、プログラム上で人間への指示とその処理結果を受け取る仕組みが必要となる。
 そこで、Babascriptという、人間への指示構文を持ったオブジェクト(以下、人間オブジェクト)を宣言できるプログラミングライブラリを実装した。
 BabascriptはJavaScriptのサーバサイド実行環境であるNode.js及びRubyで実装した。
 本論文で示すサンプルソースコードは全てJavaScriptで記述したものを掲載する。
@@ -84,7 +84,7 @@ takumibaba.clean_up_your_room();
 人間オブジェクトは、構文エラーが存在する場合を除き、
 自身に定義されていないメソッドが実行されると、エラーを返さずに人間への指示として解釈する。
 そのため、実装されていないメソッド名であれば、あらゆる指示をメソッドとして表現し実行することが可能である。
-例えば、「toString」や「call」等のメソッドは、JavaScriptにおいては多くのオブジェクトが持つメソッドだ。
+例えば、「toString」や「call」等のメソッドは、JavaScriptにおいては多くのオブジェクトが持つメソッドである。
 一方で、「clean_up_your_room」や「bake_bread」のようなメソッドは定義しない限りは存在しないメソッドである。
 Babascriptは、この定義されていないメソッドをエラーとして評価せず、
 人への指示構文として評価する(ソースコード\ref{code:methodmissing-sample})。
@@ -110,7 +110,7 @@ baba.bake_bread();
 各言語によって名称は異なるが、類似する仕組みが存在する言語は複数存在する。
 Babascriptにおいては、node-methodmissing\footnote{https://github.com/geta6/node-methodmissing}というライブラリを利用している。
 
-また、ソースコード \ref{code:babascript-exec-method}のように、execメソッドを使うことで指示を送ることも可能だ。
+また、ソースコード \ref{code:babascript-exec-method}のように、execメソッドを使うことで指示を送ることも可能となっている。
 execメソッドを利用する場合は、第一引数に命令内容、第二引数にオプション情報、第三引数にコールバック関数を指定する。
 
 ``` {#code:babascript-exec-method caption=execメソッドによる指示構文}
@@ -204,7 +204,7 @@ baba.デルタS112に誰かいますか({format: 'string', timeout: 1000*60*3}, 
 ```
 
 また、ソースコード\ref{code:babascript-option-list}の場合であれば、
-listで指定した選択肢の中から選んで返り値を返す、といった指定が可能だ。
+listで指定した選択肢の中から選んで返り値を返す、といった指定が可能である。
 
 ``` {#code:babascript-option-list caption=オプション情報のサンプルソースコードその2}
 var Babascript = require('babascript');
@@ -232,12 +232,12 @@ takumibaba.会場の雰囲気はどうですか(option, function(result){
 ```
 
 特別なオプション情報として、broadcastとinterruptが存在する。
-broadcastオプションは、同じ指示を複数のワーカーに同時に配信し、指定した数だけの値を得ることが出来た場合に
-コールバック関数を実行するというものだ。
+broadcastオプションは、同じ指示を複数のワーカーに同時に配信し、
+指定した数だけの値を得ることが出来た場合にコールバック関数を実行するというものである。
 指定した数の値が集まらない場合でも、コールバック関数を実行させることもできる。
-タイムアウトオプション等と組み合わせ、5分経ったら得られた値のみを使って処理を継続する、といったことが可能だ。
+タイムアウトオプション等と組み合わせ、5分経ったら得られた値のみを使って処理を継続する、といったことが可能となっている。
 
-interruptオプションは、割り込み処理のためのオプションだ。
+interruptオプションは、割り込み処理のためのオプションである。
 他の指示が先に送られていても、interruptオプションをつけた指示は優先的に実行されるようキューに割り込んで追加する。
 現在実行されているタスクの次のタスクとして登録される。
 
@@ -253,7 +253,7 @@ var defaultOption = {
 
 ### コマンドラインでの利用
 
-Babascriptはコマンドラインツールとしても利用可能だ。
+Babascriptはコマンドラインツールとしても利用可能となっている。
 babaコマンドは、ソースコード\ref{code:baba-command}のように利用することができる。
 オプションeの直後に指示内容を、オプションnの直後に指示先のIDを指定する。
 format情報などを付加したい場合は、オプションoの後に key=value の形で指定することができる。
@@ -480,8 +480,8 @@ Babascript及びBabascript AgentがNode-Lindaに接続するために実装さ�
 
 #### 概要
 
-Node-Linda\cite{node-linda}は、分散並列処理のための仕組みであるLinda\cite{linda}をNode.js上に実装したものだ。
-Lindaは、タプルスペースという共有メモリを用いてプロセス間でデータの通信を行う並列処理のためのモデルだ。
+Node-Linda\cite{node-linda}は、分散並列処理のための仕組みであるLinda\cite{linda}をNode.js上に実装したものである。
+Lindaは、タプルスペースという共有メモリを用いてプロセス間でデータの通信を行う並列処理のためのモデルである。
 Node-Lindaでは、Lindaを独自に拡張し、Websocket等を利用して接続できるように実装されている。
 接続のためのプログラムさえ記述すれば、あらゆるデバイスがNode-Lindaに接続可能である。
 Linda及びNode-Lindaのタプル空間への操作を表\ref{table:tuple-management}にまとめる。
@@ -544,7 +544,7 @@ Babascript及びBabascript Agentは、Adapterを用いてNode-Lindaのタプル�
 ### Socket.IO Adapter
 
 Socket.IO Adapterは、リアルタイム通信のためのライブラリであるSocket.IO\footnote{http://socket.io/}を用いて
-Node-Lindaに接続するためのAdapterだ。
+Node-Lindaに接続するためのAdapterである。
 WebsocketもしくはXHR-Pollingによって常にNode-Lindaサーバと通信をし続ける。
 全ての処理はSocket.IOによる通信によって実現する。
 
@@ -553,7 +553,7 @@ Socket.IO Adapterは、接続環境が良好な状態での利用が望ましい
 
 ### PushNotification Adapter
 
-PushNotification Adapter は、HTTP RequestとPushNotificationを用いてNode-Lindaと通信を行うためのAdapterだ。
+PushNotification Adapter は、HTTP RequestとPushNotificationを用いてNode-Lindaと通信を行うためのAdapterである。
 Cordovaのプラグインとして実装した。
 Node-Lindaへのタプル操作はHTTP Requestの実行によって実現する。
 Node-Linda側からAdapter側への通信には、PushNotificationを用いる。
@@ -562,7 +562,7 @@ PushNotificationを実現している。
 PushNotification Adapterを利用するためには、Node-Linda側でPushNotification Adapter用のライブラリを読み込む必要がある。
 
 PushNotification Adapterは、モバイルデバイス等の常時接続が難しいデバイス上で、可能な限りリアルタイムなやりとりを実現するために
-実装された通信モジュールだ。
+実装された通信モジュールである。
 主にAndroidやiPhone等のモバイルデバイスからNode-Lindaと接続する際に利用する。
 
 構成図を図\ref{fig:push-notification-adapter}に示す。
@@ -612,12 +612,12 @@ receive            ○               ○
 
 loadイベントは、プラグインが読み込まれた際に発生する。
 例えば、設定ファイルの読み込みなどの処理を行う。
-connectイベントは、Babascript及びBabascript AgentがNode-Lindaサーバに接続した際に発生するイベントだ。
+connectイベントは、Babascript及びBabascript AgentがNode-Lindaサーバに接続した際に発生するイベントである。
 sendイベントは、Babascriptによって人間への指示構文が実行された際に発生する。
 例えば、指示内容を全てログとして保存したいときなどには、sendイベントと共に受け取るデータを送信するといったことができる。
 return_valueイベントは、Babascript Agentが指示に対して実行結果を返すときに発生する。
 receiveイベントは、Babascript及びBabascript Agentが何かしらのデータをNode-Lindaサーバから受け取る際に発生する。
-指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックすることで実現可能だ。
+指示を送ってから値が帰ってくるまでの時間を計測したいときなどは、このイベントをフックすることで実現可能となっている。
 
 プラグイン機構によって、Babascript環境を拡張していくことが容易となる。
 例えば、ログを取得してサーバに送信するプラグインや、
