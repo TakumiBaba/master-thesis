@@ -142,9 +142,40 @@ var task = {
 ```
 
 メソッド名が自由に設定できるため、内容は指示ではなく、質問のようなものもあり得るが、本研究では統一して指示と呼ぶ。
-人への指示構文の第一引数にはオプション情報を指定する。
+人への指示構文の第一引数にはオプション情報を、
 第二引数には人力処理の実行後に実行するコールバック関数を指定する。
+
 このコールバック関数は、指示に対して何かしらの値が返されたときに実行される。
+人間への指示構文の最後の引数に関数を代入すると、実行結果を取得した後に代入した関数を実行する。
+処理が成功していた場合、この関数に渡される第二引数の中に、実行結果が代入される。
+処理が失敗していた場合、第一引数にエラーの内容が代入される(ソースコード:\ref{code:babascript-callback})。
+
+``` {#code:babascript-callback caption=コールバック関数の指定}
+var Babascript = require('babascript');
+
+var baba = new Babascript('takumibaba');
+baba.do_callback_to_human_message({format: 'boolean'}, function(result){
+
+});
+```
+
+また、Promiseによる処理関数の指定も可能である。
+人への指示構文実行時、コールバック関数を指定しなかった場合、Promiseオブジェクトがその時点での返り値として返される。
+Promiseオブジェクトのthenメソッドに指示に対する処理結果が得られた場合に実行する関数を、
+catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する(ソースコード:\ref{code:babascript-promise})。
+
+``` {#code:babascript-promise caption=Promiseによる関数指定}
+var takumibaba = new Babascript("takumibaba");
+
+takumibaba.use_promise_to_human_message({})
+.then(function(result){
+  // 実行結果が正しく得られた場合の処理を記述する
+}).catch(function(error){
+  // エラー等で実行結果が得られなかった場合の処理を記述する
+});
+
+```
+
 
 <!-- 割り込み処理について書く -->
 
@@ -218,39 +249,6 @@ interruptオプションは、割り込み処理のためのオプションだ�
 var defaultOption = {
   format: 'boolean'
 }
-
-```
-
-### コールバック関数の指定
-<!-- なおしたい。 -->
-
-人間への指示構文の最後の引数に関数を代入すると、実行結果を取得した後に代入した関数を実行する。
-処理が成功していた場合、この関数に渡される第二引数の中に、実行結果が代入される。
-処理が失敗していた場合、第一引数にエラーの内容が代入される(ソースコード:\ref{code:babascript-callback})。
-
-``` {#code:babascript-callback caption=コールバック関数の指定}
-var Babascript = require('babascript');
-
-var baba = new Babascript('takumibaba');
-baba.do_callback_to_human_message({format: 'boolean'}, function(result){
-
-});
-```
-
-また、Promiseによる処理関数の指定も可能である。
-人への指示構文実行時、コールバック関数を指定しなかった場合、Promiseオブジェクトがその時点での返り値として返される。
-Promiseオブジェクトのthenメソッドに指示に対する処理結果が得られた場合に実行する関数を、
-catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する(ソースコード:\ref{code:babascript-promise})。
-
-``` {#code:babascript-promise caption=Promiseによる関数指定}
-var takumibaba = new Babascript("takumibaba");
-
-takumibaba.use_promise_to_human_message({})
-.then(function(result){
-  // 実行結果が正しく得られた場合の処理を記述する
-}).catch(function(error){
-  // エラー等で実行結果が得られなかった場合の処理を記述する
-});
 
 ```
 
