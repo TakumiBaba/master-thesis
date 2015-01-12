@@ -55,8 +55,8 @@ Babascriptプログラミング環境の概要を図\ref{fig:system_image}に示
 プログラムと人とのインタラクションを実現するためには、プログラムと人間のメッセージングの実現が必要だ。
 つまり、プログラム上で人間への指示とその処理結果を受け取る仕組みが必要だ。
 そこで、Babascriptという、人間への指示構文を持ったオブジェクト(以下、人間オブジェクト)を宣言できるプログラミングライブラリを実装した。
-BabascriptはJavascriptのサーバサイド実行環境であるNode.js及びRubyで実装した。
-本論文で示すサンプルソースコードは全てJavascriptで記述したものを掲載する。
+BabascriptはJavaScriptのサーバサイド実行環境であるNode.js及びRubyで実装した。
+本論文で示すサンプルソースコードは全てJavaScriptで記述したものを掲載する。
 
 ### 基本仕様
 
@@ -75,17 +75,16 @@ takumibaba.clean_up_your_room();
 
 ```
 
-人間オブジェクトは生成時にidを指定する必要がある。
+指示を受け取る人間にはあらかじめBabascript Agent上で一意のIDを指定しておき、人間オブジェクトは生成時にこのIDを指定する必要がある。
 このidを元に、人間への指示構文は指示の配信先を決定する。
-例えば、id=baba に命令を送りたい場合、人オブジェクト宣言時の第一引数にはbabaという文字列を指定する。
-指定したidに命令が配信されるため、Babascript Agent側でも同じidを指定する必要がある。
+例えば、baba というIDを持つ人間に命令を送りたい場合、人間オブジェクト宣言時の第一引数にはbabaという文字列を指定する。
 <!-- また、指定したidを監視しているクライアントが複数ある場合は、命令がラウンドロビン方式で配信される。
 そのため、masuilabのような、特定のグループの人たちに命令を配信したいときなどにも利用可能である。 -->
 
 人間オブジェクトは、構文エラーが存在する場合を除き、
 自身に定義されていないメソッドが実行されると、エラーを返さずに人間への指示として解釈する。
 そのため、実装されていないメソッド名であれば、あらゆる指示をメソッドとして表現し実行することが可能である。
-例えば、「toString」や「call」等のメソッドは、javascriptにおいては多くのオブジェクトが持つメソッドだ。
+例えば、「toString」や「call」等のメソッドは、JavaScriptにおいては多くのオブジェクトが持つメソッドだ。
 一方で、「clean_up_your_room」や「bake_bread」のようなメソッドは定義しない限りは存在しないメソッドである。
 Babascriptは、この定義されていないメソッドをエラーとして評価せず、
 人への指示構文として評価する(ソースコード:\ref{code:methodmissing-sample})。
@@ -107,7 +106,7 @@ baba.bake_bread();
 ```
 
 オブジェクトに存在しないメソッドが呼び出された時に、特定のメソッドにその処理を委譲するような仕組みは、
-プログラミング言語Rubyにおいてはmethodmissingと呼ばれる。
+プログラミング言語Rubyにおいてはmethod_missingと呼ばれる。
 各言語によって名称は異なるが、類似する仕組みが存在する言語は複数存在する。
 Babascriptにおいては、node-methodmissing\footnote{https://github.com/geta6/node-methodmissing}というライブラリを利用している。
 
@@ -124,7 +123,8 @@ takumibaba.exec("message_to_human", {}, function(result){
 
 ```
 
-人間への指示として評価されたメソッドは、そのメソッド名と引数を元にしたタスク情報を生成し、タスク配信サーバへと送信する。
+人間への指示として評価されたメソッドは、そのメソッド名と引数を元にしたタスク情報を生成し、
+BabaScript Agentとの通信を仲介するサーバへと送信する。
 この際、メソッド名部分がユーザに命令として提示される文となる。
 タスク情報はソースコード\ref{code:task-format}のように構成される。
 
@@ -343,7 +343,7 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 指定した型以外の入力を受け付けないよう実装している。
 返り値の型は現在、Boolean, String, Number、Listに対応している。
 
-例として、スマートフォンアプリケーション、slackインタフェースを実装した。
+例として、スマートフォンアプリケーション、Slackインタフェースを実装した。
 
 #### スマートフォンアプリケーション プロトタイプ1
 
@@ -359,7 +359,7 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 webアプリケーションとして実装し、
 Apache Cordova\footnote{http://cordova.apache.org/}を用いてスマートフォンアプリケーション化した。
 android及びiOSアプリケーションとして動作する。
-JavascriptのフレームワークにはBackbone.js\footnote{http://backbonejs.org/}とMarionette.js\footnote{http://marionettejs.com/}を利用している。
+JavaScriptのフレームワークにはBackbone.js\footnote{http://backbonejs.org/}とMarionette.js\footnote{http://marionettejs.com/}を利用している。
 CSSはSASS\footnote{http://sass-lang.com/}、HTMLはJade\footnote{http://jade-lang.com/}で記述した。
 システムは図\ref{fig:client-overview}のように構成される。
 
@@ -579,14 +579,14 @@ Babascript 及びBabascriptClient Agentはその機能を拡張するために�
 それに応じたデータを受け取り、自由に操作することができる。
 
 ``` {#code:babascript-plugin caption='Babascript Plugin'}
+// Babascript を読み込み、 baba という人間オブジェクトを作成
 var Babascript = require('babascript');
 var baba = new Babascript('takumibaba');
 
-var Client = require('babascript-client');
-var client = new Client('takumibaba');
-
+// babascript-plugin-logger というプラグインを読み込み、logger という変数に代入
 var logger = require('babascript-plugin-logger');
 
+// 人間オブジェクトにプラグインをセット
 baba.set logger()
 
 ```
@@ -620,4 +620,4 @@ Babascript AgentとBabascript間でのデータの同期を実現するプラグ
 
 ## まとめ
 
-人間と計算機の処理を融合させたプログラミング環境の具体的な実装や利用方法について述べた。
+人間と計算機の処理を融合させたプログラミング環境Babascriptの具体的な実装や利用方法について述べた。
