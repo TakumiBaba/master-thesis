@@ -9,7 +9,7 @@
 ## Babascriptプログラミング環境
 
 第\ref{chap:design}章にて設計した人間と計算への指示を融合させたプログラミング環境の
-具体的な実装として、Babscriptプログラミング環境を提案する。
+具体的な実装として、Babascriptプログラミング環境を提案する。
 Babascriptプログラミング環境では、人間をコンピュータと同じ計算資源として扱うことで
 実世界におけるタスクの処理など、人間の力を最大限活用した新しい処理を実現可能である。
 以下の要素を組み合わせることによって実現する。
@@ -52,7 +52,7 @@ Babascriptプログラミング環境の概要を図\ref{fig:system_image}に示
 
 ## Babascript
 
-プログラムと人とのインタラクションを実現するためには、プログラムと人間のメッセージングの実現が必要だ。
+プログラムと人とのインタラクションを実現するためには、プログラムと人間のメッセージングの実現、
 つまり、プログラム上で人間への指示とその処理結果を受け取る仕組みが必要だ。
 そこで、Babascriptという、人間への指示構文を持ったオブジェクト(以下、人間オブジェクト)を宣言できるプログラミングライブラリを実装した。
 BabascriptはJavaScriptのサーバサイド実行環境であるNode.js及びRubyで実装した。
@@ -61,7 +61,7 @@ BabascriptはJavaScriptのサーバサイド実行環境であるNode.js及びRu
 ### 基本仕様
 
 Babascriptでは、人間オブジェクトを通して人間とプログラムのメッセージングを行う。
-例えば、ソースコード:\ref{code:babascript-sample}のようなプログラムによって、
+例えば、ソースコード\ref{code:babascript-sample}のようなプログラムによって、
 人間オブジェクトを宣言し、人間へ指示を送ることができる。
 人間への指示を送る構文のことを、人間への指示構文と呼ぶ。
 
@@ -76,8 +76,8 @@ takumibaba.clean_up_your_room();
 ```
 
 指示を受け取る人間にはあらかじめBabascript Agent上で一意のIDを指定しておき、人間オブジェクトは生成時にこのIDを指定する必要がある。
-このidを元に、人間への指示構文は指示の配信先を決定する。
-例えば、baba というIDを持つ人間に命令を送りたい場合、人間オブジェクト宣言時の第一引数にはbabaという文字列を指定する。
+このIDを元に、人間への指示構文は指示の配信先を決定する。
+例えば、takumibabaというIDを持つ人間に命令を送りたい場合、人間オブジェクト宣言時の第一引数にはtakumibabaという文字列を指定する。
 <!-- また、指定したidを監視しているクライアントが複数ある場合は、命令がラウンドロビン方式で配信される。
 そのため、masuilabのような、特定のグループの人たちに命令を配信したいときなどにも利用可能である。 -->
 
@@ -87,7 +87,7 @@ takumibaba.clean_up_your_room();
 例えば、「toString」や「call」等のメソッドは、JavaScriptにおいては多くのオブジェクトが持つメソッドだ。
 一方で、「clean_up_your_room」や「bake_bread」のようなメソッドは定義しない限りは存在しないメソッドである。
 Babascriptは、この定義されていないメソッドをエラーとして評価せず、
-人への指示構文として評価する(ソースコード:\ref{code:methodmissing-sample})。
+人への指示構文として評価する(ソースコード\ref{code:methodmissing-sample})。
 
 ``` {#code:methodmissing-sample caption=通常のメソッドと指示構文の例}
 var Babascript = require('babascript');
@@ -148,7 +148,7 @@ var task = {
 このコールバック関数は、指示に対して何かしらの値が返されたときに実行される。
 人間への指示構文の最後の引数に関数を代入すると、実行結果を取得した後に代入した関数を実行する。
 処理が成功していた場合、この関数に渡される第二引数の中に、実行結果が代入される。
-処理が失敗していた場合、第一引数にエラーの内容が代入される(ソースコード:\ref{code:babascript-callback})。
+処理が失敗していた場合、第一引数にエラーの内容が代入される(ソースコード\ref{code:babascript-callback})。
 
 ``` {#code:babascript-callback caption=コールバック関数の指定}
 var Babascript = require('babascript');
@@ -162,7 +162,7 @@ baba.do_callback_to_human_message({format: 'boolean'}, function(result){
 また、Promiseによる処理関数の指定も可能である。
 人への指示構文実行時、コールバック関数を指定しなかった場合、Promiseオブジェクトがその時点での返り値として返される。
 Promiseオブジェクトのthenメソッドに指示に対する処理結果が得られた場合に実行する関数を、
-catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する(ソースコード:\ref{code:babascript-promise})。
+catchメソッドに何かしらのエラーが起きて結果を得られなかった場合に実行する関数を指定する(ソースコード\ref{code:babascript-promise})。
 
 ``` {#code:babascript-promise caption=Promiseによる関数指定}
 var takumibaba = new Babascript("takumibaba");
@@ -185,27 +185,26 @@ takumibaba.use_promise_to_human_message({})
 ### オプション情報の付加
 
 指示内容以外に送信したい情報があるときには、人への指示構文の引数にオプション情報としてハッシュを与える。
-クライアントアプリケーション側でオプション情報を得ることができるため、このオプション情報に応じて
+Babascript Agent側でオプション情報を得ることができるため、このオプション情報に応じて
 ユーザに提示する画面を変更するといったことが可能である。
-<!-- Agent側で解釈する、というのを入れたい。 -->
 
 オプション情報の例としては、返り値の型情報や、タイムアウト情報などが考えられる。
 ソースコード\ref{code:babascript-option}の場合であれば、
-返り値の型はstringで、3分後までに返り値を得られなかった時は、
-人力処理を止め、第二引数で指定するコールバック関数を実行し、
-処理を続行させるといったことがオプション情報として記述されている。
+返り値の型はstringで、3分間だけ待ち、返り値を得られなかった時は
+人力処理を止め、指定したコールバック関数を実行するといったことがオプション情報として記述されている。
 
 ``` {#code:babascript-option caption=オプション情報のサンプルソースコードその1}
 var Babascript = require('babascript');
 var baba = new Babascript('takumibaba');
 
-baba.3分以内に返事をしろ({format: 'string', timeout: 1000*60*3}, function(){
+baba.デルタS112に誰かいますか({format: 'string', timeout: 1000*60*3}, function(){
 
 });
 
 ```
 
-また、ソースコード:\ref{code:babascript-option-list}の場合であれば、listで指定した選択肢の中から選んで返り値を返す、といった指定が可能だ。
+また、ソースコード\ref{code:babascript-option-list}の場合であれば、
+listで指定した選択肢の中から選んで返り値を返す、といった指定が可能だ。
 
 ``` {#code:babascript-option-list caption=オプション情報のサンプルソースコードその2}
 var Babascript = require('babascript');
@@ -243,7 +242,7 @@ interruptオプションは、割り込み処理のためのオプションだ�
 現在実行されているタスクの次のタスクとして登録される。
 
 オプション情報は省略可能である。
-省略した場合は、自動的にソースコード:\ref{code:option-default}のようなオブジェクトが代入される。
+省略した場合は、自動的にソースコード\ref{code:option-default}のようなオブジェクトが代入される。
 
 ``` {#code:option-default caption=デフォルトのオプション情報}
 var defaultOption = {
@@ -339,9 +338,9 @@ cancelメソッドの第一引数に、キャンセルする理由を指定す�
 指示内容と返り値の入力インタフェースをユーザに提示し、返り値の入力を受け付ける。
 この際、Babascriptの指示でオプション情報として返り値の型を指定していた場合、
 指定した型以外の入力を受け付けないよう実装している。
-返り値の型は現在、Boolean, String, Number、Listに対応している。
+返り値の型は現在、Boolean, String, Number, Listに対応している。
 
-例として、スマートフォンアプリケーション、Slackインタフェースを実装した。
+例として、スマートフォンアプリケーションとSlackインタフェースを実装した。
 
 #### スマートフォンアプリケーション プロトタイプ1
 
@@ -406,9 +405,18 @@ Listであれば、選択フォームが表示され、リストの中から返�
 人間は実世界で様々な処理を並列で実行していることから、Babascript Agentにおいても
 取得した指示を並列に示すことが望ましい。
 
-そこで、基本的なインタフェースはプロトタイプ1を踏襲し、受けた指示の一覧をTODOリスト風のインタフェースを用いて
-ワーカーに提示するアプリケーションを実装した。
+そこで、基本的なインタフェースはプロトタイプ1を踏襲し、
+受けた指示の一覧をTODOリスト風のインタフェースを用いて
+ワーカーに提示するアプリケーションを実装した(図:\ref{webapp-interface-v2})。
 こちらのアプリケーションをプロトタイプ2とする。
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=.5\linewidth,bb=0 0 1200 1920]{images/webapp-interface-v2.png}
+  \end{center}
+  \caption{Babascript Agent Webアプリケーション プロトタイプ2 TODOリストビュー}
+  \label{fig:webapp-interface-v2}
+\end{figure}
 
 <!-- 図 -->
 
@@ -434,7 +442,7 @@ Hubotは様々なチャットサービスに対応しているが、Slackとい�
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=.4\linewidth,bb=0 0 273 402]{images/babascript_client_slack.png}
+  \includegraphics[width=.4\linewidth,bb=0 0 273 402]{images/slack-interface.png}
   \end{center}
   \caption{Babascript Agent Slackインタフェース}
   \label{fig:babascript_client_slack}
