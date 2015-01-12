@@ -124,7 +124,7 @@ takumibaba.exec("message_to_human", {}, function(result){
 ```
 
 人間への指示として評価されたメソッドは、そのメソッド名と引数を元にしたタスク情報を生成し、
-BabaScript Agentとの通信を仲介するサーバへと送信する。
+Babascript Agentとの通信を仲介するサーバへと送信する。
 この際、メソッド名部分がユーザに命令として提示される文となる。
 タスク情報はソースコード\ref{code:task-format}のように構成される。
 
