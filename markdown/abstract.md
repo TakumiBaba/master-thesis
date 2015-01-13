@@ -21,51 +21,35 @@
 <!-- % 日本語のアブストラクト -->
 \begin{jabstract}
 
-近年、人間を計算資源としてシステムに組み込み利用するヒューマンコンピュテーションの研究が流行しているが、
-その多くは人間の知能を計算資源として利用するものである。
-人間の知能だけでない様々な能力を活かし、人間にしかできないことをシステムに組み込むことができれば
-非常に有用である。
+近年、人間を計算資源としてシステムに組み込み利用するヒューマンコンピュテーションの研究が流行している。
+実世界には人間にしかできない処理が多く存在し、その処理をプログラムで実現するためにも、
+人間と計算機をより融合させたプログラミング環境が必要である。
 
-そこで、人間と計算機の処理を融合させるBabaScriptプログラミング環境を提案する。
-BabaScriptプログラミング環境は、従来のプログラミング言語上で
-具体的な人間への指示と指示結果の取得を可能にするライブラリ「Babascript」と
-指示に対して実行結果を返すことのできるアプリケーション「Babascript Agent」から成る。
-このプログラミング環境によって、人間と計算機への指示が混在したプログラムを記述・実行することができるようになり、
-計算機が得意なことは計算機が、人間が得意なことは人間が実行するという、人間と計算機の協働を実現する。
+そこで、人間とプログラムへの指示を同等な記法によって実現するBabascriptプログラミング環境を提案する。
+このプログラミング環境を使うことで、従来のプログラミング言語上でコンピュータに対するプログラムを
+記述する記法と同じような記法で人間に指示を送り、実行結果を得ることが出来る。
 
 本論文では、このBabaScriptプログラミング環境の設計や実装、その応用例について述べ、
 ユーザインタビューの結果等について考察する
 
 \end{jabstract}
 
-
-
-<!-- % 英語のアブストラクト -->
 \begin{eabstract}
-Recently, research of human computation is a paradigm for utilizing human processing as a power to solve problems such problems that computer cannot solve, is becoming popular.
-It is very valuable if we can integrate human resources, such as intelligence and physicial into the system.
 
-We proposed "BabaScript" programming environment that supports the integration of human resources and compuing resources.
-Programming environment of this system consists of Babascript and Babascript Agent.
-Babascript will assign tasks to human and receive result of human execution.
-Babascript Agent will receive tasks and return its result.
+Researches on ``human computation'' is getting popular these days,
+where human resources can be used in computing environments just like
+computer resources. Integrating human resources with computing
+resources is considered to be very important in the real world, since
+there are still many tasks which only humans can perform.
 
-Using this programming environment, computer activities and human activities can be described
-in a same programming language, and can collabolate between humans and computers.
+We propose the ``Babascript'' programming environment where we can ask
+computers and people to perform tasks in the same manner.  Using the
+Babascript environment, users can write programs that can send
+instructions to people in the real world and get the results, just
+like calling library functions and getting results on the computer.
 
-This paper describe the design, implementation, application of BabaScript programming environment
-, and also examinate about the result of user interview.
+In this paper, we describe the design, implementation, and application
+of BabaScript programming environment, and show the results of
+user tests and interviews.
 
 \end{eabstract}
-
-
-<!-- % 以下、旧版
-% プログラム上で人間と計算機への指示を同等に記述可能なシステムについて述べる。
-% 人間を計算資源としてシステムに組み込み利用するヒューマンコンピュテーションの研究が流行している。
-% しかし、その多くは不特定多数の人間を演算装置として利用するものであり、入出力装置として利用していない。
-% 例えば自分自身など、具体的な人物を指定することができず、実世界におけるタスク処理には向いていない。
-%
-% このような状況を踏まえ、本研究では、人間への行動指示と指示結果の取得を
-% 従来のプログラミング言語に組み込んだシステムを提案する。
-% このシステムにより、シンプルな記述法で人間と計算機への指示が混在したプログラムを記述・実行することができるようになり、
-% 計算機が得意なことは計算機が、人間が得意なことは人間が実行するという、人間と計算機の協働を実現する。 -->
